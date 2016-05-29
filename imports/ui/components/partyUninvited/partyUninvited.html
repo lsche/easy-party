@@ -1,0 +1,10 @@
+<ul>
+  Users to invite:
+  <li ng-repeat="user in partyUninvited.users | uninvitedFilter:partyUninvited.party">
+    <button ng-click="partyUninvited.invite(user)" class="btn btn-primary-outline">Invite</button>
+    {{ user | displayNameFilter }}
+  </li>
+ </ul>   
+    <div class="alert alert-success" role="alert" ng-if="(partyUninvited.users | uninvitedFilter:partyUninvited.party).length <= 0">
+        Everyone are already invited.
+    </div>
