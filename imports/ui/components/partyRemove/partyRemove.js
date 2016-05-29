@@ -1,9 +1,9 @@
 import angular from 'angular';
 import angularMeteor from 'angular-meteor';
- 
+
 import template from './partyRemove.html';
-import { Parties } from '../../../api/parties'; 
- 
+import { Parties } from '../../../api/parties';
+
 class PartyRemove {
   remove() {
     if (this.party) {
@@ -11,9 +11,9 @@ class PartyRemove {
     }
   }
 }
- 
+
 const name = 'partyRemove';
- 
+
 // create a module
 export default angular.module(name, [
   angularMeteor
