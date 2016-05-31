@@ -22,6 +22,7 @@ export default angular.module(name, [
   PartyDetails,
   Navigation,
   Auth,
+    homeDashboard,
   'accounts.ui'
 ]).component(name, {
   template,
