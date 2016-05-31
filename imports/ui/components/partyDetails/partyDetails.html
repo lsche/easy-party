@@ -1,28 +1,83 @@
-<div layout="column" layout-padding>
-  <div layout="column" layout-gt-sm="row"  layout-padding>
-    <form flex="50" layout="column">
-      <md-input-container>
-        <label>Party name</label>
-        <input ng-model="partyDetails.party.name" ng-disabled="!partyDetails.isLoggedIn">
-      </md-input-container>
+<div class="container">
+    <div ng-controller="SidebarController" class="sidebar" sidebar-directive="state">
+        <a href="#" id="navigation-toggle" ng-click="toggleState()">Navigation</a>
+        <ul class="navigation">
+            <li class="navigation-items"> <a href="/">Link1</a> </li>
+            <li class="navigation-items"> <a href="/">Link2</a> </li>
+            <li class="navigation-items"> <a href="/">Link3</a> </li>
+            <li class="navigation-items"> <a href="/">Link4</a> </li>
+            <li class="navigation-items"> <a href="/">Link4</a> </li>
+        </ul>
+    </div>
+</div>
 
-      <md-input-container>
-        <label>Description</label>
-        <input ng-model="partyDetails.party.description" ng-disabled="!partyDetails.isLoggedIn">
-      </md-input-container>
+<div class="progress">
+    <div class="determinate blue darken-1" style="width: 10%"></div>
+</div>
 
-      <div>
-        <md-checkbox ng-model="partyDetails.party.public" ng-disabled="!partyDetails.isLoggedIn" aria-label="Public Party?">
-          Public Party?
-        </md-checkbox>
-      </div>
+<div class="row">
 
-      <div>
-        <md-button ng-click="partyDetails.save()" class="md-primary md-raised">Save</md-button>
-      </div>
-    </form>
-    <party-map flex="50" location="partyDetails.party.location"></party-map>
-  </div>
+    <div class="col s4">
+            <div class="card">
+                    <span class="card-title">Location</span>
+                    <div class="card-action">
+                </div>
+            </div>
+    </div>
 
-  <party-uninvited flex party="partyDetails.party" ng-show="partyDetails.canInvite()"></party-uninvited>
+    <div class="col s4">
+        <div class="card">
+            <div class="right-content">
+                <span class="card-title">Food & Drinks</span>
+                <div class="card-action">
+
+                </div>
+            </div>
+        </div>
+     </div>
+
+    <div class="col s4">
+        <div class="card">
+            <div class="right-content">
+                <span class="card-title">Entertainment</span>
+                <div class="card-action">
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col s4">
+        <div class="card">
+            <div class="right-content">
+                <span class="card-title">Guests</span>
+                <div class="card-action">
+
+                </div>
+            </div>
+        </div>
+     </div>
+
+    <div class="col s4">
+        <div class="card">
+            <div class="right-content">
+                <span class="card-title">Finance</span>
+                <div class="card-action">
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col s4">
+        <div class="card">
+            <div class="right-content">
+                <span class="card-title">Other</span>
+                <div class="card-action">
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <dir-pagination-controls on-page-change="partiesList.pageChanged(newPageNumber)"></dir-pagination-controls>
 </div>

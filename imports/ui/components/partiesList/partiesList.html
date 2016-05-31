@@ -16,37 +16,21 @@
 
   <div layout="column" layout-gt-sm="row">
     <div flex="50">
-      <md-card dir-paginate="party in partiesList.parties | itemsPerPage: partiesList.perPage" total-items="partiesList.partiesCount">
-        <md-card-title>
-          <md-card-title-text>
-            <span class="md-headline" ui-sref="partyDetails({ partyId: party._id })">
-              {{party.name}}
-              <party-remove party="party"></party-remove>
-            </span>
-            <span class="md-subhead">{{party.description}}</span>
-          </md-card-title-text>
-        </md-card-title>
-        <md-card-content>
-          <party-rsvps-list rsvps="party.rsvps"></party-rsvps-list>
+        <div class="col s4">
+          <md-card dir-paginate="party in partiesList.parties | itemsPerPage: partiesList.perPage" total-items="partiesList.partiesCount">
+            <md-card-title>
+              <md-card-title-text>
+                <span class="md-headline" ui-sref="partyDetails({ partyId: party._id })">
+                  {{party.name}}
+                </span>
+                <span class="md-subhead">{{party.description}}</span>
+              </md-card-title-text>
+            </md-card-title>
 
-          <party-unanswered party="party" ng-if="!party.public"></party-unanswered>
-          <div ng-if="party.public">
-            Everyone is invited
-          </div>
-
-          <party-creator party="party"></party-creator>
-        </md-card-content>
-        <md-card-actions>
-          <party-rsvp party="party" ng-show="partiesList.isLoggedIn"></party-rsvp>
-          <div ng-hide="partiesList.isLoggedIn">
-            <i>Sign in to RSVP for this party.</i>
-          </div>
-        </md-card-actions>
-      </md-card>
+          </md-card>
+         </div>
       <dir-pagination-controls on-page-change="partiesList.pageChanged(newPageNumber)"></dir-pagination-controls>
     </div>
-    <div flex="50">
-      <parties-map parties="partiesList.parties"></parties-map>
-    </div>
+
   </div>
 </div>
