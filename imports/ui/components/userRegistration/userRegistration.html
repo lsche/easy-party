@@ -9,21 +9,21 @@
             <label>
                 Email
             </label>
-            <input type="text" ng-model="register.credentials.email" placeholder="email" aria-label="email" required/>
+            <input type="text" ng-model="userRegistration.credentials.email" placeholder="email" aria-label="email" required/>
         </md-input-container>
         <md-input-container >
             <label>
                 Password
             </label>
-            <input type="password" ng-model="register.credentials.password" placeholder="password" aria-label="password" required/>
+            <input type="password" ng-model="userRegistration.credentials.password" placeholder="password" aria-label="password" required/>
         </md-input-container>
         <div layout="row" layout-align="end center">
-            <md-button class="md-raised md-primary" ng-click="userRegistartion.register()" aria-label="login" ng-disabled="register.registerForm.$invalid()">Register</md-button>
+            <md-button class="md-raised md-primary" ng-click="userRegistration.register()" aria-label="login" ng-disabled="userRegistration.registerForm.$invalid()">Register</md-button>
         </div>
     </form>
 
-    <md-toolbar ng-show="register.error" class="md-warn" layout="row" layout-fill layout-padding layout-margin>
-        <p class="md-body-1">{{ register.error }}</p>
+    <md-toolbar ng-show="userRegistration.error" class="md-warn" layout="row" layout-fill layout-padding layout-margin>
+        <p class="md-body-1">{{ userRegistration.error }}</p>
     </md-toolbar>
 
     <md-divider></md-divider>
