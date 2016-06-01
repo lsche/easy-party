@@ -54,7 +54,7 @@ export default angular.module(name, [
         done: '&?'
     },
     controllerAs: name,
-    controller: userRegistration
+    controller: UserRegistration
 });
 
 //TODO: evtl hier das config von register.js

@@ -7,8 +7,7 @@ import { Accounts } from 'meteor/accounts-base';
 import template from './userAuth.html';
 import modalRegistrationTemplate from './userRegisterModal.html';
 import { name as DisplayNameFilter } from '../../filters/displayNameFilter';
-//TODO probably something missing here: vgl Line 6 in partyAddButton.js
-//TODO probably something missing here: vgl Line 9-11 in auth.js
+import { name as UserRegistration } from '../userRegistration/userRegistration';
 import { name as Login } from '../login/login';
 import { name as Register } from '../register/register';
 import { name as Password } from '../password/password';
@@ -60,11 +59,10 @@ class UserAuth {
 export default angular.module(name, [
     angularMeteor,
     DisplayNameFilter,
+    UserRegistration,
     Login,
     Register,
     Password
-    //TODO: evtl fehlt hier etwas. vgl partyaddButton.js line 40
-    //TODO: evtl fehlt hier etwas. vgl auth.js line 40-43
 ]).component(name, {
     template,
     controllerAs: name,
