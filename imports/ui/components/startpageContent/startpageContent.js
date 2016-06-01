@@ -51,10 +51,24 @@ function config($stateProvider, $mdThemingProvider, $mdIconProvider) {
             'default': '900'
         });
 
-  //  const iconPath= '/packages/planettraining_material-design-icons/bower_components/material-design-icons/' +
-    //    'sprites/svg-sprite/';
-    $mdIconProvider
-        .iconSet('social','img/icons/sets/social-icons.svg', 24 )
-        .iconSet('action','img/icons/sets/action-icons.svg', 24)
-      ;
+  const iconPath =  '/packages/planettraining_material-design-icons/bower_components/material-design-icons/sprites/svg-sprite/';
+
+  $mdIconProvider
+      .iconSet('social',
+          iconPath + 'svg-sprite-social.svg')
+      .iconSet('action',
+          iconPath + 'svg-sprite-action.svg')
+      .iconSet('communication',
+          iconPath + 'svg-sprite-communication.svg')
+      .iconSet('content',
+          iconPath + 'svg-sprite-content.svg')
+      .iconSet('toggle',
+          iconPath + 'svg-sprite-toggle.svg')
+      .iconSet('navigation',
+          iconPath + 'svg-sprite-navigation.svg')
+      .iconSet('image',
+          iconPath + 'svg-sprite-image.svg')
+      .iconSet('maps',
+          iconPath + 'svg-sprite-maps.svg');
+
 }
