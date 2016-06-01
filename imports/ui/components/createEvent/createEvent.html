@@ -1,0 +1,17 @@
+<div layout="column" layout-padding>
+  <md-input-container>
+    <label>
+      Event Name:
+    </label>
+    <input type="text" ng-model="createEvent.event.name"/>
+  </md-input-container>
+  <md-input-container>
+    <label>
+      Invite co-planner(s):
+    </label>
+    <input type="text" ng-model="createEvent.event.coplaner"/>
+  </md-input-container>
+  <div flex>
+    <md-button ng-click="createEvent.submit()" class="md-raised">Create Event!</md-button>
+  </div>
+</div>
