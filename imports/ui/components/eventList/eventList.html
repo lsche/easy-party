@@ -1,0 +1,34 @@
+<md-slider-container class="image" ><img src="/other.jpg" alt="" id="background" >
+
+    <div layout="column" layout-padding id="content">
+        <party-add-button ng-show="partiesList.isLoggedIn"></party-add-button>
+        <div style="margin: 0px auto 0px auto; width: 50%; height: 100%; background-color: #ffffff">
+            <div flex>
+                <h2 class="md-display-1">Your Parties:</h2>
+            </div>
+
+            <div layout="column" layout-gt-sm="row">
+                <div flex="50">
+                    <md-card dir-paginate="party in partiesList.parties | itemsPerPage: partiesList.partiesCount" total-items="partiesList.partiesCount">
+                        <md-card-title>
+                            <md-card-title-text>
+            <span class="md-headline" ui-sref="partyDetails({ partyId: party._id })">
+              {{party.name}}
+                <party-remove party="party"></party-remove>
+            </span>
+                                <span class="md-subhead">{{party.description}}</span>
+                            </md-card-title-text>
+                        </md-card-title>
+                        <md-card-content>
+
+
+                        </md-card-content>
+
+                    </md-card>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</md-slider-container>
