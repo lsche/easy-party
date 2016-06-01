@@ -6,51 +6,60 @@
 
 
 <div layout="column" layout-padding>
+    <div><md-content flex layout-padding align="center">
+        <h2 class="md-display-1">What is EasyParty?</h2>
+        <p>
+            Lorem ipsum dolor sit amet, ne quod novum mei. Sea omnium invenire mediocrem at, in lobortis
+            conclusionemque nam. Ne deleniti appetere reprimique pro, inani labitur disputationi te sed. At vix sale c
+            omnesque, id pro labitur reformidans accommodare, cum labores honestatis eu. Nec quem lucilius in, eam
+            praesent reformidans no. Sed laudem aliquam ne.
+            Lorem ipsum dolor sit amet, ne quod novum mei. Sea omnium invenire mediocrem at, in lobortis
+            conclusionemque nam. Ne deleniti appetere reprimique pro, inani labitur disputationi te sed. At vix sale c
+            omnesque, id pro labitur reformidans accommodare, cum labores honestatis eu. Nec quem lucilius in, eam
+            praesent reformidans no. Sed laudem aliquam ne.
+        </p>
+        <md-button class="md-raised md-accent">Start your free trial now!</md-button>
+    </md-content></div>
 
-  <div flex>
-    <h2 class="md-display-1">List of the parties:</h2>
-  </div>
+    <div>
+        <h2 class="md-display-1" align="center">Special Features</h2>
 
-  <div flex layout="row" layout-padding>
-    <md-input-container>
-      <label>Search</label>
-      <input ng-model="partiesList.searchText">
-    </md-input-container>
-
-  </div>
-
-    
-<!-- delete later!!
-
-  <div layout="column" layout-gt-sm="row">
-    <div flex="50">
-      <md-card dir-paginate="party in partiesList.parties | itemsPerPage: partiesList.perPage" total-items="partiesList.partiesCount">
-        <md-card-title>
-          <md-card-title-text>
-            <span class="md-headline" ui-sref="partyDetails({ partyId: party._id })">
-
-              <party-remove party="party"></party-remove>
-            </span>
-            <span class="md-subhead"></span>
-          </md-card-title-text>
-        </md-card-title>
-        <md-card-content>
-          <party-rsvps-list rsvps="party.rsvps"></party-rsvps-list>
-
-          <party-unanswered party="party" ng-if="!party.public"></party-unanswered>
-          <div ng-if="party.public">
-            Everyone is invited
-          </div>
-
-          <party-creator party="party"></party-creator>
-        </md-card-content>
-        <md-card-actions>
-          <party-rsvp party="party" ng-show="partiesList.isLoggedIn"></party-rsvp>
-          <div ng-hide="partiesList.isLoggedIn">
-            <i>Sign in to RSVP for this party.</i>
-          </div>
-        </md-card-actions>
-      </md-card>
+        <md-content class="md-padding" layout-xs="column" layout="row">
+            <div flex-xs layout="row">
+                <md-card  layout-align="center center">
+                    <md-card-title>
+                        <md-card-title-text>
+                            <span class="md-headline">Progress Bar</span>
+                        </md-card-title-text>
+                    </md-card-title>
+                    <md-card-content>
+                        <p>
+                            The titles of Washed Out's breakthrough song and the first single from Paracosm share the
+                            two most important words in Ernest Greene's musical language: feel it. It's a simple request, as well...
+                        </p>
+                    </md-card-content>
+                    <md-card-actions layout="coloumn">
+                        <md-button class="md-raised md-primary">Learn more</md-button>
+                    </md-card-actions>
+                </md-card>
+                <md-card class="cardcolor" layout-align="center center">
+                    <md-card-title>
+                        <md-card-title-text>
+                            <span class="md-headline">Guest List</span>
+                        </md-card-title-text>
+                    </md-card-title>
+                    <md-card-content>
+                        <p>
+                            The titles of Washed Out's breakthrough song and the first single from Paracosm share the
+                            two most important words in Ernest Greene's musical language: feel it. It's a simple request, as well...
+                        </p>
+                    </md-card-content>
+                    <md-card-actions layout="coloumn" layout-align="start">
+                        <md-button class="md-raised">Learn more</md-button>
+                    </md-card-actions>
+                </md-card>
+            </div>
+        </md-content>
     </div>
-  </div> -->
+
 </div>

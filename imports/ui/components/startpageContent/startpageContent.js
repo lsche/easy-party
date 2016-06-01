@@ -24,7 +24,7 @@ class StartpageContent {
 
 const name = 'startpageContent';
 
-// create a module
+
 export default angular.module(name, [
   angularMeteor,
   uiRouter
@@ -35,11 +35,17 @@ export default angular.module(name, [
 })
   .config(config);
 
-function config($stateProvider) {
+function config($stateProvider, $mdThemingProvider) {
   'ngInject';
   $stateProvider
     .state('start', {
       url: '/start',
       template: '<startpage-content></startpage-content>'
-    });
+    }),
+      // define cyan-theme -> color of the logo
+    $mdThemingProvider.theme('default')
+        .primaryPalette('cyan')
+        .accentPalette('red', {
+            'default': '900'
+        });
 }
