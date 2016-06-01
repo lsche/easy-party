@@ -19,7 +19,7 @@
             <md-card dir-paginate="party in partiesList.parties | itemsPerPage: partiesList.perPage" total-items="partiesList.partiesCount">
                 <md-card-title>
                     <md-card-title-text>
-            <span class="md-headline" ui-sref="partyDetails({ partyId: party._id })">
+            <span class="md-headline" ui-sref="partyDashboard({ partyId: party._id })">
               {{party.name}}
                 <party-remove party="party"></party-remove>
             </span>

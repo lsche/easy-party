@@ -6,6 +6,7 @@ import uiRouter from 'angular-ui-router';
 import template from './socially.html';
 import { name as PartiesList } from '../partiesList/partiesList';
 import { name as PartyDetails } from '../partyDetails/partyDetails';
+import { name as PartyDashboard } from '../partyDashboard/partyDashboard';
 import { name as Navigation } from '../navigation/navigation';
 import { name as Auth } from '../auth/auth';
 
@@ -20,6 +21,7 @@ export default angular.module(name, [
   uiRouter,
   PartiesList,
   PartyDetails,
+    PartyDashboard,
   Navigation,
   Auth,
   'accounts.ui'
