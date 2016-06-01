@@ -2,11 +2,11 @@ import angular from 'angular';
 
 import { Meteor } from 'meteor/meteor';
 
-import { name as Socially } from '../imports/ui/components/socially/socially';
+import { name as Startpage } from '../imports/ui/components/startpage/startpage';
 
 function onReady() {
   angular.bootstrap(document, [
-    Socially
+    Startpage
   ], {
     strictDi: true
   });
