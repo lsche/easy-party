@@ -1,0 +1,56 @@
+<!-- Karin - content of the start page -->
+
+<div layout="column">
+    <img flex class="responsive-img" src="event.jpg">
+</div>
+
+
+<div layout="column" layout-padding>
+
+  <div flex>
+    <h2 class="md-display-1">List of the parties:</h2>
+  </div>
+
+  <div flex layout="row" layout-padding>
+    <md-input-container>
+      <label>Search</label>
+      <input ng-model="partiesList.searchText">
+    </md-input-container>
+
+  </div>
+
+    
+<!-- delete later!!
+
+  <div layout="column" layout-gt-sm="row">
+    <div flex="50">
+      <md-card dir-paginate="party in partiesList.parties | itemsPerPage: partiesList.perPage" total-items="partiesList.partiesCount">
+        <md-card-title>
+          <md-card-title-text>
+            <span class="md-headline" ui-sref="partyDetails({ partyId: party._id })">
+
+              <party-remove party="party"></party-remove>
+            </span>
+            <span class="md-subhead"></span>
+          </md-card-title-text>
+        </md-card-title>
+        <md-card-content>
+          <party-rsvps-list rsvps="party.rsvps"></party-rsvps-list>
+
+          <party-unanswered party="party" ng-if="!party.public"></party-unanswered>
+          <div ng-if="party.public">
+            Everyone is invited
+          </div>
+
+          <party-creator party="party"></party-creator>
+        </md-card-content>
+        <md-card-actions>
+          <party-rsvp party="party" ng-show="partiesList.isLoggedIn"></party-rsvp>
+          <div ng-hide="partiesList.isLoggedIn">
+            <i>Sign in to RSVP for this party.</i>
+          </div>
+        </md-card-actions>
+      </md-card>
+    </div>
+  </div> -->
+</div>
