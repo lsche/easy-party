@@ -16,13 +16,19 @@ class UserRegistration {
 
         this.credentials = {
             email: '',
-            password: ''
+            password: '',
+            profile:{
+                firstName: '',
+                lastName: ''
+            }
         };
+        
 
         this.error = '';
     }
 
     register() {
+        console.log(this.credentials);
         Accounts.createUser(this.credentials,
             this.$bindToContext((err) => {
                 if (err) {

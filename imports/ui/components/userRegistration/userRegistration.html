@@ -1,21 +1,29 @@
 <div layout="column" layout-fill layout-margin layout-padding>
 
-    <div layout="row" layout-fill layout-margin>
-        <p class="md-body-2">Use your email?</p>
-    </div>
-
     <form name="registerForm" layout="column" layout-fill layout-padding layout-margin>
+        <md-input-container >
+            <label>
+                First Name
+            </label>
+            <input type="text" ng-model="userRegistration.credentials.profile.firstName" placeholder="First Name" aria-label="firstName" required/>
+        </md-input-container>
+        <md-input-container >
+            <label>
+                Last Name
+            </label>
+            <input type="text" ng-model="userRegistration.credentials.profile.lastName" placeholder="Last Name" aria-label="lastName" required/>
+        </md-input-container>
         <md-input-container >
             <label>
                 Email
             </label>
-            <input type="text" ng-model="userRegistration.credentials.email" placeholder="email" aria-label="email" required/>
+            <input type="email" ng-model="userRegistration.credentials.email" placeholder="E-Mail" aria-label="email" required/>
         </md-input-container>
         <md-input-container >
             <label>
                 Password
             </label>
-            <input type="password" ng-model="userRegistration.credentials.password" placeholder="password" aria-label="password" required/>
+            <input type="password" ng-model="userRegistration.credentials.password" placeholder="Password" aria-label="password" required/>
         </md-input-container>
         <div layout="row" layout-align="end center">
             <md-button class="md-raised md-primary" ng-click="userRegistration.register()" aria-label="login" ng-disabled="userRegistration.registerForm.$invalid()">Register</md-button>

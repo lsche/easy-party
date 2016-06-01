@@ -7,6 +7,8 @@ accounts-ui@1.1.9
 accounts-ui-unstyled@1.1.12
 allow-deny@1.0.4
 amplify@1.0.0
+angular:angular@1.5.3_1
+angular:angular-messages@1.5.3_1
 autoupdate@1.2.8
 babel-compiler@6.6.4
 babel-runtime@0.1.8

@@ -7,8 +7,8 @@
     <div ng-show="userAuth.isLoggedIn">
         <md-menu md-position-mode="target-right bottom">
             <md-button aria-label="Open user menu" ng-click="$mdOpenMenu($event)">
-                <md-icon md-svg-icon="img/icons/launch.svg"></md-icon>
-                {{ userAuth.currentUser | displayNameFilter }}
+                <md-icon md-svg-icon="action:ic_perm_identity_24px"></md-icon>
+                {{userAuth.currentUser.profile.firstName}}
             </md-button>
             <md-menu-content md-position-mode="target-right target" width="2">
                 <md-menu-item>
