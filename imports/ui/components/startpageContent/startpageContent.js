@@ -3,6 +3,7 @@
 import angular from 'angular';
 import angularMeteor from 'angular-meteor';
 import uiRouter from 'angular-ui-router';
+import ngMaterial from 'angular-material';
 
 import template from './startpageContent.html';
 import { Parties } from '../../../api/parties';
@@ -27,6 +28,7 @@ const name = 'startpageContent';
 
 export default angular.module(name, [
   angularMeteor,
+    ngMaterial,
   uiRouter
 ]).component(name, {
   template,
@@ -35,7 +37,7 @@ export default angular.module(name, [
 })
   .config(config);
 
-function config($stateProvider, $mdThemingProvider) {
+function config($stateProvider, $mdThemingProvider, $mdIconProvider) {
   'ngInject';
   $stateProvider
     .state('start', {
@@ -48,4 +50,11 @@ function config($stateProvider, $mdThemingProvider) {
         .accentPalette('red', {
             'default': '900'
         });
+
+  //  const iconPath= '/packages/planettraining_material-design-icons/bower_components/material-design-icons/' +
+    //    'sprites/svg-sprite/';
+    $mdIconProvider
+        .iconSet('social','img/icons/sets/social-icons.svg', 24 )
+        .iconSet('action','img/icons/sets/action-icons.svg', 24)
+      ;
 }
