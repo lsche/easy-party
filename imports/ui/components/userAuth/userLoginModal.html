@@ -1,1 +1,17 @@
-<!-- TODO -->
+<md-dialog aria-label="Login" ng-cloak flex="50">
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h2>Log in to your EasyParty account</h2>
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="userLoginModal.close()" aria-label="Close">
+                <md-icon md-svg-icon="navigation:ic_close_24px"></md-icon>
+            </md-button>
+
+        </div>
+    </md-toolbar>
+    <md-dialog-content>
+        <div class="md-dialog-content">
+            <user-login done="userLoginModal.close()"></user-login>
+        </div>
+    </md-dialog-content>
+</md-dialog>
