@@ -38,7 +38,7 @@ function config($locationProvider, $urlRouterProvider, $mdIconProvider) {
 
   $locationProvider.html5Mode(true);
 
-  $urlRouterProvider.otherwise('/parties');
+  $urlRouterProvider.otherwise('/events');
 
   const iconPath =  '/packages/planettraining_material-design-icons/bower_components/material-design-icons/sprites/svg-sprite/';
 
@@ -65,7 +65,7 @@ function run($rootScope, $state) {
   $rootScope.$on('$stateChangeError',
     (event, toState, toParams, fromState, fromParams, error) => {
       if (error === 'AUTH_REQUIRED') {
-        $state.go('parties');
+        $state.go('events');
       }
     }
   );

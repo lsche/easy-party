@@ -15,7 +15,7 @@ import { name as PartyCreator } from '../partyCreator/partyCreator';
 import { name as PartyRsvp } from '../partyRsvp/partyRsvp';
 import { name as PartyRsvpsList } from '../partyRsvpsList/partyRsvpsList';
 
-class PartiesList {
+class EventList {
   constructor($scope, $reactive) {
     'ngInject';
 
@@ -68,7 +68,7 @@ class PartiesList {
   }
 }
 
-const name = 'partiesList';
+const name = 'eventList';
 
 // create a module
 export default angular.module(name, [
@@ -85,15 +85,15 @@ export default angular.module(name, [
 ]).component(name, {
   template,
   controllerAs: name,
-  controller: PartiesList
+  controller: EventList
 })
   .config(config);
 
 function config($stateProvider) {
   'ngInject';
   $stateProvider
-    .state('parties', {
-      url: '/parties',
-      template: '<parties-list></parties-list>'
+    .state('events', {
+      url: '/events',
+      template: '<event-list></event-list>'
     });
 }

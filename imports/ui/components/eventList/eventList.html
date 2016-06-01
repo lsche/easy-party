@@ -1,7 +1,7 @@
-<md-slider-container class="image" ><img src="/other.jpg" alt="" id="background" >
+<md-slider-container class="image" ><img src="other.jpg" alt="" id="background" >
 
     <div layout="column" layout-padding id="content">
-        <party-add-button ng-show="partiesList.isLoggedIn"></party-add-button>
+        <party-add-button ng-show="eventList.isLoggedIn"></party-add-button>
         <div style="margin: 0px auto 0px auto; width: 50%; height: 100%; background-color: #ffffff">
             <div flex>
                 <h2 class="md-display-1">Your Parties:</h2>
@@ -9,7 +9,7 @@
 
             <div layout="column" layout-gt-sm="row">
                 <div flex="50">
-                    <md-card dir-paginate="party in partiesList.parties | itemsPerPage: partiesList.partiesCount" total-items="partiesList.partiesCount">
+                    <md-card dir-paginate="party in eventList.parties | itemsPerPage: eventList.partiesCount" total-items="eventList.partiesCount">
                         <md-card-title>
                             <md-card-title-text>
             <span class="md-headline" ui-sref="partyDetails({ partyId: party._id })">
