@@ -35,8 +35,7 @@ class UserLogin {
                     if(this.done) {
                         this.done();
                     }
-                    //TODO: provide correct route
-                    this.$state.go('parties');
+                    this.$state.go('event');
                 }
             })
         );
