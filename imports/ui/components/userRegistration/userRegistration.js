@@ -41,7 +41,7 @@ class UserRegistration {
                     }
 
                     //TODO: should go to list of projects!
-                    this.$state.go('parties');
+                    this.$state.go('event');
                 }
             })
         );
