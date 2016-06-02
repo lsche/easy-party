@@ -18,8 +18,10 @@ import { name as Password } from '../password/password';
 const name = 'userAuth';
 
 class UserAuth {
-    constructor($scope, $reactive, $mdDialog, $mdMedia) {
+    constructor($scope, $reactive, $mdDialog, $mdMedia, $state) {
         'ngInject';
+
+        this.$state = $state;
 
         $reactive(this).attach($scope);
 
@@ -38,6 +40,7 @@ class UserAuth {
 
     logout() {
         Accounts.logout();
+        this.$state.go('start');
     }
     openRegistration(event){
         this.$mdDialog.show({
