@@ -8,7 +8,7 @@ import uiRouter from 'angular-ui-router';
 import template from './startpage.html';
 import { name as StartpageContent } from '../startpageContent/startpageContent';
 import { name as Navigation } from '../navigation/navigation';
-import { name as Auth } from '../auth/auth';
+import { name as UserAuth} from '../userAuth/userAuth';
 
 class Startpage {}
 
@@ -21,7 +21,7 @@ export default angular.module(name, [
   uiRouter,
   StartpageContent,
   Navigation,
-  Auth,           // Karin: maybe name change necessary - depends on new authentication class
+  UserAuth,        
   'accounts.ui'   // Karin: user accounts - delete if not necessary!!
 ]).component(name, {
   template,
