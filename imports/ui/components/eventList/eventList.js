@@ -54,7 +54,6 @@ export default angular.module(name, [
     angularMeteor,
     ngMaterial,
     uiRouter,
-    CreateEvent
 ]).component(name, {
     template,
     bindings: {
