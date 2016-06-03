@@ -1,0 +1,23 @@
+<div layout="column" layout-padding>
+    
+  <md-input-container>
+    <label>
+      Name:
+    </label>
+    <input type="text" ng-model="partyNotes.note.name"/>
+  </md-input-container>  
+  
+  <md-input-container>
+    <label>
+      Text:
+    </label>
+    <input type="text" ng-model="partyNotes.note.text"/>
+  </md-input-container>
+  
+  
+  <div flex>
+    <md-button ng-click="partyNotes.submit()" class="md-raised">Add Note</md-button>
+  </div>
+   
+  
+</div>
