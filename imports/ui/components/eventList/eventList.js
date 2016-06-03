@@ -7,8 +7,6 @@ import ngMaterial from 'angular-material';
 
 import template from './eventList.html';
 
-import { name as CreateEvent } from '../createEvent/createEvent';
-
 import { Events } from '../../../api/events';
 import { Meteor } from 'meteor/meteor';
 
