@@ -1,0 +1,21 @@
+<div layout="row">
+    <div ng-show="!userAuth.isLoggedIn">
+        <md-button flex ng-hide="auth.isLoggedIn" ng-click="userAuth.openLogin($event)"> Log in</md-button>
+        <md-button flex ng-hide="auth.isLoggedIn" aria-label="Registration" ng-click="userAuth.openRegistration($event)">Sign up</md-button>
+    </div>
+
+    <div ng-show="userAuth.isLoggedIn">
+        <md-menu md-position-mode="target-right bottom">
+            <md-button aria-label="Open user menu" ng-click="$mdOpenMenu($event)">
+                <md-icon md-svg-icon="action:ic_perm_identity_24px"></md-icon>
+                {{userAuth.currentUser.profile.firstName}}
+            </md-button>
+            <md-menu-content md-position-mode="target-right target" width="2">
+                <md-menu-item>
+                    <md-button ng-click="userAuth.logout()">Logout</md-button>
+                </md-menu-item>
+            </md-menu-content>
+        </md-menu>
+    </div>
+
+</div>

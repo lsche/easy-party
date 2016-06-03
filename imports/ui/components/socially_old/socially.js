@@ -7,7 +7,7 @@ import template from './socially.html';
 import { name as PartiesList } from '../partiesList/partiesList';
 import { name as PartyDetails } from '../partyDetails/partyDetails';
 import { name as Navigation } from '../navigation/navigation';
-import { name as Auth } from '../auth/auth';
+import { name as UserAuth} from '../userAuth/userAuth';
 
 class Socially {}
 
@@ -21,7 +21,7 @@ export default angular.module(name, [
   PartiesList,
   PartyDetails,
   Navigation,
-  Auth,
+  UserAuth,
   'accounts.ui'
 ]).component(name, {
   template,
