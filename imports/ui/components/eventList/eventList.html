@@ -6,7 +6,36 @@
             <div flex>
                 <h2 class="md-display-1">Your Parties:</h2>
             </div>
-            <md-button class="md-raised md-accent">Add Event</md-button>
+            <ul>
+                <li ng-repeat="event in eventList.events">
+                    {{event.name}}
+                </li>
+            </ul>
+
+            <md-button class="md-raised md-accent material-icons" ng-click="eventList.openForm()"> add</md-button>
+
+            <div ng-if="eventList.showAddForm">
+                <div layout="column" layout-padding>
+                    <md-input-container>
+                        <label>
+                            Event Name:
+                        </label>
+                        <input type="text" ng-model="eventList.event.name"/>
+                    </md-input-container>
+                    <md-input-container>
+                        <label>
+                            Description:
+                        </label>
+                        <input type="text" ng-model="eventList.event.description"/>
+                    </md-input-container>
+
+                    <div flex>
+                        <md-button ng-click="eventList.submit()" class="md-raised">Add Event!</md-button>
+                    </div>
+                </div>
+
+            </div>
+
         </div>
     </div>
 </md-slider-container>
