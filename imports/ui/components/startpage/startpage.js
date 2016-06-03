@@ -42,8 +42,7 @@ function config($locationProvider, $urlRouterProvider, $mdIconProvider) {
   $locationProvider.html5Mode(true);
 
   $urlRouterProvider.otherwise('/start');
-
-  //Karin: delete icons later when not in use
+  
   const iconPath =  '/packages/planettraining_material-design-icons/bower_components/material-design-icons/sprites/svg-sprite/';
 
   $mdIconProvider

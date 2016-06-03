@@ -1,8 +1,8 @@
 <div layout="row" layout-wrap ng-init="value = 'off'">
   
-  <div flex="10" class="sideNavbar">
+  <div flex="10" class="sideNavbar lukas2">
     
-        <a href=""><i class="material-icons ikonos" style="display: block;">settings_overscan</i></a>
+        <a class="lukas1" href=""><i class="material-icons ikonos" style="display: block;">settings_overscan</i></a>
         <a href=""><i class="material-icons ikonos" style="display: block;">home</i></a>
         <a href=""><i class="material-icons ikonos" style="display: block;">local_dining</i></a>
         <a href=""><i class="material-icons ikonos" style="display: block;">group</i></a>
@@ -12,9 +12,9 @@
   
 <div flex="70" ng-init="valuecom = 'off'">
     
-<md-toolbar class="md-table-toolbar md-default">
+<md-toolbar class="md-table-toolbar md-default lukas3">
   <div class="md-toolbar-tools">
-    <span>My Todos</span> <i ng-click="value = { 'on': 'off', 'off':'on'}[value]" class="material-icons addTodo"> add</i>
+    <span class="lukas4">My Todos</span> <i ng-click="value = { 'on': 'off', 'off':'on'}[value]" class="material-icons addTodo"> add</i>
   </div>
 </md-toolbar>
 
@@ -24,13 +24,13 @@
 <md-table-container>
   <table md-table md-row-select multiple ng-model="selected" md-progress="promise">
     <thead md-head md-order="query.order">
-      <tr md-row>
+      <tr md-row class="lukas5">
         <th md-column md-numeric>Name</th>
         <th md-column md-numeric>Asignee</th>
         <th md-column md-numeric>Due Date</th>
       </tr>
     </thead>
-    <tbody md-body>
+    <tbody md-body class="lukas6">
       <tr md-row md-select-id="name" md-auto-select ng-repeat="todo in partyCategory.todoslist">
         <td md-cell>{{todo.name}}</td>
         <td md-cell>{{todo.creater}}</td>
@@ -48,7 +48,7 @@
      
     <md-toolbar class="md-table-toolbar md-default">
       <div class="md-toolbar-tools">
-        <span>List of Comments </span> <i ng-click="valuecom = { 'on': 'off', 'off':'on'}[valuecom]" class="material-icons addTodo"> add</i>
+        <span class="lukas4">List of Comments </span> <i ng-click="valuecom = { 'on': 'off', 'off':'on'}[valuecom]" class="material-icons addTodo"> add</i>
       </div>
     </md-toolbar>
     
@@ -62,7 +62,7 @@
                 <span class="md-headline">
                   {{comment.text}}
                 </span>
-                <span class="md-subhead">{{comment.createdAt}}</span>
+                <span class="md-subhead">{{parseDate(comment.createdAt)}}</span>
               </md-card-title-text>
             </md-card-title>
 
