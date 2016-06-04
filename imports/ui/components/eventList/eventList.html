@@ -3,17 +3,11 @@
 
     <div layout="column" layout-padding id="content">
         <div id="whiteBox">
-            <div flex>
-                <h2 class="md-display-1">Your Parties:</h2>
+            <div layout="row">
+                    <h2 class="md-display-1">Your Parties:</h2>
+                    <span flex></span>
+                    <md-button class="md-fab material-icons" ng-click="eventList.openForm()"> add</md-button>
             </div>
-            <ul>
-                <li ng-repeat="event in eventList.events">
-                    {{event.name}}
-                </li>
-            </ul>
-
-            <md-button class="md-raised md-accent material-icons" ng-click="eventList.openForm()"> add</md-button>
-
             <div ng-if="eventList.showAddForm">
                 <div layout="column" layout-padding>
                     <md-input-container>
@@ -33,8 +27,16 @@
                         <md-button ng-click="eventList.submit()" class="md-raised">Add Event!</md-button>
                     </div>
                 </div>
-
             </div>
+
+            <md-list flex ng-repeat="event in eventList.events" >
+                <md-list-item class="md-2-line">
+                    <div class="md-list-item-text" ng-click="eventList.showSimpleToast(event)">
+                        <h3>{{ event.name}}</h3>
+                        <p>{{event.description}}</p>
+                    </div>
+                </md-list-item>
+            </md-list>
 
         </div>
     </div>

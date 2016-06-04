@@ -27,7 +27,7 @@ class EventList {
 
         this.helpers({
             events() {
-                return Events.find({});
+                return Events.find({},{ sort: {createdAt: -1}});
             }
         });
 
@@ -37,12 +37,17 @@ class EventList {
     }
     submit() {
         this.event.creator = Meteor.user()._id;
+        this.event.createdAt = new Date();
 
         Events.insert(this.event);
 
         this.showAddForm = false;
 
         this.event = {};
+    }
+
+    showSimpleToast(currentEvent){
+        console.log(currentEvent.name + currentEvent._id);
     }
 
 }
@@ -53,7 +58,7 @@ const name = 'eventList';
 export default angular.module(name, [
     angularMeteor,
     ngMaterial,
-    uiRouter,
+    uiRouter
 ]).component(name, {
     template,
     bindings: {
