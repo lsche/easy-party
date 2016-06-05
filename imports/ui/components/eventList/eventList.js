@@ -65,7 +65,6 @@ class EventList {
         function loadAll() {
             var easyPartyUser = [];
             var users = Meteor.users.find();
-            console.log(users);
             if(users){
                 users.forEach(function(user) {
                     easyPartyUser.push({

@@ -58,21 +58,41 @@
 
 </div>
 
-    <md-table-container>
-        <table md-table md-row-select multiple ng-model="selected" md-progress="promise">
-            <thead md-head md-order="query.order">
-            <tr md-row class="lukas5">
-                <th md-column md-numeric>Name</th>
-                <th md-column md-numeric>Asignee</th>
-                <th md-column md-numeric>Due Date</th>
-            </tr>
-            </thead>
-            <tbody md-body class="lukas6">
-            <tr md-row md-select-id="name" md-auto-select ng-repeat="todo in partyTodos.todoslist">
-                <td md-cell>{{todo.name}}</td>
-                <td md-cell>{{getName(todo.assignee)}}</td>
-                <td md-cell>{{parseDate(todo.duedate)}}</td>
-            </tr>
-            </tbody>
-        </table>
-    </md-table-container>
+    <md-content>
+        <md-list>
+            <md-list-item class="md-3-line">
+                <div class="md-list-item-text">
+                    <div layout="row">
+                        <span flex="20">
+                        <h3>Todo</h3>
+                        <h4>{{todo.description}}</h4>
+                        </span>
+                        <span flex="30">
+                        <p>Assignee</p>
+                        </span>
+                        <span flex="20">
+                            <p>Due Date</p>
+                        </span>
+                    </div>
+                </div>
+                <md-divider ng-if="!$last"></md-divider>
+            </md-list-item>
+            <md-list-item class="md-3-line" ng-repeat="todo in partyTodos.todoslist">
+                <div class="md-list-item-text">
+                    <div layout="row">
+                        <span flex="20">
+                        <h3>{{todo.name}}</h3>
+                        <h4>{{todo.description}}</h4>
+                        </span>
+                        <span flex="30">
+                        <p>{{getName(todo.assignee)}}</p>
+                        </span>
+                        <span flex="20">
+                            <p>{{parseDate(todo.duedate)}}</p>
+                        </span>
+                    </div>
+                </div>
+                <md-divider ng-if="!$last"></md-divider>
+            </md-list-item>
+        </md-list>
+    </md-content>
