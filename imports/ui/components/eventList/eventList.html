@@ -24,25 +24,22 @@
                         <input type="text" ng-model="eventList.event.description"/>
                     </md-input-container>
 
-                    <!--<md-autocomplete flex
+                    <md-autocomplete
                             ng-disabled="eventList.isDisabled"
                             md-no-cache="eventList.noCache"
                             md-selected-item="eventList.selectedItem"
                             md-search-text-change="eventList.searchTextChange(eventList.searchText)"
                             md-search-text="eventList.searchText"
-                            md-selected-item-change="eventList.selectedItemChange(item)"
-                            md-items="item in eventList.querySearch(eventList.searchText)"
-                            md-item-text="item.display"
+                            md-selected-item-change="eventList.selectedItemChange(item)" md-items="item in eventList.querySearch(eventList.searchText)"
+                            md-item-text="item.value"
                             md-min-length="3"
-                            md-floating-label="Favorite state">
+                            md-floating-label="Type in a mail address"
+                            md-menu-class="autocomplete-custom-template">
                         <md-item-template>
-                            <span md-highlight-text="eventList.searchText" md-highlight-flags="^i">{{item.display}}</span>
+                            <span md-highlight-text="eventList.searchText" class="item-title">{{item.name}}</span>
+                            <span class="item-metadata">{{item.value}}</span>
                         </md-item-template>
-                        <md-not-found>
-                            No states matching "{{eventList.searchText}}" were found.
-                            <a ng-click="eventList.newState(eventList.searchText)">Create a new one!</a>
-                        </md-not-found>
-                    </md-autocomplete> -->
+                    </md-autocomplete>
                     <div flex>
                         <md-button ng-click="eventList.submit()" class="md-raised">Add Event!</md-button>
                     </div>
@@ -84,7 +81,7 @@
 
             <md-list flex ng-repeat="event in eventList.events" >
                 <md-list-item class="md-2-line"  ui-sref="partyDashboard({ eventId: event._id })">
-                    <div class="md-list-item-text" ng-click="eventList.showSimpleToast(event)">
+                    <div class="md-list-item-text">
                         <h3>{{ event.name}}</h3>
                         <p>{{event.description}}</p>
                     </div>
