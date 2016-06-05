@@ -18,11 +18,11 @@ class PartyComment {
       return moment(jsonDate).format('DD-MM-YYYY');;
     };
     
-    this.comment = {};
     this.subscribe('comments');
     this.subscribe('users');
 
     this.showAddForm = false;
+    this.comment = {};
 
     this.helpers({
       commentslist() {
@@ -38,8 +38,14 @@ class PartyComment {
   }
 
   openForm() {
-    this.showAddForm = true;
+    if(this.showAddForm) {
+      this.comment = {};
+      this.showAddForm = false;
+    } else {
+      this.showAddForm = true;
+    }
   }
+
   submit() {
     this.comment.creater = Meteor.user()._id;
     this.comment.createdAt = new Date();

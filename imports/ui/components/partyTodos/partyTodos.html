@@ -1,6 +1,9 @@
     <md-toolbar class="md-table-toolbar md-default lukas3">
         <div class="md-toolbar-tools">
-            <span class="lukas4">My Todos</span> <i class="material-icons addTodo" ng-click="partyTodos.openForm()"> add</i>
+            <h3>My Todos</h3>
+            <span flex></span>
+            <i ng-hide="partyTodos.showAddForm" class="material-icons addTodo" ng-click="partyTodos.openForm()"> add</i>
+            <i ng-show="partyTodos.showAddForm" class="material-icons addTodo" ng-click="partyTodos.openForm()"> close</i>
         </div>
     </md-toolbar>
 

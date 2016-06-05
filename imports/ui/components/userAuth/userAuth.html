@@ -1,7 +1,7 @@
 <div layout="row">
     <div ng-show="!userAuth.isLoggedIn">
-        <md-button flex ng-hide="auth.isLoggedIn" ng-click="userAuth.openLogin($event)"> Log in</md-button>
-        <md-button flex ng-hide="auth.isLoggedIn" aria-label="Registration" ng-click="userAuth.openRegistration($event)">Sign up</md-button>
+        <md-button flex ng-click="userAuth.openLogin($event)"> Log in</md-button>
+        <md-button flex aria-label="Registration" ng-click="userAuth.openRegistration($event)">Sign up</md-button>
     </div>
 
     <div ng-show="userAuth.isLoggedIn">

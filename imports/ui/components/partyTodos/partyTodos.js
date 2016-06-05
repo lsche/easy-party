@@ -17,7 +17,7 @@ class PartyTodos {
 
     $scope.parseDate = function(jsonDate) {
       //date parsing functionality
-      return moment(jsonDate).format('DD-MM-YYYY');;
+      return moment(jsonDate).format('DD-MM-YYYY');
     };
 
     this.showAddForm = false;
@@ -25,7 +25,8 @@ class PartyTodos {
     this.subscribe('events');
     this.subscribe('todos');
     this.subscribe('users');
-    
+
+
     //this.eventId = $stateParams.eventId;
     this.helpers({
       todoslist() {
@@ -40,7 +41,12 @@ class PartyTodos {
     });
   }
   openForm() {
-    this.showAddForm = true;
+    if(this.showAddForm) {
+      this.todo = {};
+      this.showAddForm = false;
+    } else {
+      this.showAddForm = true;
+    }
   }
 
   submit() {

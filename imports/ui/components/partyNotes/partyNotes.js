@@ -30,7 +30,12 @@ class PartyNotes {
     });
   }
   openForm() {
-    this.showAddForm = true;
+    if(this.showAddForm) {
+      this.note = {};
+      this.showAddForm = false;
+    } else {
+      this.showAddForm = true;
+    }
   }
 
   submit() {
