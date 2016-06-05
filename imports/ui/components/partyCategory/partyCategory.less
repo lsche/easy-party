@@ -6,10 +6,15 @@ party-category {
 
 .ikonos {
   display: block;
-  font-size: 55px !important;
-  margin: 35px !important;
+  font-size: 48px !important;
+  margin: 23px !important;
   text-decoration: none;
   color: #00BCD4;
+}
+
+.active{    
+    font-size: 60px !important;
+    color: #24248f
 }
 
 .lukas1 {
@@ -40,6 +45,36 @@ party-category {
 .addTodo {
   color: rgb(63, 81, 181);
   cursor: pointer;
+}
+
+@media (max-width: 1130px) {
+  .ikonos {
+    font-size: 45px !important;
+    margin: 25px !important;
+  }
+  .active{    
+    font-size: 55px !important;
+  }
+}
+
+@media (max-width: 840px) {
+  .ikonos {
+    font-size: 35px !important;
+    margin: 15px !important;
+  }
+  .active{    
+    font-size: 45px !important;
+  }
+}
+
+@media (max-width: 635px) {
+  .ikonos {
+    font-size: 25px !important;
+    margin: 10px !important;
+  }
+  .active{    
+    font-size: 35px !important;
+  }
 }
 
 @import "../partyNotes/partyNotes.less";
