@@ -1,28 +1,87 @@
-<div layout="column" layout-padding>
-  <div layout="column" layout-gt-sm="row"  layout-padding>
-    <form flex="50" layout="column">
-      <md-input-container>
-        <label>Party name</label>
-        <input ng-model="partyDetails.party.name" ng-disabled="!partyDetails.isLoggedIn">
-      </md-input-container>
+<div layout="row" layout-wrap>
+    <div layout=column flex="80">
+            <div flex class="progress">
+                 <div class="determinate blue darken-1" style="width: 10%"></div>
+            </div>
 
-      <md-input-container>
-        <label>Description</label>
-        <input ng-model="partyDetails.party.description" ng-disabled="!partyDetails.isLoggedIn">
-      </md-input-container>
+<div class="row">
 
-      <div>
-        <md-checkbox ng-model="partyDetails.party.public" ng-disabled="!partyDetails.isLoggedIn" aria-label="Public Party?">
-          Public Party?
-        </md-checkbox>
-      </div>
+    <div class="col s4">
+            <div class="card">
+                    <div class="card-image waves-effect waves-block waves-light">
+                        <img class="activator" src="/location.jpg">
+                    </div>
+                        <span class="card-title">Location</span>
 
-      <div>
-        <md-button ng-click="partyDetails.save()" class="md-primary md-raised">Save</md-button>
-      </div>
-    </form>
-    <party-map flex="50" location="partyDetails.party.location"></party-map>
-  </div>
 
-  <party-uninvited flex party="partyDetails.party" ng-show="partyDetails.canInvite()"></party-uninvited>
+            </div>
+    </div>
+
+    <div class="col s4">
+        <div class="card">
+                <div class="card-image waves-effect waves-block waves-light">
+                    <img class="activator" src="/food.jpg">
+                </div>
+                <span class="card-title">Food & Drinks</span>
+
+        </div>
+     </div>
+
+    <div class="col s4">
+
+        <div class="card">
+                <div class="card-image waves-effect waves-block waves-light">
+                    <img class="activator" src="/entertainment.jpg">
+                </div>
+                <span class="card-title">Entertainment</span>
+
+        </div>
+    </div>
+
+    <div class="col s4">
+        <div class="card">
+                <div class="card-image waves-effect waves-block waves-light">
+                    <img class="activator" src="/guests.jpg">
+                </div>
+                <span class="card-title">Guests</span>
+
+        </div>
+     </div>
+
+    <div class="col s4">
+        <div class="card">
+
+                <div class="card-image waves-effect waves-block waves-light">
+                    <img class="activator" src="/finance.jpg">
+                </div>
+                <span class="card-title">Finance</span>
+
+
+        </div>
+    </div>
+
+    <div class="col s4">
+        <div class="card">
+                <div class="card-image waves-effect waves-block waves-light">
+                    <img class="activator" src="/other.jpg">
+                </div>
+                <span class="card-title">Other</span>
+
+        </div>
+    </div>
+</div>
+</div>
+    <div class="sidebar" flex="20">
+        <h1 style="font-size: xx-large">Overview</h1>
+            <div layout="column">
+                <div class="todo">
+                <md-list>
+                    <h1 style="font-size: large">Upcoming To-Dos</h1>
+                    <md-list-item>Send Invitations</md-list-item>
+                    <md-list-item>Confirm Location</md-list-item>
+                    <md-list-item>Order Decoration</md-list-item>
+                </md-list>
+             </div>
+             </div>
+    </div>
 </div>

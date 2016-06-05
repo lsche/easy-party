@@ -1,107 +1,26 @@
-<div layout="row" layout-wrap ng-init="value = 'off'">
-  
+<div layout="row" layout-wrap>
+
   <div flex="10" class="sideNavbar lukas2">
-    
-        <a class="lukas1" href=""><i class="material-icons ikonos">settings_overscan</i></a>
-        <a href=""><i class="material-icons ikonos" >home</i></a>
-        <a href=""><i class="material-icons ikonos" >local_dining</i></a>
-        <a href=""><i class="material-icons ikonos" >group</i></a>
-        <a href=""><i class="material-icons ikonos" >euro_symbol</i></a>
-
+        <!--<div ng-if="partyCategory.category == 'Lntertainment'"></div>-->
+        <i class="material-icons ikonos" ui-sref="partyDashboard({ eventId: partyCategory.eventId})">settings_overscan</i>
+       <i class="material-icons ikonos" ui-sref="category({ eventId: partyCategory.eventId, categoryName: 'location' })" >home</i>
+        <i class="material-icons ikonos" ui-sref="category({ eventId: partyCategory.eventId, categoryName: 'catering' })" >local_dining</i>
+        <i class="material-icons ikonos" ui-sref="category({ eventId: partyCategory.eventId, categoryName: 'guests' })">group</i>
+        <i class="material-icons ikonos" ui-sref="category({ eventId: partyCategory.eventId, categoryName: 'finance' })">euro_symbol</i>
   </div>
-  
-<div flex="70" ng-init="valuecom = 'off'">
-    
-<md-toolbar class="md-table-toolbar md-default lukas3">
-  <div class="md-toolbar-tools">
-    <span class="lukas4">My Todos</span> <i ng-click="value = { 'on': 'off', 'off':'on'}[value]" class="material-icons addTodo"> add</i>
-  </div>
-</md-toolbar>
 
-<party-todos ng-show="value == 'on'" my-attr="partyCategory.eventId" my-category="partyCategory.categoryName"></party-todos>
+    <div flex="70">
+        <h1> {{partyCategory.category}} </h1>
 
-<!-- exact table from live demo -->
-<md-table-container>
-  <table md-table md-row-select multiple ng-model="selected" md-progress="promise">
-    <thead md-head md-order="query.order">
-      <tr md-row class="lukas5">
-        <th md-column md-numeric>Name</th>
-        <th md-column md-numeric>Asignee</th>
-        <th md-column md-numeric>Due Date</th>
-      </tr>
-    </thead>
-    <tbody md-body class="lukas6">
-      <tr md-row md-select-id="name" md-auto-select ng-repeat="todo in partyCategory.todoslist">
-        <td md-cell>{{todo.name}}</td>
-        <td md-cell>{{todo.creater}}</td>
-        <td md-cell>{{parseDate(todo.duedate)}}</td>
-      </tr>
-    </tbody>
-  </table>
-</md-table-container>
-
-
-
-<!--<md-table-pagination md-limit="query.limit" md-limit-options="[5, 10, 15]" md-page="query.page" md-total="5" md-on-paginate="getDesserts" md-page-select></md-table-pagination>-->
-    
-    <br><br>
-     
-    <md-toolbar class="md-table-toolbar md-default">
-      <div class="md-toolbar-tools">
-        <span class="lukas4">List of Comments </span> <i ng-click="valuecom = { 'on': 'off', 'off':'on'}[valuecom]" class="material-icons addTodo"> add</i>
-      </div>
-    </md-toolbar>
-    
-    <party-comment ng-show="valuecom == 'on'" my-attr="partyCategory.eventId" my-category="partyCategory.categoryName"></party-comment>    
-      
-    <div layout="column" layout-gt-sm="row">
-        <div flex="50">
-          <md-card ng-repeat="comment in partyCategory.commentslist">
-            <md-card-title>
-              <md-card-title-text>
-                <span class="md-headline">
-                  {{comment.text}}
-                </span>
-                <span class="md-subhead">{{parseDate(comment.createdAt)}}</span>
-              </md-card-title-text>
-            </md-card-title>
-
-          </md-card>
-        </div>
-    </div>  
-  </div>
-  
-  <div flex="20" ng-init="valuenote = 'off'">
-   
- 
-      <div class="md-toolbar-tools">
-        <span>Important Notes </span> <i ng-click="valuenote = { 'on': 'off', 'off':'on'}[valuenote]" class="material-icons addTodo"> add</i>
-      </div>
-    
-    <party-notes ng-show="valuenote == 'on'" my-attr="partyCategory.eventId" my-category="partyCategory.categoryName"></party-notes>
-    
-    <div layout="column" layout-gt-sm="row">
-        <div flex="50">
-          <md-card ng-repeat="note in partyCategory.noteslist">
-            <md-card-title>
-              <md-card-title-text>
-                <span class="md-headline">
-                  {{note.name}}
-                </span>
-                <span class="md-subhead">{{note.text}}</span>
-              </md-card-title-text>
-            </md-card-title>
-
-          </md-card>
-        </div>
+        <party-todos my-attr="partyCategory.eventId" my-category="partyCategory.categoryName"></party-todos>
+        <!--<md-table-pagination md-limit="query.limit" md-limit-options="[5, 10, 15]" md-page="query.page" md-total="5" md-on-paginate="getDesserts" md-page-select></md-table-pagination>-->
+        <br><br>
+        <party-comment my-attr="partyCategory.eventId" my-category="partyCategory.categoryName"></party-comment>
     </div>
-   
-    
-  </div>
+
+    <party-notes flex="20" my-attr="partyCategory.eventId" my-category="partyCategory.categoryName"></party-notes>
+
 </div>
-  
- 
- 
  
  
  

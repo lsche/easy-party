@@ -1,21 +1,49 @@
 import angular from 'angular';
 import angularMeteor from 'angular-meteor';
+import moment from 'moment';
+
 
 import { Meteor } from 'meteor/meteor';
 import template from './partyComment.html';
 import { Comments } from '../../../api/comments';
 
 class PartyComment {
-  constructor($scope, $reactive) {
+  constructor($scope, $reactive, $stateParams) {
     'ngInject';
     
     $reactive(this).attach($scope);
+
+    $scope.parseDate = function(jsonDate) {
+      //date parsing functionality
+      return moment(jsonDate).format('DD-MM-YYYY');;
+    };
     
-    this.comment = {};
     this.subscribe('comments');
     this.subscribe('users');
-    
-    
+
+    this.showAddForm = false;
+    this.comment = {};
+
+    this.helpers({
+      commentslist() {
+        return Comments.find({ event_Id: $stateParams.eventId, category: $stateParams.categoryName });
+      },
+      eventId() {
+        return $stateParams.eventId;
+      },
+      categoryName() {
+        return $stateParams.categoryName;
+      }
+    });
+  }
+
+  openForm() {
+    if(this.showAddForm) {
+      this.comment = {};
+      this.showAddForm = false;
+    } else {
+      this.showAddForm = true;
+    }
   }
 
   submit() {
@@ -26,16 +54,10 @@ class PartyComment {
     
     Comments.insert(this.comment);
 
-    if(this.done) {
-      this.done();
-    }
-
-    this.reset();
-  }
-
-  reset() {
     this.comment = {};
+    this.showAddForm = false;
   }
+
 }
 
 const name = 'partyComment';
@@ -46,7 +68,6 @@ export default angular.module(name, [
 ]).component(name, {
   template,
   bindings: {
-    done: '&?',
     myAttr: '=',
     myCategory: '='
   },

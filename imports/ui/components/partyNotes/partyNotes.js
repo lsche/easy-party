@@ -1,21 +1,41 @@
 import angular from 'angular';
 import angularMeteor from 'angular-meteor';
+import moment from 'moment';
 
 import { Meteor } from 'meteor/meteor';
 import template from './partyNotes.html';
 import { Notes } from '../../../api/notes';
 
 class PartyNotes {
-  constructor($scope, $reactive) {
+  constructor($scope, $reactive, $stateParams) {
     'ngInject';
     
     $reactive(this).attach($scope);
-    
+
+    this.showAddForm = false;
     this.note = {};
     this.subscribe('notes');
     this.subscribe('users');
-    
-    
+
+    this.helpers({
+      noteslist() {
+        return Notes.find({ event_Id: $stateParams.eventId, category: $stateParams.categoryName });
+      },
+      eventId() {
+        return $stateParams.eventId;
+      },
+      categoryName() {
+        return $stateParams.categoryName;
+      }
+    });
+  }
+  openForm() {
+    if(this.showAddForm) {
+      this.note = {};
+      this.showAddForm = false;
+    } else {
+      this.showAddForm = true;
+    }
   }
 
   submit() {
@@ -26,15 +46,8 @@ class PartyNotes {
     
     Notes.insert(this.note);
 
-    if(this.done) {
-      this.done();
-    }
-
-    this.reset();
-  }
-
-  reset() {
     this.note = {};
+    this.showAddForm = false;
   }
 }
 
@@ -46,7 +59,6 @@ export default angular.module(name, [
 ]).component(name, {
   template,
   bindings: {
-    done: '&?',
     myAttr: '=',
     myCategory: '='
   },
