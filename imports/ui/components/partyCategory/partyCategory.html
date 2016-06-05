@@ -9,8 +9,8 @@
         <i class="material-icons ikonos" ui-sref="category({ eventId: partyCategory.eventId, categoryName: 'finance' })">euro_symbol</i>
   </div>
 
-    <div flex="70">
-        <h1> {{partyCategory.category}} </h1>
+    <div flex="60">
+        <!--<h1> {{partyCategory.category}} </h1>-->
 
         <party-todos my-attr="partyCategory.eventId" my-category="partyCategory.categoryName"></party-todos>
         <!--<md-table-pagination md-limit="query.limit" md-limit-options="[5, 10, 15]" md-page="query.page" md-total="5" md-on-paginate="getDesserts" md-page-select></md-table-pagination>-->
@@ -18,7 +18,7 @@
         <party-comment my-attr="partyCategory.eventId" my-category="partyCategory.categoryName"></party-comment>
     </div>
 
-    <party-notes flex="20" my-attr="partyCategory.eventId" my-category="partyCategory.categoryName"></party-notes>
+    <party-notes flex="30" my-attr="partyCategory.eventId" my-category="partyCategory.categoryName"></party-notes>
 
 </div>
  
