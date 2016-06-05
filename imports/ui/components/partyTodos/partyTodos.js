@@ -28,7 +28,7 @@ class PartyTodos {
         return "no name";
       }
     };
-
+    this.category = $stateParams.categoryName.charAt(0).toUpperCase() + $stateParams.categoryName.slice(1);
     this.showAddForm = false;
     this.todo = {};
     this.subscribe('events');
@@ -78,12 +78,25 @@ class PartyTodos {
     this.todo.creater = Meteor.user()._id;
     this.todo.event_Id = this.myAttr;
     this.todo.category = this.myCategory;
+    this.todo.done = false;
     
     Todos.insert(this.todo);
 
 
     this.todo = {};
     this.showAddForm = false;
+  }
+  
+  clickCheckBox(todo){
+    if(todo.done){
+      Todos.update(todo._id, {
+        $set: { done: false}
+      });
+    } else {
+      Todos.update(todo._id, {
+        $set: { done: true}
+      });
+    }
   }
 }
 
