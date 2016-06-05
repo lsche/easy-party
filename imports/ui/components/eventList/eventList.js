@@ -97,7 +97,12 @@ class EventList {
     }
     
     openForm() {
-        this.showAddForm = true;
+        if(this.showAddForm) {
+            this.event= {};
+            this.showAddForm = false;
+        } else {
+            this.showAddForm = true;
+        }
     }
     submit() {
         this.event.creator = Meteor.user()._id;

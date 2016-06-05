@@ -3,6 +3,7 @@ import angularMeteor from 'angular-meteor';
 import uiRouter from 'angular-ui-router';
 
 import { Meteor } from 'meteor/meteor';
+import { Events } from '../../../api/events';
 
 import template from './partyDashboard.html';
 
@@ -15,10 +16,15 @@ class PartyDashboard{
 
     this.eventId = $stateParams.eventId;
 
+
     this.subscribe('events');
     this.subscribe('users');
 
+
     this.helpers({
+      currentEvent(){
+        return Events.findOne(this.eventId);
+      },
       users() {
         return Meteor.users.find({});
       },

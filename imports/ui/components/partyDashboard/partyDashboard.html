@@ -1,10 +1,11 @@
 <div layout="row" layout-wrap>
-    <div layout=column flex="80">
-            <div flex class="progress">
+ <div layout=column flex="75">
+            <!--<div flex class="progress">
                  <div class="determinate blue darken-1" style="width: 10%"></div>
             </div>
+            -->
 
-<div class="row">
+<div class="row categories" >
 
     <div class="col s4">
             <div class="card">
@@ -70,17 +71,19 @@
     </div>
 </div>
 </div>
-    <div class="sidebar" flex="20">
-        <h1 style="font-size: xx-large">Overview</h1>
+    <div flex="25">
+        <div class="sidebar" md-whiteframe="3">
+            <h3>{{partyDashboard.currentEvent.name}}</h3>
             <div layout="column">
-                <div class="todo">
-                <md-list>
-                    <h1 style="font-size: large">Upcoming To-Dos</h1>
-                    <md-list-item>Send Invitations</md-list-item>
-                    <md-list-item>Confirm Location</md-list-item>
-                    <md-list-item>Order Decoration</md-list-item>
-                </md-list>
-             </div>
-             </div>
+                <div class="todo" md-whiteframe="2">
+                    <md-list>
+                        <h4>Upcoming To-Dos</h4>
+                        <md-list-item>Send Invitations</md-list-item>
+                        <md-list-item>Confirm Location</md-list-item>
+                        <md-list-item>Order Decoration</md-list-item>
+                    </md-list>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

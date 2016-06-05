@@ -6,7 +6,8 @@
             <div layout="row">
                     <h2 class="md-display-1">Your Events:</h2>
                     <span flex></span>
-                    <md-button class="md-fab material-icons" ng-click="eventList.openForm()"> add</md-button>
+                    <md-button ng-hide="eventList.showAddForm" class="md-fab material-icons" ng-click="eventList.openForm()"> add</md-button>
+                    <md-button ng-show="eventList.showAddForm" class="md-fab material-icons" ng-click="eventList.openForm()"> close</md-button>
             </div>
             <div ng-if="eventList.showAddForm">
                 <div layout="row" layout-padding>
