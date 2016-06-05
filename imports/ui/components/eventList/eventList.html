@@ -24,7 +24,7 @@
                         <input type="text" ng-model="eventList.event.description"/>
                     </md-input-container>
 
-                    <md-autocomplete flex
+                    <!--<md-autocomplete flex
                             ng-disabled="eventList.isDisabled"
                             md-no-cache="eventList.noCache"
                             md-selected-item="eventList.selectedItem"
@@ -42,12 +42,44 @@
                             No states matching "{{eventList.searchText}}" were found.
                             <a ng-click="eventList.newState(eventList.searchText)">Create a new one!</a>
                         </md-not-found>
-                    </md-autocomplete>
-
+                    </md-autocomplete> -->
                     <div flex>
                         <md-button ng-click="eventList.submit()" class="md-raised">Add Event!</md-button>
                     </div>
                 </div>
+                <div layout="row" layout-padding>
+                    <md-input-container>
+                        <label>How many people should help you?</label>
+                        <md-select ng-model="$scope.plannerNumber">
+                            <md-option ng-repeat="number in [0,1,2,3,4]" value="{{number}}">{{number}}</md-option>
+                        </md-select>
+                    </md-input-container>
+                    <div layout="column" layout-padding>
+                        <md-input-container ng-if="$scope.plannerNumber > 0">
+                            <label>
+                                Helper 1:
+                            </label>
+                            <input type="email" ng-model="eventList.event.planner[0].mail"/>
+                        </md-input-container>
+                        <md-input-container ng-if="$scope.plannerNumber > 1">
+                            <label>
+                                Helper 2:
+                            </label>
+                            <input type="email" ng-model="eventList.event.planner[1].mail"/>
+                        </md-input-container><md-input-container ng-if="$scope.plannerNumber > 2">
+                        <label>
+                            Helper 3:
+                        </label>
+                        <input type="email" ng-model="eventList.event.planner[2].mail"/>
+                    </md-input-container><md-input-container ng-if="$scope.plannerNumber > 3">
+                        <label>
+                            Helper 4:
+                        </label>
+                        <input type="email" ng-model="eventList.event.planner[3].mail"/>
+                    </md-input-container>
+                    </div>
+                </div>
+
             </div>
 
             <md-list flex ng-repeat="event in eventList.events" >

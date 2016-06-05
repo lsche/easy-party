@@ -20,6 +20,15 @@ class PartyTodos {
       return moment(jsonDate).format('DD-MM-YYYY');
     };
 
+    $scope.getName = function(userId){
+      var user = Meteor.users.findOne({_id: userId});
+      if(user){
+        return user.profile.firstName;
+      } else{
+        return "no name";
+      }
+    };
+
     this.showAddForm = false;
     this.todo = {};
     this.subscribe('events');
@@ -34,6 +43,22 @@ class PartyTodos {
       },
       eventId() {
         return $stateParams.eventId;
+      },
+      getEventPlanner(){
+        var event = Events.findOne($stateParams.eventId);
+        if(Meteor.user()){
+          var planner = [{name: Meteor.user().profile.firstName, id: Meteor.userId(), mail: Meteor.user().emails[0].address}];
+        }
+        if(event){
+          event.planner.forEach(function(person) {
+            var user = Meteor.users.findOne({emails: {$elemMatch: {address: person.mail }}});
+            if(user){
+              //safe object with name and id in planner
+              planner.push({name: user.profile.firstName, id: user._id, mail: person.mail});
+            }
+          });
+        }
+        return planner;
       },
       categoryName() {
         return $stateParams.categoryName;
@@ -53,7 +78,7 @@ class PartyTodos {
     this.todo.creater = Meteor.user()._id;
     this.todo.event_Id = this.myAttr;
     this.todo.category = this.myCategory;
-
+    
     Todos.insert(this.todo);
 
 

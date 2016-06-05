@@ -21,6 +21,7 @@ class EventList {
         $reactive(this).attach($scope);
 
         this.event = {};
+        this.event.planner = [];
         this.$state = $state;
         
         this.subscribe('events');

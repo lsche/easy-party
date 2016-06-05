@@ -7,9 +7,9 @@
         </div>
     </md-toolbar>
 
-<div ng-if="partyTodos.showAddForm" class="md-inline-form" layout-padding>
+    <div ng-if="partyTodos.showAddForm" class="md-inline-form" layout-padding>
 
-<div layout-gt-sm="row">    
+    <div layout-gt-sm="row">
       
   <md-input-container class="md-block" flex-gt-sm="25">
     <label>
@@ -35,17 +35,24 @@
   </div>
   
   </div>
+    <div layout-gt-sm="row">
+        <md-input-container class="md-block" flex-gt-sm="25">
+            <label>Assignee</label>
+            <md-select ng-model="partyTodos.todo.assignee">
+                <md-option ng-repeat="person in partyTodos.getEventPlanner" value="{{person.id}}">{{person.name}}</md-option>
+            </md-select>
+        </md-input-container>
+    </div>
+    <div layout-gt-sm="row">
 
-  <div layout-gt-sm="row">   
-    
-  <div flex class="md-block" flex-gt-sm="20">
-    <md-button ng-click="partyTodos.submit()" class="md-raised">Add Todo</md-button>
-  </div>   
-  
-  <md-content class="md-block" flex-gt-sm="40">
-    <label><strong>Due date</strong></label>
-    <md-datepicker ng-model="partyTodos.todo.duedate" md-placeholder="Task due date"></md-datepicker>
-  </md-content>
+      <md-content class="md-block" flex-gt-sm="40">
+        <label><strong>Due date</strong></label>
+        <md-datepicker ng-model="partyTodos.todo.duedate" md-placeholder="Task due date"></md-datepicker>
+      </md-content>
+
+      <div flex class="md-block" flex-gt-sm="20">
+          <md-button ng-click="partyTodos.submit()" class="md-raised">Add Todo</md-button>
+      </div>
 
   </div>
 
@@ -63,7 +70,7 @@
             <tbody md-body class="lukas6">
             <tr md-row md-select-id="name" md-auto-select ng-repeat="todo in partyTodos.todoslist">
                 <td md-cell>{{todo.name}}</td>
-                <td md-cell>{{todo.creater}}</td>
+                <td md-cell>{{getName(todo.assignee)}}</td>
                 <td md-cell>{{parseDate(todo.duedate)}}</td>
             </tr>
             </tbody>
