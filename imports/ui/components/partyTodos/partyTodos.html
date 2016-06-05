@@ -1,7 +1,14 @@
-<div class="md-inline-form" layout-padding>
-    
-        
-        
+    <md-toolbar class="md-table-toolbar md-default lukas3">
+        <div class="md-toolbar-tools">
+            <h3>My Todos</h3>
+            <span flex></span>
+            <i ng-hide="partyTodos.showAddForm" class="material-icons addTodo" ng-click="partyTodos.openForm()"> add</i>
+            <i ng-show="partyTodos.showAddForm" class="material-icons addTodo" ng-click="partyTodos.openForm()"> close</i>
+        </div>
+    </md-toolbar>
+
+<div ng-if="partyTodos.showAddForm" class="md-inline-form" layout-padding>
+
 <div layout-gt-sm="row">    
       
   <md-input-container class="md-block" flex-gt-sm="25">
@@ -39,16 +46,26 @@
     <label><strong>Due date</strong></label>
     <md-datepicker ng-model="partyTodos.todo.duedate" md-placeholder="Task due date"></md-datepicker>
   </md-content>
-  
-   
 
-  
   </div>
-  
- 
-  
 
-  
-  
-  
 </div>
+
+    <md-table-container>
+        <table md-table md-row-select multiple ng-model="selected" md-progress="promise">
+            <thead md-head md-order="query.order">
+            <tr md-row class="lukas5">
+                <th md-column md-numeric>Name</th>
+                <th md-column md-numeric>Asignee</th>
+                <th md-column md-numeric>Due Date</th>
+            </tr>
+            </thead>
+            <tbody md-body class="lukas6">
+            <tr md-row md-select-id="name" md-auto-select ng-repeat="todo in partyTodos.todoslist">
+                <td md-cell>{{todo.name}}</td>
+                <td md-cell>{{todo.creater}}</td>
+                <td md-cell>{{parseDate(todo.duedate)}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </md-table-container>

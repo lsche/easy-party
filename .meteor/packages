@@ -29,4 +29,6 @@ check
 email
 less
 planettraining:material-design-icons
+materialize:materialize
 angular:angular-messages
+

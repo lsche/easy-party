@@ -1,4 +1,11 @@
-<div layout="column" layout-padding class="lukas7">
+<div class="md-toolbar-tools">
+    <h3>Notes </h3>
+    <span flex></span>
+    <i ng-hide="partyNotes.showAddForm" class="material-icons addTodo" ng-click="partyNotes.openForm()"> add</i>
+    <i ng-show="partyNotes.showAddForm" class="material-icons addTodo" ng-click="partyNotes.openForm()"> close</i>
+</div>
+
+<div layout="column" layout-padding class="lukas7" ng-if="partyNotes.showAddForm">
     
   <md-input-container>
     <label>
@@ -20,4 +27,21 @@
   </div>
    
   
+</div>
+
+
+<div layout="column" layout-gt-sm="row">
+    <div flex="50">
+        <md-card ng-repeat="note in partyNotes.noteslist">
+            <md-card-title>
+                <md-card-title-text>
+                <span class="md-headline">
+                    {{note.name}}
+                </span>
+                    <span class="md-subhead">{{note.text}}</span>
+                </md-card-title-text>
+            </md-card-title>
+
+        </md-card>
+    </div>
 </div>
