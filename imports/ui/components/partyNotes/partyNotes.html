@@ -1,0 +1,44 @@
+<div class="md-toolbar-tools">
+    <span>Important Notes </span> <i ng-click="partyNotes.openForm()" class="material-icons addTodo"> add</i>
+</div>
+
+<div layout="column" layout-padding class="lukas7" ng-if="partyNotes.showAddForm">
+    
+  <md-input-container>
+    <label>
+      Name:
+    </label>
+    <input type="text" ng-model="partyNotes.note.name"/>
+  </md-input-container>  
+  
+  <md-input-container>
+    <label>
+      Text:
+    </label>
+    <input type="text" ng-model="partyNotes.note.text"/>
+  </md-input-container>
+  
+  
+  <div flex>
+    <md-button ng-click="partyNotes.submit()" class="md-raised lukas8">Add Note</md-button>
+  </div>
+   
+  
+</div>
+
+
+<div layout="column" layout-gt-sm="row">
+    <div flex="50">
+        <md-card ng-repeat="note in partyNotes.noteslist">
+            <md-card-title>
+                <md-card-title-text>
+                <span class="md-headline">
+                    {{note.name}}
+                </span>
+                    <span class="md-subhead">{{note.text}}</span>
+                </md-card-title-text>
+            </md-card-title>
+
+        </md-card>
+    </div>
+</div>

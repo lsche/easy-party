@@ -1,0 +1,38 @@
+<md-toolbar class="md-table-toolbar md-default">
+    <div class="md-toolbar-tools">
+        <span class="lukas4">List of Comments </span> <i ng-click="partyComment.openForm()" class="material-icons addTodo"> add</i>
+    </div>
+</md-toolbar>
+
+<div layout="column" layout-padding ng-if="partyComment.showAddForm">
+  
+  <md-input-container>
+    <label>
+      Text:
+    </label>
+    <input type="text" ng-model="partyComment.comment.text"/>
+  </md-input-container>
+  
+  
+  <div flex>
+    <md-button ng-click="partyComment.submit()" class="md-raised">Add Comment</md-button>
+  </div>
+   
+  
+</div>
+
+<div layout="column" layout-gt-sm="row">
+    <div flex="50">
+        <md-card ng-repeat="comment in partyComment.commentslist">
+            <md-card-title>
+                <md-card-title-text>
+                <span class="md-headline">
+                    {{comment.text}}
+                </span>
+                    <span class="md-subhead">{{parseDate(comment.createdAt)}}</span>
+                </md-card-title-text>
+            </md-card-title>
+
+        </md-card>
+    </div>
+</div>
