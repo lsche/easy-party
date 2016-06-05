@@ -26,8 +26,8 @@ class PartyCategory {
 
       $scope.parseDate = function(jsonDate) {
          //date parsing functionality
-         return moment(jsonDate).format('DD-MM-YYYY');;
-      }
+         return moment(jsonDate).format('DD-MM-YYYY');
+      };
     
     $scope.selected = [];
 
@@ -44,7 +44,8 @@ class PartyCategory {
     this.subscribe('notes');
     this.subscribe('users');
     
-    
+    this.category = $stateParams.categoryName.charAt(0).toUpperCase() + $stateParams.categoryName.slice(1);
+      this.eventId = $stateParams.eventId;
     
     this.helpers({
        todoslist() {
@@ -62,9 +63,10 @@ class PartyCategory {
        categoryName() {
            return $stateParams.categoryName;
        }
-    }); 
-  }
+    });
 
+  }
+    
   
 }
 

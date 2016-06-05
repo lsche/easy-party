@@ -12,7 +12,7 @@ import { Meteor } from 'meteor/meteor';
 
 
 class EventList {
-    constructor($scope, $reactive, $timeout, $q, $log) {
+    constructor($scope, $reactive, $timeout, $q, $log, $state) {
         'ngInject';
 
         this.showAddForm = false;
@@ -21,6 +21,7 @@ class EventList {
         $reactive(this).attach($scope);
 
         this.event = {};
+        this.$state = $state;
         
         this.subscribe('events');
         this.subscribe('users');
@@ -112,7 +113,6 @@ class EventList {
     showSimpleToast(currentEvent){
         console.log(currentEvent.name + currentEvent._id);
     }
-
 }
 
 const name = 'eventList';

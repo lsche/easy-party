@@ -50,7 +50,7 @@
             </div>
 
             <md-list flex ng-repeat="event in eventList.events" >
-                <md-list-item class="md-2-line">
+                <md-list-item class="md-2-line"  ui-sref="partyDashboard({ eventId: event._id })">
                     <div class="md-list-item-text" ng-click="eventList.showSimpleToast(event)">
                         <h3>{{ event.name}}</h3>
                         <p>{{event.description}}</p>

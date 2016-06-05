@@ -12,7 +12,7 @@ class PartyNotes {
     
     $reactive(this).attach($scope);
 
-    this.showAddForm = {};
+    this.showAddForm = false;
     this.note = {};
     this.subscribe('notes');
     this.subscribe('users');

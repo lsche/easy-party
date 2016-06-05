@@ -5,27 +5,20 @@ import uiRouter from 'angular-ui-router';
 import { Meteor } from 'meteor/meteor';
 
 import template from './partyDashboard.html';
-import { Parties } from '../../../api/parties';
-import { name as PartyUninvited } from '../partyUninvited/partyUninvited';
-import { name as PartyMap } from '../partyMap/partyMap';
 
-class PartyDetails {
+
+class PartyDashboard{
   constructor($stateParams, $scope, $reactive) {
     'ngInject';
 
     $reactive(this).attach($scope);
 
-    this.partyId = $stateParams.partyId;
+    this.eventId = $stateParams.eventId;
 
-    this.subscribe('parties');
+    this.subscribe('events');
     this.subscribe('users');
 
     this.helpers({
-      party() {
-        return Parties.findOne({
-          _id: $stateParams.partyId
-        });
-      },
       users() {
         return Meteor.users.find({});
       },
@@ -35,32 +28,10 @@ class PartyDetails {
     });
   }
 
-  canInvite() {
-    if (!this.party) {
-      return false;
-    }
-
-    return !this.party.public && this.party.owner === Meteor.userId();
+  logEvent(){
+    console.log(this.eventId);
   }
 
-  save() {
-    Parties.update({
-      _id: this.party._id
-    }, {
-      $set: {
-        name: this.party.name,
-        description: this.party.description,
-        public: this.party.public,
-        location: this.party.location
-      }
-    }, (error) => {
-      if (error) {
-        console.log('Oops, unable to update the party...');
-      } else {
-        console.log('Done!');
-      }
-    });
-  }
 }
 
 const name = 'partyDashboard';
@@ -68,21 +39,20 @@ const name = 'partyDashboard';
 // create a module
 export default angular.module(name, [
   angularMeteor,
-  uiRouter,
-  PartyUninvited,
-  PartyMap
+  uiRouter
 ]).component(name, {
   template,
   controllerAs: name,
-  controller: PartyDetails
+  controller: PartyDashboard
 })
   .config(config);
+
 
 function config($stateProvider) {
   'ngInject';
 
   $stateProvider.state('partyDashboard', {
-    url: '/parties/:partyId',
+    url: '/:eventId/category',
     template: '<party-dashboard></party-dashboard>',
     resolve: {
       currentUser($q) {
