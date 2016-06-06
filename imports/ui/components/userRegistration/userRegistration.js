@@ -15,16 +15,14 @@ class UserRegistration {
         $reactive(this).attach($scope);
         
         var randCol = '#'+(Math.random()*0xFFFFFF<<0).toString(16);
-        
-        // th.color = randCol;
             
         this.credentials = {
             email: '',
             password: '',
-            color: '',
             profile:{
                 firstName: '',
-                lastName: ''
+                lastName: '',
+                color: randCol
             },      
         };
         
