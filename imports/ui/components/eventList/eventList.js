@@ -34,8 +34,17 @@ class EventList {
         });
 
         this.helpers({
-            events() {
-                return Events.find({},{ sort: {createdAt: -1}});
+            creatorEvents() {
+                var currentId = Meteor.userId();
+                return Events.find({creator: currentId},{ sort: {createdAt: -1}});
+            },
+            plannerEvents(){
+                var currentUserMail = Meteor.user();
+                if(currentUserMail){
+                    var mail = currentUserMail.emails[0].address;
+                    return Events.find({planner: {$elemMatch: {mail: mail}}}, { sort: {createdAt: -1}});
+                }
+                return null;
             }
         });
 
