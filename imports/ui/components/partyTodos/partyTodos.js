@@ -30,6 +30,7 @@ class PartyTodos {
     };
     this.category = $stateParams.categoryName.charAt(0).toUpperCase() + $stateParams.categoryName.slice(1);
     this.showAddForm = false;
+    this.selectedTodoId = null;
     this.todo = {};
     this.subscribe('events');
     this.subscribe('todos');
@@ -71,6 +72,14 @@ class PartyTodos {
       this.showAddForm = false;
     } else {
       this.showAddForm = true;
+    }
+  }
+
+  selectTodo(todo){
+    if(this.selectedTodoId == todo._id){
+      this.selectedTodoId = null;
+    } else {
+      this.selectedTodoId = todo._id;
     }
   }
 
