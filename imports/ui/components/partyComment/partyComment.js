@@ -17,12 +17,22 @@ class PartyComment {
       //date parsing functionality
       return moment(jsonDate).format('DD-MM-YYYY');;
     };
+
+    $scope.getName = function(userId){
+      var user = Meteor.users.findOne({_id: userId});
+      if(user){
+        return user.profile.firstName;
+      } else{
+        return "no name";
+      }
+    };
     
     this.subscribe('comments');
     this.subscribe('users');
 
     this.showAddForm = false;
     this.comment = {};
+    this.categoryName = $stateParams.categoryName.charAt(0).toUpperCase() + $stateParams.categoryName.slice(1);
 
     this.helpers({
       commentslist() {
@@ -30,9 +40,6 @@ class PartyComment {
       },
       eventId() {
         return $stateParams.eventId;
-      },
-      categoryName() {
-        return $stateParams.categoryName;
       }
     });
   }

@@ -17,11 +17,14 @@ import { name as PartyComment } from '../partyComment/partyComment';
 import { name as PartyNotes } from '../partyNotes/partyNotes';
 
 
+
 class PartyCategory {
   constructor($stateParams, $scope, $reactive) {
     'ngInject';
 
     $reactive(this).attach($scope);
+    
+     
     
 
       $scope.parseDate = function(jsonDate) {
@@ -64,6 +67,8 @@ class PartyCategory {
            return $stateParams.categoryName;
        }
     });
+    
+   
 
   }
     

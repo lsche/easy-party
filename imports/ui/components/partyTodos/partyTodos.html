@@ -1,71 +1,117 @@
-    <md-toolbar class="md-table-toolbar md-default lukas3">
-        <div class="md-toolbar-tools">
-            <h3>My Todos</h3>
-            <span flex></span>
-            <i ng-hide="partyTodos.showAddForm" class="material-icons addTodo" ng-click="partyTodos.openForm()"> add</i>
-            <i ng-show="partyTodos.showAddForm" class="material-icons addTodo" ng-click="partyTodos.openForm()"> close</i>
-        </div>
-    </md-toolbar>
+<md-content class="todos" md-whiteframe="3">
+        <md-list>
+            <md-subheader class="md-sticky">
+                <div layout="column">
+                    <div layout="row">
+                        <span flex="5"></span>
+                        <span flex="75"><h5>Todos for {{partyTodos.category}}</h5></span>
+                        <md-select ng-model="partyTodos.sort" placeholder="Sort by" flex="13">
+                            <md-option ng-value="opt" ng-repeat="opt in ['Date', 'Status', 'Assignee']">{{ opt }}</md-option>
+                        </md-select>
+                        <md-button ng-hide="partyTodos.showAddForm" class="material-icons md-fab md-mini addTodo" ng-click="partyTodos.openForm()"> add</md-button>
+                        <md-button ng-show="partyTodos.showAddForm" class="material-icons md-fab md-mini addTodo" ng-click="partyTodos.openForm()"> close</md-button>
+                    </div>
+                    <div layout="row">
+                        <span flex="10"></span>
+                        <span flex="30">
+                        <p>Todo</p>
+                        </span>
+                        <span flex="20" align="center">
+                        <p>Assignee</p>
+                        </span>
+                        <span flex="15" align="center">
+                            <p>Due Date</p>
+                        </span>
+                    </div>
+                </div>
+            </md-subheader>
+            <form ng-if="partyTodos.showAddForm" md-whiteframe>
 
-<div ng-if="partyTodos.showAddForm" class="md-inline-form" layout-padding>
+                <div layout="row">
+                    <md-input-container class="md-block" flex="30">
+                        <label>
+                            Title:
+                        </label>
+                        <input type="text" ng-model="partyTodos.todo.name"/>
+                    </md-input-container>
+                    <div class="md-block" flex="5"></div>
+                    <md-input-container class="md-block" flex="30">
+                        <label>Assignee</label>
+                        <md-select ng-model="partyTodos.todo.assignee">
+                            <md-option ng-repeat="person in partyTodos.getEventPlanner" value="{{person.id}}">{{person.name}}</md-option>
+                        </md-select>
+                    </md-input-container>
+                    <div class="md-block" flex="5"></div>
+                    <md-content flex="15">
+                        <label><strong>Due date</strong></label>
+                        <md-datepicker ng-model="partyTodos.todo.duedate" md-placeholder="Due date" flex></md-datepicker>
+                    </md-content>
+                </div>
+                <div layout="row">
+                    <md-input-container class="md-block" flex="50">
+                        <label>
+                            Additional Text:
+                        </label>
+                        <textarea type="text" ng-model="partyTodos.todo.description"></textarea>
+                    </md-input-container>
 
-<div layout-gt-sm="row">    
-      
-  <md-input-container class="md-block" flex-gt-sm="25">
-    <label>
-      Title:
-    </label>
-    <input type="text" ng-model="partyTodos.todo.name"/>
-  </md-input-container>
-  
-  <md-input-container class="md-block" flex-gt-sm="50">
-    <label>
-      Text:
-    </label>
-    <input type="text" ng-model="partyTodos.todo.description"/>
-  </md-input-container>
-  
-  <div flex class="md-block" flex-gt-sm="5">
-  </div>
-  
-  <div flex class="md-block" flex-gt-sm="20">
-    <md-checkbox ng-model="partyTodos.todo.finished" aria-label="Task done?">
-      Task done?
-    </md-checkbox>
-  </div>
-  
-  </div>
+                    <div class="md-block" flex="20">
+                        <md-button ng-click="partyTodos.submit()" class="md-raised">Add Todo</md-button>
+                    </div>
+                </div>
 
-  <div layout-gt-sm="row">   
-    
-  <div flex class="md-block" flex-gt-sm="20">
-    <md-button ng-click="partyTodos.submit()" class="md-raised">Add Todo</md-button>
-  </div>   
-  
-  <md-content class="md-block" flex-gt-sm="40">
-    <label><strong>Due date</strong></label>
-    <md-datepicker ng-model="partyTodos.todo.duedate" md-placeholder="Task due date"></md-datepicker>
-  </md-content>
+            </form>
+            <div class="listItems">
+                <md-list-item class="md-2-line" ng-repeat="todo in partyTodos.todoslist">
 
-  </div>
+                        <div class="md-list-item-text selected" ng-if="partyTodos.selectedTodoId == todo._id">
+                            <div layout="row" class="rows">
+                                <div class="md-checkbox-div" ng-repeat="v in [0]">
+                                    <md-checkbox ng-model="todo.done" ng-change="partyTodos.clickCheckbox(todo)" >
+                                    </md-checkbox>
+                                </div>
 
-</div>
+                                <div flex="30">
+                                    <h3  ng-show="todo.done" class="textItems done" ng-click="partyTodos.selectTodo(todo)">{{todo.name}}</h3>
+                                    <h3  ng-hide="todo.done" class="textItems" ng-click="partyTodos.selectTodo(todo)">{{todo.name}}</h3>
+                                    <!--<h4>{{todo.description}}</h4>-->
+                                </div>
+                                <span flex="30" align="center">
+                                <p class="textItems" >{{getName(todo.assignee)}}</p>
+                                </span>
+                                <span flex="20">
+                                    <p class="textItems" >{{parseDate(todo.duedate)}}</p>
+                                </span>
+                                <span flex></span>
+                                <md-button class="material-icons md-icon-button"> edit</md-button>
+                                <md-button class="material-icons md-icon-button"> delete</md-button>
+                            </div>
+                            <div>
+                                <p class="description"> {{todo.description}}</p>
+                            </div>
+                        </div>
+                        <div class="md-list-item-text" ng-if=" partyTodos.selectedTodoId != todo._id">
+                            <div layout="row" class="rows">
+                                <div class="md-checkbox-div" ng-repeat="v in [0]">
+                                    <md-checkbox ng-model="todo.done" ng-change="partyTodos.clickCheckbox(todo)" >
+                                    </md-checkbox>
+                                </div>
+                                <div flex="30">
+                                    <h3  ng-show="todo.done" class="textItems2 done" ng-mouseover="partyTodos.selectTodo(todo)">{{todo.name}}</h3>
+                                    <h3  ng-hide="todo.done" class="textItems2" ng-mouseover="partyTodos.selectTodo(todo)">{{todo.name}}</h3>
+                                    <!--<h4>{{todo.description}}</h4>-->
+                                </div>
+                        <span flex="30" align="center">
+                        <p  class="textItems2">{{getName(todo.assignee)}}</p>
+                        </span>
+                        <span flex="20">
+                            <p class="textItems2">{{parseDate(todo.duedate)}}</p>
+                        </span>
+                            </div>
+                        </div>
 
-    <md-table-container>
-        <table md-table md-row-select multiple ng-model="selected" md-progress="promise">
-            <thead md-head md-order="query.order">
-            <tr md-row class="lukas5">
-                <th md-column md-numeric>Name</th>
-                <th md-column md-numeric>Asignee</th>
-                <th md-column md-numeric>Due Date</th>
-            </tr>
-            </thead>
-            <tbody md-body class="lukas6">
-            <tr md-row md-select-id="name" md-auto-select ng-repeat="todo in partyTodos.todoslist">
-                <td md-cell>{{todo.name}}</td>
-                <td md-cell>{{todo.creater}}</td>
-                <td md-cell>{{parseDate(todo.duedate)}}</td>
-            </tr>
-            </tbody>
-        </table>
-    </md-table-container>
+                    <md-divider ng-if="!$last"></md-divider>
+                </md-list-item>
+            </div>
+        </md-list>
+    </md-content>

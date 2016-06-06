@@ -5,11 +5,16 @@ party-category {
 }
 
 .ikonos {
-  display: block;
-  font-size: 55px !important;
-  margin: 35px !important;
+ // display: block;
+  font-size: 48px !important;
+  //margin: 22px !important;
   text-decoration: none;
   color: #00BCD4;
+}
+
+.activate{
+    font-size: 60px !important;
+    color: #006064;
 }
 
 .lukas1 {
@@ -17,7 +22,10 @@ party-category {
 }
 
 .lukas2 {
-  background-color: #1565C0;
+  background-color: rgba(0, 188, 212, 0.55);
+ // height: 1000px !important;
+  width: 96px;
+  padding-top: 20px !important;
 }
 
 .lukas3 {
@@ -42,4 +50,37 @@ party-category {
   cursor: pointer;
 }
 
+@media (max-width: 1130px) {
+  .ikonos {
+    font-size: 45px !important;
+   // margin: 25px !important;
+  }
+  .activate{
+    font-size: 55px !important;
+  }
+}
+
+@media (max-width: 840px) {
+  .ikonos {
+    font-size: 35px !important;
+   // margin: 15px !important;
+  }
+  .activate{
+    font-size: 45px !important;
+  }
+}
+
+@media (max-width: 635px) {
+  .ikonos {
+    font-size: 25px !important;
+   // margin: 10px !important;
+  }
+  .activate{
+    font-size: 35px !important;
+  }
+}
+
 @import "../partyNotes/partyNotes.less";
+@import "../partyTodos/partyTodos.less";
+@import "../partyComment/partyComment.less";
+
