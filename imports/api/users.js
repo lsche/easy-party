@@ -5,7 +5,7 @@ if (Meteor.isServer) {
 
     return Meteor.methods({
 
-      removeAllPosts: function() {
+      removeAllUsers: function() {
 
         return Meteor.users.remove({});
 
