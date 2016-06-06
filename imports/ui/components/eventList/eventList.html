@@ -11,13 +11,14 @@
             </div>
             <div ng-if="eventList.showAddForm" md-whiteframe>
                 <div layout="row" layout-padding>
-                    <md-input-container>
+                    <md-input-container flex="45" align="center" class="topInputEventList">
                         <label>
                             Event Name:
                         </label>
                         <input type="text" ng-model="eventList.event.name"/>
                     </md-input-container>
-                    <md-input-container>
+                    <span flex="10"></span>
+                    <md-input-container flex="45" align="center" class="topInputEventList">
                         <label>
                             Description:
                         </label>
@@ -41,10 +42,10 @@
                         </md-item-template>
                     </md-autocomplete>-->
                 </div>
-                <div layout="row" flex>
-                    <md-datepicker ng-model="eventList.event.event_date" md-placeholder="Enter date"></md-datepicker>
-                </div>
+
                 <div layout="row" layout-padding>
+                    <md-datepicker flex="30" align="center" ng-model="eventList.event.event_date" md-placeholder="Enter date"></md-datepicker>
+                    <span flex="5px"></span>
                     <md-input-container>
                         <label>How many people should help you?</label>
                         <md-select ng-model="$scope.plannerNumber">
@@ -76,8 +77,8 @@
                     </md-input-container>
                     </div>
                 </div>
-                <div layout="row" flex>
-                    <md-button ng-click="eventList.submit()" class="md-raised">Add Event!</md-button>
+                <div layout="row" flex >
+                    <md-button flex="100" align="center" ng-click="eventList.submit()" class="md-raised">Add Event!</md-button>
                 </div>
             </div>
 
