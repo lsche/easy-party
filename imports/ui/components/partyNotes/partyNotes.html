@@ -1,9 +1,9 @@
 <div class="notes" md-whiteframe="3">
-<div class="md-toolbar-tools">
-    <h3>Notes </h3>
+<div class="md-toolbar-tools" id="noteToolbar">
+    <h5 id="noteTitle">Notes</h5>
     <span flex></span>
-    <i ng-hide="partyNotes.showAddForm" class="material-icons addTodo" ng-click="partyNotes.openForm()"> add</i>
-    <i ng-show="partyNotes.showAddForm" class="material-icons addTodo" ng-click="partyNotes.openForm()"> close</i>
+    <md-button ng-hide="partyNotes.showAddForm" class="material-icons md-fab md-mini addTodo" ng-click="partyNotes.openForm()"> add</md-button>
+    <md-button ng-show="partyNotes.showAddForm" class="material-icons md-fab md-mini addTodo" ng-click="partyNotes.openForm()"> close</md-button>
 </div>
 
 <div layout="column" layout-padding class="lukas7" ng-if="partyNotes.showAddForm">
@@ -21,8 +21,8 @@
     </label>
     <input type="text" ng-model="partyNotes.note.text"/>
   </md-input-container>
-  
-  
+
+
   <div flex>
     <md-button ng-click="partyNotes.submit()" class="md-raised lukas8">Add Note</md-button>
   </div>
