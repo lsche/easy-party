@@ -4,6 +4,8 @@ import angular from 'angular';
 import angularMeteor from 'angular-meteor';
 import uiRouter from 'angular-ui-router';
 import ngMaterial from 'angular-material';
+import moment from 'moment';
+
 
 import template from './eventList.html';
 
@@ -19,6 +21,11 @@ class EventList {
         var self = this;
 
         $reactive(this).attach($scope);
+
+        $scope.parseDate = function(jsonDate) {
+            //date parsing functionality
+            return moment(jsonDate).format('DD-MM-YYYY');
+        };
 
         this.event = {};
         this.event.planner = [];

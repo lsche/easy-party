@@ -9,7 +9,7 @@
                     <md-button ng-hide="eventList.showAddForm" class="md-fab material-icons" ng-click="eventList.openForm()"> add</md-button>
                     <md-button ng-show="eventList.showAddForm" class="md-fab material-icons" ng-click="eventList.openForm()"> close</md-button>
             </div>
-            <div ng-if="eventList.showAddForm">
+            <div ng-if="eventList.showAddForm" md-whiteframe>
                 <div layout="row" layout-padding>
                     <md-input-container>
                         <label>
@@ -24,7 +24,7 @@
                         <input type="text" ng-model="eventList.event.description"/>
                     </md-input-container>
 
-                    <md-autocomplete
+                    <!--<md-autocomplete
                             ng-disabled="eventList.isDisabled"
                             md-no-cache="eventList.noCache"
                             md-selected-item="eventList.selectedItem"
@@ -39,10 +39,10 @@
                             <span md-highlight-text="eventList.searchText" class="item-title">{{item.name}}</span>
                             <span class="item-metadata">{{item.value}}</span>
                         </md-item-template>
-                    </md-autocomplete>
-                    <div flex>
-                        <md-button ng-click="eventList.submit()" class="md-raised">Add Event!</md-button>
-                    </div>
+                    </md-autocomplete>-->
+                </div>
+                <div layout="row" flex>
+                    <md-datepicker ng-model="eventList.event.event_date" md-placeholder="Enter date"></md-datepicker>
                 </div>
                 <div layout="row" layout-padding>
                     <md-input-container>
@@ -76,24 +76,31 @@
                     </md-input-container>
                     </div>
                 </div>
-
+                <div layout="row" flex>
+                    <md-button ng-click="eventList.submit()" class="md-raised">Add Event!</md-button>
+                </div>
             </div>
 
             <md-list flex ng-repeat="event in eventList.creatorEvents" >
                 <md-list-item class="md-2-line"  ui-sref="partyDashboard({ eventId: event._id })">
                     <div class="md-list-item-text">
-                        <h3>{{event.name}}</h3>
-                        <p>{{event.description}}</p>
+                        <div layout="row">
+                            <span flex="70"><h3>{{event.name}}</h3>
+                        <p>{{event.description}}</p></span>
+                            <span flex="30"><p>{{parseDate(event.event_date)}}</p></span>
+                        </div>
                     </div>
                 </md-list-item>
             </md-list>
             <md-divider></md-divider>
-            <md-subheader class="md-no-sticky">Co-Planner Events</md-subheader>
             <md-list flex ng-repeat="event in eventList.plannerEvents" >
                 <md-list-item class="md-2-line"  ui-sref="partyDashboard({ eventId: event._id })">
                     <div class="md-list-item-text">
-                        <h3>{{event.name}}</h3>
-                        <p>{{event.description}}</p>
+                        <div layout="row">
+                            <span flex="70"><h3>{{event.name}}</h3>
+                        <p>{{event.description}}</p></span>
+                            <span flex="30"><p>{{parseDate(event.event_date)}}</p></span>
+                        </div>
                     </div>
                 </md-list-item>
             </md-list>
