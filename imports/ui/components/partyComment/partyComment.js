@@ -17,6 +17,15 @@ class PartyComment {
       //date parsing functionality
       return moment(jsonDate).format('DD-MM-YYYY');;
     };
+
+    $scope.getName = function(userId){
+      var user = Meteor.users.findOne({_id: userId});
+      if(user){
+        return user.profile.firstName;
+      } else{
+        return "no name";
+      }
+    };
     
     this.subscribe('comments');
     this.subscribe('users');
