@@ -12,7 +12,7 @@
                         <md-button ng-show="partyTodos.showAddForm" class="material-icons md-fab md-mini addTodo" ng-click="partyTodos.openForm()"> close</md-button>
                     </div>
                     <div layout="row">
-                        <span flex="5"></span>
+                        <span flex="10"></span>
                         <span flex="20">
                         <p>Todo</p>
                         </span>
@@ -67,12 +67,15 @@
                         <div class="md-list-item-text selected" ng-if="partyTodos.selectedTodoId == todo._id">
                             <div layout="row" class="rows">
                                 <div class="md-checkbox-div" ng-repeat="v in [0]">
-                                    <md-checkbox flex="10" checked="{{todo.done}}" >
+                                    <md-checkbox ng-model="todo.done" ng-change="partyTodos.clickCheckbox(todo)" >
                                     </md-checkbox>
                                 </div>
 
-                                <h3 class="textItems" ng-click="partyTodos.selectTodo(todo)" flex="20">{{todo.name}}</h3>
-
+                                <div flex="20">
+                                    <h3  ng-show="todo.done" class="textItems done" ng-click="partyTodos.selectTodo(todo)">{{todo.name}}</h3>
+                                    <h3  ng-hide="todo.done" class="textItems" ng-click="partyTodos.selectTodo(todo)">{{todo.name}}</h3>
+                                    <!--<h4>{{todo.description}}</h4>-->
+                                </div>
                                 <span flex="30">
                                 <p class="textItems" >{{getName(todo.assignee)}}</p>
                                 </span>
@@ -90,13 +93,14 @@
                         <div class="md-list-item-text" ng-if=" partyTodos.selectedTodoId != todo._id">
                             <div layout="row" class="rows">
                                 <div class="md-checkbox-div" ng-repeat="v in [0]">
-                                    <md-checkbox flex="10" checked="{{todo.done}}" >
+                                    <md-checkbox ng-model="todo.done" ng-change="partyTodos.clickCheckbox(todo)" >
                                     </md-checkbox>
                                 </div>
-
-                                <h3  class="textItems2" ng-click="partyTodos.selectTodo(todo)" flex="20">{{todo.name}}</h3>
-                                <!--<h4>{{todo.description}}</h4>-->
-
+                                <div flex="20">
+                                    <h3  ng-show="todo.done" class="textItems2 done" ng-mouseover="partyTodos.selectTodo(todo)">{{todo.name}}</h3>
+                                    <h3  ng-hide="todo.done" class="textItems2" ng-mouseover="partyTodos.selectTodo(todo)">{{todo.name}}</h3>
+                                    <!--<h4>{{todo.description}}</h4>-->
+                                </div>
                         <span flex="30">
                         <p  class="textItems2">{{getName(todo.assignee)}}</p>
                         </span>

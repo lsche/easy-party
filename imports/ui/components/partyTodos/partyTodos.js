@@ -67,6 +67,7 @@ class PartyTodos {
     });
   }
   openForm() {
+    this.selectedTodoId = null;
     if(this.showAddForm) {
       this.todo = {};
       this.showAddForm = false;
