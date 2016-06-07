@@ -6,7 +6,7 @@ import uiRouter from 'angular-ui-router';
 import ngMaterial from 'angular-material';
 
 import template from './startpageContent.html';
-import { Parties } from '../../../api/parties';
+
 
 
 class StartpageContent {
@@ -16,9 +16,7 @@ class StartpageContent {
     $reactive(this).attach($scope);
 
     this.helpers({
-      parties() {
-        return Parties.find({});
-      }
+      
     });
   }
 }

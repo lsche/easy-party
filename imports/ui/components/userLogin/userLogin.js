@@ -6,7 +6,6 @@ import { Meteor } from 'meteor/meteor';
 
 import template from './userLogin.html';
 
-import { name as Register } from '../register/register';
 
 class UserLogin {
     constructor($scope, $reactive, $state) {
