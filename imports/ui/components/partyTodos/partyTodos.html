@@ -68,7 +68,7 @@
                         <div class="md-list-item-text selected" ng-if="partyTodos.selectedTodoId == todo._id">
                             <div layout="row" class="rows">
                                 <div class="md-checkbox-div" ng-repeat="v in [0]">
-                                    <md-checkbox ng-model="todo.done" ng-change="partyTodos.clickCheckbox(todo)" >
+                                    <md-checkbox ng-model="todo.done" ng-change="partyTodos.clickCheckBox(todo)" >
                                     </md-checkbox>
                                 </div>
 
@@ -84,8 +84,8 @@
                                     <p class="textItems" >{{parseDate(todo.duedate)}}</p>
                                 </span>
                                 <span flex></span>
-                                <md-button class="material-icons md-icon-button"> edit</md-button>
-                                <md-button class="material-icons md-icon-button"> delete</md-button>
+                                <md-button class="material-icons md-icon-button" ng-click="partyTodos.editTodo(todo)"> edit</md-button>
+                                <md-button class="material-icons md-icon-button" ng-click="partyTodos.deleteTodo(todo)"> delete</md-button>
                             </div>
                             <div>
                                 <p class="description"> {{todo.description}}</p>
@@ -94,7 +94,7 @@
                         <div class="md-list-item-text" ng-if=" partyTodos.selectedTodoId != todo._id">
                             <div layout="row" class="rows">
                                 <div class="md-checkbox-div" ng-repeat="v in [0]">
-                                    <md-checkbox ng-model="todo.done" ng-change="partyTodos.clickCheckbox(todo)" >
+                                    <md-checkbox ng-model="todo.done" ng-change="partyTodos.clickCheckBox(todo)" >
                                     </md-checkbox>
                                 </div>
                                 <div flex="30">
