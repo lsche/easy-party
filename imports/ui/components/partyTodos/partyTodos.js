@@ -15,6 +15,7 @@ class PartyTodos {
     
     $reactive(this).attach($scope);
 
+
     $scope.parseDate = function(jsonDate) {
       //date parsing functionality
       return moment(jsonDate).format('DD-MM-YYYY');
@@ -41,7 +42,7 @@ class PartyTodos {
     //this.eventId = $stateParams.eventId;
     this.helpers({
       todoslist() {
-        switch(this.sort) {
+        switch(this.getReactively('sort')) {
           case 'Status':
             return Todos.find({ event_Id: $stateParams.eventId, category: $stateParams.categoryName },{sort: {done: 1}});
             break;
@@ -52,7 +53,7 @@ class PartyTodos {
             return Todos.find({ event_Id: $stateParams.eventId, category: $stateParams.categoryName },{sort: {duedate: 1}});
             break;
           default:
-            return Todos.find({ event_Id: $stateParams.eventId, category: $stateParams.categoryName },{sort: {duedate: 1}});
+            return Todos.find({ event_Id: $stateParams.eventId, category: $stateParams.categoryName },{sort: {createdAt: 1}});
         }
       },
       eventId() {
