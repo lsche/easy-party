@@ -12,7 +12,7 @@ import { Events } from '../../../api/events';
 class PartyTodos {
   constructor($stateParams, $scope, $reactive) {
     'ngInject';
-    
+    'mdDateTime';
     
     $reactive(this).attach($scope);
 
