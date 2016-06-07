@@ -4,6 +4,8 @@ import angular from 'angular';
 import angularMeteor from 'angular-meteor';
 import uiRouter from 'angular-ui-router';
 import ngMaterial from 'angular-material';
+import moment from 'moment';
+
 
 import template from './eventList.html';
 
@@ -20,6 +22,11 @@ class EventList {
 
         $reactive(this).attach($scope);
 
+        $scope.parseDate = function(jsonDate) {
+            //date parsing functionality
+            return moment(jsonDate).format('DD-MM-YYYY');
+        };
+
         this.event = {};
         this.event.planner = [];
         this.$state = $state;
@@ -34,8 +41,17 @@ class EventList {
         });
 
         this.helpers({
-            events() {
-                return Events.find({},{ sort: {createdAt: -1}});
+            creatorEvents() {
+                var currentId = Meteor.userId();
+                return Events.find({creator: currentId},{ sort: {createdAt: -1}});
+            },
+            plannerEvents(){
+                var currentUserMail = Meteor.user();
+                if(currentUserMail){
+                    var mail = currentUserMail.emails[0].address;
+                    return Events.find({planner: {$elemMatch: {mail: mail}}}, { sort: {createdAt: -1}});
+                }
+                return null;
             }
         });
 
