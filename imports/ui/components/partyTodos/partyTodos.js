@@ -13,6 +13,7 @@ class PartyTodos {
   constructor($stateParams, $scope, $reactive) {
     'ngInject';
     
+    
     $reactive(this).attach($scope);
 
     $scope.parseDate = function(jsonDate) {

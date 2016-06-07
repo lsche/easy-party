@@ -32,7 +32,7 @@
                         <label>
                             Title:
                         </label>
-                        <input type="text" ng-model="partyTodos.todo.name"/>
+                        <textarea type="text" ng-model="partyTodos.todo.name"></textarea>
                     </md-input-container>
                     <div class="md-block" flex="5"></div>
                     <md-input-container class="md-block" flex="30">
@@ -41,11 +41,11 @@
                             <md-option ng-repeat="person in partyTodos.getEventPlanner" value="{{person.id}}">{{person.name}}</md-option>
                         </md-select>
                     </md-input-container>
-                    <div class="md-block" flex="5"></div>
-                    <md-content flex="15">
-                        <label><strong>Due date</strong></label>
-                        <md-datepicker ng-model="partyTodos.todo.duedate" md-placeholder="Due date" flex></md-datepicker>
-                    </md-content>
+                    <div class="md-block" flex="10"></div>
+                        <md-content flex="15">
+                            <label><strong>Due date</strong></label>
+                            <md-datepicker ng-model="partyTodos.todo.duedate" md-placeholder="Due date" flex style="width: 20px"></md-datepicker>
+                        </md-content>
                 </div>
                 <div layout="row">
                     <md-input-container class="md-block" flex="50">
