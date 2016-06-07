@@ -18,8 +18,7 @@ if (Meteor.isServer) {
     return Meteor.users.find({}, {
       fields: {
         emails: 1,
-        profile: 1,
-        color: 1
+        profile: 1
       }
     });
   });
