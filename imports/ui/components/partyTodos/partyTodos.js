@@ -31,6 +31,7 @@ class PartyTodos {
     };
     this.category = $stateParams.categoryName.charAt(0).toUpperCase() + $stateParams.categoryName.slice(1);
     this.showAddForm = false;
+    this.showEditForm = true;
     this.selectedTodoId = null;
     this.todo = {};
     this.sort = '';
@@ -122,7 +123,12 @@ class PartyTodos {
       });
     }
   }
-  
+  deleteTodo(todo){
+    Todos.remove(todo._id);
+  }
+  editTodo(todo){
+    //this.showEditForm = true;
+  }
 }
 
 const name = 'partyTodos';
