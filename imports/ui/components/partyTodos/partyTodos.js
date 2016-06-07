@@ -32,6 +32,7 @@ class PartyTodos {
     this.showAddForm = false;
     this.selectedTodoId = null;
     this.todo = {};
+    this.sort = '';
     this.subscribe('events');
     this.subscribe('todos');
     this.subscribe('users');
@@ -40,7 +41,19 @@ class PartyTodos {
     //this.eventId = $stateParams.eventId;
     this.helpers({
       todoslist() {
-        return Todos.find({ event_Id: $stateParams.eventId, category: $stateParams.categoryName });
+        switch(this.sort) {
+          case 'Status':
+            return Todos.find({ event_Id: $stateParams.eventId, category: $stateParams.categoryName },{sort: {done: 1}});
+            break;
+          case 'Assignee':
+            return Todos.find({ event_Id: $stateParams.eventId, category: $stateParams.categoryName },{sort: {assignee: 1}});
+            break;
+          case 'Date':
+            return Todos.find({ event_Id: $stateParams.eventId, category: $stateParams.categoryName },{sort: {duedate: 1}});
+            break;
+          default:
+            return Todos.find({ event_Id: $stateParams.eventId, category: $stateParams.categoryName },{sort: {duedate: 1}});
+        }
       },
       eventId() {
         return $stateParams.eventId;
@@ -108,6 +121,7 @@ class PartyTodos {
       });
     }
   }
+  
 }
 
 const name = 'partyTodos';
