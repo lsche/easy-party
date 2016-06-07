@@ -13,15 +13,20 @@ class UserRegistration {
         this.$state = $state;
 
         $reactive(this).attach($scope);
-
+        
+        var randCol = '#'+(Math.random()*0xFFFFFF<<0).toString(16);
+            
         this.credentials = {
             email: '',
             password: '',
             profile:{
                 firstName: '',
-                lastName: ''
-            }
+                lastName: '',
+                color: randCol
+            },      
         };
+        
+        
         
 
         this.error = '';

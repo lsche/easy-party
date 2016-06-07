@@ -27,6 +27,15 @@ class PartyComment {
       }
     };
     
+    $scope.getColor = function(userId){
+      var user = Meteor.users.findOne({_id: userId});
+      if(user){
+        return user.profile.color;
+      } else{
+        return "no name";
+      }
+    };
+    
     this.subscribe('comments');
     this.subscribe('users');
 
@@ -40,7 +49,7 @@ class PartyComment {
       },
       eventId() {
         return $stateParams.eventId;
-      }
+      },
     });
   }
 

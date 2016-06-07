@@ -4,6 +4,7 @@ import uiRouter from 'angular-ui-router';
 
 import { Meteor } from 'meteor/meteor';
 import { Events } from '../../../api/events';
+import { Todos } from '../../../api/todos';
 
 import template from './partyDashboard.html';
 
@@ -18,6 +19,7 @@ class PartyDashboard{
 
 
     this.subscribe('events');
+    this.subscribe('todos');
     this.subscribe('users');
 
 
@@ -25,6 +27,17 @@ class PartyDashboard{
       currentEvent(){
         return Events.findOne(this.eventId);
       },
+      procent() {
+        var allTodos = Todos.find({event_Id: this.eventId}).count();
+        if (allTodos == 0) {
+          return 0;
+        } else {
+          var allDoneTodos = Todos.find({event_Id: this.eventId, done: false}).count();
+          var f = Math.ceil(allTodos / allDoneTodos * 100);
+          return f; 
+        }
+         
+    },
       users() {
         return Meteor.users.find({});
       },
