@@ -32,7 +32,7 @@
                         <label>
                             Title:
                         </label>
-                        <input type="text" ng-model="partyTodos.todo.name"/>
+                        <textarea type="text" ng-model="partyTodos.todo.name"></textarea>
                     </md-input-container>
                     <div class="md-block" flex="5"></div>
                     <md-input-container class="md-block" flex="30">
@@ -41,11 +41,12 @@
                             <md-option ng-repeat="person in partyTodos.getEventPlanner" value="{{person.id}}">{{person.name}}</md-option>
                         </md-select>
                     </md-input-container>
-                    <div class="md-block" flex="5"></div>
-                    <md-content flex="15">
-                        <label><strong>Due date</strong></label>
-                        <md-datepicker ng-model="partyTodos.todo.duedate" md-placeholder="Due date" flex></md-datepicker>
-                    </md-content>
+                    <div class="md-block" flex="10"></div>
+
+                        <md-content flex="15">
+                            <label><strong>Due date</strong></label>
+                            <md-datepicker ng-model="partyTodos.todo.duedate" md-placeholder="Due date" flex style="width: 20px"></md-datepicker>
+                        </md-content>
                 </div>
                 <div layout="row">
                     <md-input-container class="md-block" flex="50">
@@ -67,7 +68,7 @@
                         <div class="md-list-item-text selected" ng-if="partyTodos.selectedTodoId == todo._id">
                             <div layout="row" class="rows">
                                 <div class="md-checkbox-div" ng-repeat="v in [0]">
-                                    <md-checkbox ng-model="todo.done" ng-change="partyTodos.clickCheckbox(todo)" >
+                                    <md-checkbox ng-model="todo.done" ng-change="partyTodos.clickCheckBox(todo)" >
                                     </md-checkbox>
                                 </div>
 
@@ -83,8 +84,8 @@
                                     <p class="textItems" >{{parseDate(todo.duedate)}}</p>
                                 </span>
                                 <span flex></span>
-                                <md-button class="material-icons md-icon-button"> edit</md-button>
-                                <md-button class="material-icons md-icon-button"> delete</md-button>
+                                <md-button class="material-icons md-icon-button" ng-click="partyTodos.editTodo(todo)"> edit</md-button>
+                                <md-button class="material-icons md-icon-button" ng-click="partyTodos.deleteTodo(todo)"> delete</md-button>
                             </div>
                             <div>
                                 <p class="description"> {{todo.description}}</p>
@@ -93,7 +94,7 @@
                         <div class="md-list-item-text" ng-if=" partyTodos.selectedTodoId != todo._id">
                             <div layout="row" class="rows">
                                 <div class="md-checkbox-div" ng-repeat="v in [0]">
-                                    <md-checkbox ng-model="todo.done" ng-change="partyTodos.clickCheckbox(todo)" >
+                                    <md-checkbox ng-model="todo.done" ng-change="partyTodos.clickCheckBox(todo)" >
                                     </md-checkbox>
                                 </div>
                                 <div flex="30">
