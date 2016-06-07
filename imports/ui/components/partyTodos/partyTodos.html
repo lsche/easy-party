@@ -49,16 +49,17 @@
                         </md-content>
                 </div>
                 <div layout="row">
-                    <md-input-container class="md-block" flex="50">
+                    <md-input-container class="md-block" flex="65">
                         <label>
                             Additional Text:
                         </label>
                         <textarea type="text" ng-model="partyTodos.todo.description"></textarea>
                     </md-input-container>
 
-                    <div class="md-block" flex="20">
-                        <md-button ng-click="partyTodos.submit()" class="md-raised">Add Todo</md-button>
-                    </div>
+                </div>
+
+                <div layout="row" flex >
+                    <md-button flex="100" align="center" ng-click="partyTodos.submit()" class="md-raised add">Add Todo</md-button>
                 </div>
 
             </form>
