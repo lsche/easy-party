@@ -13,15 +13,20 @@ class UserRegistration {
         this.$state = $state;
 
         $reactive(this).attach($scope);
-
+        
+        var randCol = '#'+(Math.random()*0xFFFFFF<<0).toString(16);
+            
         this.credentials = {
             email: '',
             password: '',
             profile:{
                 firstName: '',
-                lastName: ''
-            }
+                lastName: '',
+                color: randCol
+            },      
         };
+        
+        
         
 
         this.error = '';
@@ -39,8 +44,7 @@ class UserRegistration {
                     if(this.done) {
                         this.done();
                     }
-
-                    //TODO: should go to list of projects!
+                    
                     this.$state.go('event');
                 }
             })
@@ -63,4 +67,3 @@ export default angular.module(name, [
     controller: UserRegistration
 });
 
-//TODO: evtl hier das config von register.js

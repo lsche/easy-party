@@ -10,9 +10,7 @@ import modalLoginTemplate from './userLoginModal.html';
 import { name as DisplayNameFilter } from '../../filters/displayNameFilter';
 import { name as UserRegistration } from '../userRegistration/userRegistration';
 import { name as UserLogin } from '../userLogin/userLogin';
-import { name as Login } from '../login/login';
-import { name as Register } from '../register/register';
-import { name as Password } from '../password/password';
+
 
 
 const name = 'userAuth';
@@ -83,10 +81,7 @@ export default angular.module(name, [
     angularMeteor,
     DisplayNameFilter,
     UserRegistration,
-    UserLogin,
-    Login,
-    Register,
-    Password
+    UserLogin
 ]).component(name, {
     template,
     controllerAs: name,

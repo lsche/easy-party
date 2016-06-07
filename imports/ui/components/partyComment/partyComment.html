@@ -50,11 +50,14 @@
                             <span flex="15">{{parseDate(comment.createdAt)}}</span>
                         </div>
                         <div layout="row" class="rows">
-                           
-                        <h3 flex="20">{{getName(comment.creater)}}</h3>
-                        <!--<h4>{{todo.description}}</h4>-->
+                        
+                        <div flex="15" class="flexikona">
+                        <i style="color: {{getColor(comment.creater)}}" class="material-icons ikona">person</i>   
+                        <h3 style="color: {{getColor(comment.creater)}}">{{getName(comment.creater)}}</h3>
+                        </div>
+                        
 
-                        <span flex="70">
+                        <span flex="85">
                         <p>{{comment.text}}</p>
                         </span>
  
