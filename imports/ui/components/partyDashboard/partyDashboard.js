@@ -33,7 +33,7 @@ class PartyDashboard{
           return 0;
         } else {
           var allDoneTodos = Todos.find({event_Id: this.eventId, done: false}).count();
-          var f = Math.ceil(allTodos / allDoneTodos * 100);
+          var f = Math.ceil( allDoneTodos / allTodos * 100);
           return f; 
         }
          
