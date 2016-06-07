@@ -108,6 +108,9 @@ class PartyTodos {
       });
     }
   }
+  deleteTodo(todo){
+    Todos.remove(todo._id);
+  }
 }
 
 const name = 'partyTodos';
