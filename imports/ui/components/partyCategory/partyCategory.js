@@ -47,7 +47,8 @@ export default angular.module(name, [
   uiRouter,
   PartyTodos,
   PartyComment,
-  PartyNotes
+  PartyNotes,
+    EventGuestList
 ]).component(name, {
   template,
   controllerAs: name,
