@@ -9,7 +9,7 @@ if (Meteor.isServer) {
 
         return Meteor.methods({
 
-            removeAllTodos: function() {
+            removeAllGuests: function() {
 
                 return Guests.remove({});
 

@@ -21,7 +21,7 @@ class PartyDashboard{
     this.subscribe('events');
     this.subscribe('todos');
     this.subscribe('users');
-    this.subscribe('guests');
+    
 
 
     this.helpers({

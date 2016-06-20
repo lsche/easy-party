@@ -47,7 +47,7 @@
 
     <div class="col s4">
         <div class="card">
-                <div class="card-image waves-effect waves-block waves-light" ui-sref="category({ eventId: partyDashboard.eventId, categoryName: 'guests' })">
+                <div class="card-image waves-effect waves-block waves-light" ui-sref="eventGuestCategory({eventId: partyDashboard.eventId})">
                     <img class="activator" src="/guests.jpg">
                 </div>
                 <span class="card-title">Guests</span>
@@ -81,16 +81,14 @@
     <div flex="25">
         <div class="sidebar" md-whiteframe="3">
             <h3>{{partyDashboard.currentEvent.name}}</h3>
-            <!--<div layout="column">
+            <div layout="column">
                 <div class="todo" md-whiteframe="2">
                     <md-list>
                         <h4>Upcoming To-Dos</h4>
-                        <md-list-item>Send Invitations</md-list-item>
-                        <md-list-item>Confirm Location</md-list-item>
-                        <md-list-item>Order Decoration</md-list-item>
+                        <party-todos></party-todos>
                     </md-list>
                 </div>
-            </div>-->
+            </div>
         </div>
     </div>
 </div>

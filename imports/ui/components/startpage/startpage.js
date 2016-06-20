@@ -8,10 +8,11 @@ import uiRouter from 'angular-ui-router';
 import template from './startpage.html';
 import { name as StartpageContent } from '../startpageContent/startpageContent';
 import { name as EventList} from '../eventList/eventList';
+import { name as EventGuestCategory} from '../eventGuestCategory/eventGuestCategory';
 import { name as PartyCategory } from '../partyCategory/partyCategory';
 import { name as Navigation } from '../navigation/navigation';
 import { name as UserAuth} from '../userAuth/userAuth';
-import { name as PartyDashboard} from '../partyDashboard/partyDashboard'
+import { name as PartyDashboard} from '../partyDashboard/partyDashboard';
 
 class Startpage {}
 
@@ -26,6 +27,7 @@ export default angular.module(name, [
   EventList,
   Navigation,
   UserAuth,
+  EventGuestCategory,
   PartyCategory,
   PartyDashboard,
   'accounts.ui'   // Karin: user accounts - delete if not necessary!!
