@@ -33,11 +33,11 @@ class EventGuestList {
         this.category = $stateParams.categoryName.charAt(0).toUpperCase() + $stateParams.categoryName.slice(1);
         this.showAddForm = false;
         this.showEditForm = true;
-        this.selectedTodoId = null;
-        this.todo = {};
+        this.selectedGuestId = null;
+        this.guest = {};
         this.sort = '';
         this.subscribe('events');
-        this.subscribe('todos');
+        this.subscribe('guests');
         this.subscribe('users');
 
 
@@ -104,7 +104,7 @@ class EventGuestList {
     }
 
 
-    deleteGuest(todo){
+    deleteGuest(guest){
         Guests.remove(guest._id);
     }
     editTodo(todo){
@@ -112,7 +112,7 @@ class EventGuestList {
     }
 }
 
-const name = 'partyTodos';
+const name = 'eventGuestList';
 
 // create a module
 export default angular.module(name, [

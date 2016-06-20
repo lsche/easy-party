@@ -20,7 +20,7 @@
     <div flex="60" ng-if="partyCategory.category == 'Guests'">
         <!--<h1> {{partyCategory.category}} </h1>-->
         <event-guest-list my-attr="partyCategory.eventId" my-category="partyCategory.categoryName"></event-guest-list>
-        <party-comment my-attr="partyCategory.eventId" my-category="partyCategory.categoryName"></party-comment>
+        <party-todos my-attr="partyCategory.eventId" my-category="partyCategory.categoryName"></party-todos>
     </div>
     <div flex="60" ng-if="partyCategory.category != 'Guests'">
         <party-todos my-attr="partyCategory.eventId" my-category="partyCategory.categoryName"></party-todos>
