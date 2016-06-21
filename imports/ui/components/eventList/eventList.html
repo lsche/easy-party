@@ -1,8 +1,8 @@
 <md-slider-container class="image" >
     <img src="other.jpg" alt="" id="background" >
 
-    <div layout="column" layout-padding id="content">
-        <div id="whiteBox">
+    <div layout="row" layout-padding id="content">
+        <div flex id="whiteBox">
             <div layout="row">
                     <h2 class="md-display-1">Your Events:</h2>
                     <span flex></span>
@@ -44,6 +44,7 @@
                 </div>
 
                 <div layout="row" layout-padding>
+                  
                     <md-datepicker flex="30" align="center" ng-model="eventList.event.event_date" md-placeholder="Enter date"></md-datepicker>
                     <span flex="5px"></span>
                     <md-input-container>
@@ -107,5 +108,69 @@
             </md-list>
 
         </div>
-    </div>
+
+
+
+    <div flex id="whiteBox" ng-if="eventList.ifpaid == false">
+        <p>Your trial version will end on <b>{{eventList.timeLeft}}</b>. Please put your credit card details down below and get an unlimited access for just 4,99 Euros!</p>
+        <md-content layout-padding>
+
+            <form class="payment-form">
+
+                    <md-input-container class="md-block">
+                        <label for="cardNumber">Card Number</label>
+                            <input
+                                ng-model="eventList.payment.cardNumber"
+                                type="tel"
+                                class="form-control"
+                                name="cardNumber"
+                                autocomplete="cc-number"
+                                required autofocus
+                            />
+                    </md-input-container>
+
+                    <!--<span flex="10"></span>-->
+                <div layout-gt-sm="row">
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <label for="cardExpiry">Expiration Month</label>
+                            <input
+                                ng-model="eventList.payment.cardExpiryMM"
+                                type="tel"
+                                class="form-control"
+                                name="cardExpiryMM"
+                                autocomplete="cc-exp"
+                                required
+                            />
+                    </md-input-container>
+
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <label for="cardExpiry">Expiration Year</label>
+                            <input
+                                ng-model="eventList.payment.cardExpiryYY"
+                                type="tel"
+                                class="form-control"
+                                name="cardExpiryYY"
+                                autocomplete="cc-exp"
+                                required
+                            />
+                    </md-input-container>
+
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <label for="cardCVC">CVC Code</label>
+                            <input 
+                                ng-model="eventList.payment.cardCVC"
+                                type="tel"
+                                class="form-control"
+                                name="cardCVC"
+                                autocomplete="cc-csc"
+                                required
+                            />
+                    </md-input-container>
+                </div>
+
+                <md-button ng-click="eventList.payForAccount()" type="submit" class="md-raised">Pay</md-button>
+            </form>
+        </md-content>
+        </div>
+      </div>
 </md-slider-container>
