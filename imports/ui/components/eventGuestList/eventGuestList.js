@@ -46,13 +46,13 @@ class EventGuestList {
             guestList() {
                 switch(this.getReactively('sort')) {
                     case 'Status':
-                        return Guests.find({ event_Id: $stateParams.eventId, category: $stateParams.categoryName },{sort: {status: 1}});
+                        return Guests.find({ event_Id: $stateParams.eventId},{sort: {status: 1}});
                         break;
                     case 'Number':
-                        return Guests.find({ event_Id: $stateParams.eventId, category: $stateParams.categoryName },{sort: {number: 1}});
+                        return Guests.find({ event_Id: $stateParams.eventId},{sort: {number: 1}});
                         break;
                     default:
-                        return Guests.find({ event_Id: $stateParams.eventId, category: $stateParams.categoryName },{sort: {name: 1}});
+                        return Guests.find({ event_Id: $stateParams.eventId},{sort: {name: 1}});
                 }
             },
             eventId() {
@@ -74,9 +74,7 @@ class EventGuestList {
                 }
                 return planner;
             },
-            categoryName() {
-                return $stateParams.categoryName;
-            }
+           
         });
     }
     openForm() {
@@ -89,12 +87,17 @@ class EventGuestList {
         }
     }
 
-
+    selectGuest(guest){
+        if(this.selectedGuestIdId == guest._id){
+            this.selectedGuestId = null;
+        } else {
+            this.selectedGuestId = guest._id;
+        }
+    }
 
     submit() {
         this.guest.creater = Meteor.user()._id;
         this.guest.event_Id = this.myAttr;
-        this.guest.category = this.myCategory;
 
         Guests.insert(this.guest);
 
@@ -102,13 +105,12 @@ class EventGuestList {
         this.guest = {};
         this.showAddForm = false;
     }
-
-
+    
     deleteGuest(guest){
         Guests.remove(guest._id);
     }
-    editTodo(todo){
-        //this.showEditForm = true;
+    editGuest(guest){
+        this.showEditForm = true;
     }
 }
 
@@ -120,8 +122,7 @@ export default angular.module(name, [
 ]).component(name, {
     template,
     bindings: {
-        myAttr: '=',
-        myCategory: '='
+        myAttr: '='
     },
     controllerAs: name,
     controller: EventGuestList
