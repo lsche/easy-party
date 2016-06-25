@@ -32,7 +32,7 @@ class EventGuestList {
         };
         this.category = $stateParams.categoryName.charAt(0).toUpperCase() + $stateParams.categoryName.slice(1);
         this.showAddForm = false;
-        this.showEditForm = true;
+        this.showEditForm = false;
         this.selectedGuestId = null;
         this.guest = {};
         this.sort = '';
@@ -46,10 +46,10 @@ class EventGuestList {
             guestList() {
                 switch(this.getReactively('sort')) {
                     case 'Status':
-                        return Guests.find({ event_Id: $stateParams.eventId},{sort: {status: 1}});
+                        return Guests.find({ event_Id: $stateParams.eventId},{sort: {status: 1, name: 1}});
                         break;
                     case 'Number':
-                        return Guests.find({ event_Id: $stateParams.eventId},{sort: {number: 1}});
+                        return Guests.find({ event_Id: $stateParams.eventId},{sort: {number: 1, name: 1}});
                         break;
                     default:
                         return Guests.find({ event_Id: $stateParams.eventId},{sort: {name: 1}});
@@ -86,6 +86,7 @@ class EventGuestList {
             this.showAddForm = true;
         }
     }
+    
 
     selectGuest(guest){
         if(this.selectedGuestIdId == guest._id){
@@ -101,9 +102,19 @@ class EventGuestList {
 
         Guests.insert(this.guest);
 
-
         this.guest = {};
         this.showAddForm = false;
+    }
+    
+    submitEdit() {
+        this.guest.creater = Meteor.user()._id;
+        this.guest.event_Id = this.myAttr;
+
+
+        Guests.guests[Guests.editIndex].guest = Guests.guest;
+
+        this.guest = {};
+        this.showEditForm = false;
     }
     
     deleteGuest(guest){
