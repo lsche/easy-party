@@ -8,6 +8,7 @@ import template from './partyTodos.html';
 
 import { Todos } from '../../../api/todos';
 import { Events } from '../../../api/events';
+import { Activities } from '../../../api/activities'
 
 class PartyTodos {
   constructor($stateParams, $scope, $reactive) {
@@ -39,6 +40,7 @@ class PartyTodos {
     this.subscribe('events');
     this.subscribe('todos');
     this.subscribe('users');
+    this.subscribe('activities');
 
 
     //this.eventId = $stateParams.eventId;
@@ -106,7 +108,12 @@ class PartyTodos {
     this.todo.category = this.myCategory;
     this.todo.done = false;
     
-    Todos.insert(this.todo);
+    Todos.insert(this.todo, function(error, result){
+      if(result){
+        Activities.insert({text: "Added Todo"});
+        console.log("Actvitiy added");
+      }
+    });
 
 
     this.todo = {};

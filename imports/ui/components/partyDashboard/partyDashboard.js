@@ -5,6 +5,7 @@ import uiRouter from 'angular-ui-router';
 import { Meteor } from 'meteor/meteor';
 import { Events } from '../../../api/events';
 import { Todos } from '../../../api/todos';
+import { Activities } from '../../../api/activities';
 
 import template from './partyDashboard.html';
 
@@ -21,9 +22,13 @@ class PartyDashboard{
     this.subscribe('events');
     this.subscribe('todos');
     this.subscribe('users');
+    this.subscribe('activities');
 
 
     this.helpers({
+      activitiesOfEvent(){
+        return Activities.find();
+      },
       currentEvent(){
         return Events.findOne(this.eventId);
       },
