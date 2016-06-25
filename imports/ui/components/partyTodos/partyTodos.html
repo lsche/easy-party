@@ -65,16 +65,15 @@
             <div class="listItems">
                 <md-list-item class="md-2-line" ng-repeat="todo in partyTodos.todoslist">
 
-                        <div class="md-list-item-text selected" ng-if="partyTodos.selectedTodoId == todo._id">
+                        <div class="md-list-item-text selected" ng-if="partyTodos.selectedTodoId == todo._id" ng-mouseleave="partyTodos.selectTodo(todo)">
                             <div layout="row" class="rows">
                                 <div class="md-checkbox-div" ng-repeat="v in [0]">
-                                    <md-checkbox ng-model="todo.done" ng-change="partyTodos.clickCheckBox(todo)" >
+                                    <md-checkbox ng-model="todo.done" ng-click="partyTodos.clickCheckBox(todo)" >
                                     </md-checkbox>
                                 </div>
 
                                 <div flex="30">
-                                    <h3  ng-show="todo.done" class="textItems done" ng-click="partyTodos.selectTodo(todo)">{{todo.name}}</h3>
-                                    <h3  ng-hide="todo.done" class="textItems" ng-click="partyTodos.selectTodo(todo)">{{todo.name}}</h3>
+                                    <h3  class="textItems done-{{todo.done}}">{{todo.name}}</h3>
                                     <!--<h4>{{todo.description}}</h4>-->
                                 </div>
                                 <span flex="30" align="center">
@@ -91,15 +90,14 @@
                                 <p class="description"> {{todo.description}}</p>
                             </div>
                         </div>
-                        <div class="md-list-item-text" ng-if=" partyTodos.selectedTodoId != todo._id">
+                        <div class="md-list-item-text" ng-if=" partyTodos.selectedTodoId != todo._id" ng-mouseover="partyTodos.selectTodo(todo)">
                             <div layout="row" class="rows">
                                 <div class="md-checkbox-div" ng-repeat="v in [0]">
-                                    <md-checkbox ng-model="todo.done" ng-change="partyTodos.clickCheckBox(todo)" >
+                                    <md-checkbox ng-model="todo.done" ng-click="partyTodos.clickCheckBox(todo)" >
                                     </md-checkbox>
                                 </div>
                                 <div flex="30">
-                                    <h3  ng-show="todo.done" class="textItems2 done" ng-mouseover="partyTodos.selectTodo(todo)">{{todo.name}}</h3>
-                                    <h3  ng-hide="todo.done" class="textItems2" ng-mouseover="partyTodos.selectTodo(todo)">{{todo.name}}</h3>
+                                    <h3  class="textItems2 done-{{todo.done}}">{{todo.name}}</h3>
                                     <!--<h4>{{todo.description}}</h4>-->
                                 </div>
                         <span flex="30" align="center">
