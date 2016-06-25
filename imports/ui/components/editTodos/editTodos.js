@@ -15,10 +15,8 @@ class EditTodos {
 
         $reactive(this).attach($scope);
 
-        this.credentials = {
-            email: '',
-            password: ''
-        };
+        
+        this.task = this.myTask;
 
         this.error = '';
     }
@@ -34,6 +32,9 @@ export default angular.module(name, [
 ])
     .component(name, {
         template,
+        bindings: {
+            myTask: '=',
+        },
         controllerAs: name,
         controller: EditTodos
     });

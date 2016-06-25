@@ -12,7 +12,7 @@ import { Events } from '../../../api/events';
 import {name as EditTodos} from '../editTodos/editTodos';
 
 class PartyTodos {
-  constructor($stateParams, $scope, $reactive) {
+  constructor($stateParams, $scope, $mdDialog, $mdMedia, $reactive) {
     'ngInject';
     'mdDateTime';
     
@@ -132,8 +132,9 @@ class PartyTodos {
   }
   editTodo(event){
     this.$mdDialog.show({
-      controller($mdDialog) {
+      controller($scope, $mdDialog, task) {
         'ngInject';
+        $scope.task = task;
 
         this.close = () => {
           $mdDialog.hide();
@@ -144,6 +145,9 @@ class PartyTodos {
       targetEvent: event,
       parent: angular.element(document.body),
       clickOutsideToClose: true,
+      locals: {
+        task: event
+      },
       fullscreen: this.$mdMedia('sm') || this.$mdMedia('xs')
     });
   }

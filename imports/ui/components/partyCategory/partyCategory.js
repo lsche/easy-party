@@ -14,13 +14,15 @@ import { name as PartyNotes } from '../partyNotes/partyNotes';
 
 
 class PartyCategory {
-  constructor($stateParams, $scope, $reactive) {
+  constructor($stateParams, $scope, $mdDialog, $mdMedia, $reactive) {
     'ngInject';
 
     $reactive(this).attach($scope);
 
     $scope.selected = [];
 
+      this.$mdDialog = $mdDialog;
+      this.$mdMedia = $mdMedia;
     
     this.subscribe('events');
     this.subscribe('users');
