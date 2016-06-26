@@ -72,7 +72,7 @@
                                 </span>
                         <span flex="5"></span>
                         <span flex="15">
-                                    <p class="textItems" >{{guest.status}}</p>
+                                    <p class="textItems" >{{guest.status}} </p>
                                 </span>
 
                         <span flex></span>
@@ -95,7 +95,7 @@
                                 <div class="md-block" flex="5"></div>
                                 <md-input-container class="md-block" flex="30">
                                     <label>Status</label>
-                                    <md-select ng-model="eventGuestList.guest.status" placeholder={{guest.status}}>
+                                    <md-select ng-model="eventGuestList.guest.status"  placeholder={{guest.status}}>
                                         <md-option ng-value="opt" ng-repeat="opt in ['Invited', 'Not Invited yet', 'Attending', 'Not Attending']">{{ opt }}</md-option>
                                     </md-select>
                                 </md-input-container>

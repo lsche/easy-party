@@ -1,6 +1,7 @@
 import angular from 'angular';
 import angularMeteor from 'angular-meteor';
 import uiRouter from 'angular-ui-router';
+import moment from 'moment';
 
 import { Meteor } from 'meteor/meteor';
 import { Events } from '../../../api/events';
@@ -15,13 +16,27 @@ class PartyDashboard{
 
     $reactive(this).attach($scope);
 
+      $scope.parseDate = function(jsonDate) {
+          //date parsing functionality
+          return moment(jsonDate).format('DD-MM-YYYY');
+      };
+      $scope.getName = function(userId){
+          var user = Meteor.users.findOne({_id: userId});
+          if(user){
+              return user.profile.firstName;
+          } else{
+              return "unassigned";
+          }
+      };
+
     this.eventId = $stateParams.eventId;
 
 
     this.subscribe('events');
     this.subscribe('todos');
     this.subscribe('users');
-    
+
+
 
 
     this.helpers({
@@ -39,6 +54,12 @@ class PartyDashboard{
         }
          
     },
+      upcomingTodos() {
+        //return Todos.find({ event_Id: $stateParams.eventId, category: $stateParams.categoryName },{sort: {done: 1, duedate: 1}});
+
+        var upcomingTodos = Todos.find({event_Id: this.eventId} , {sort: {duedate: 1}});
+        return upcomingTodos;
+      },
       users() {
         return Meteor.users.find({});
       },

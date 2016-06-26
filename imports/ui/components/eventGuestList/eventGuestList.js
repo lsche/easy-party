@@ -30,6 +30,9 @@ class EventGuestList {
                 return "no name";
             }
         };
+
+        
+
         this.category = $stateParams.categoryName.charAt(0).toUpperCase() + $stateParams.categoryName.slice(1);
         this.showAddForm = false;
         this.showEditForm = false;
@@ -107,12 +110,7 @@ class EventGuestList {
     }
     
     submitEdit() {
-        this.guest.creater = Meteor.user()._id;
-        this.guest.event_Id = this.myAttr;
-
-
-        Guests.guests[Guests.editIndex].guest = Guests.guest;
-
+        Guests.currentItem = this.guest
         this.guest = {};
         this.showEditForm = false;
     }
@@ -120,9 +118,23 @@ class EventGuestList {
     deleteGuest(guest){
         Guests.remove(guest._id);
     }
-    editGuest(guest){
+    editGuest(guest) {
         this.showEditForm = true;
+        /*Guests.newGuest = angular.copy(guest);
+         Guests.currentItemIndex = Guests.guests.indexOf(guest);*/
+        EventGuestList.update({
+                _id: this.guest._id
+            },
+            {
+                $set: {
+                    name: this.guest.name,
+        status: this.guest.status,
+        number: this.guest.number
     }
+    })
+    }
+
+        //$rootScope.item =guest;
 }
 
 const name = 'eventGuestList';
