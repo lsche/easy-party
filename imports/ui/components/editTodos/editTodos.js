@@ -14,16 +14,10 @@ class EditTodos {
         'ngInject';
 
         this.$state = $state;
-
         $reactive(this).attach($scope);
-
-        
-        this.task = this.myTask;
 
         this.error = '';
     }
-
-
 }
 
 const name = 'editTodos';
@@ -36,7 +30,7 @@ export default angular.module(name, [
     .component(name, {
         template,
         bindings: {
-            myTask: '=',
+            myTask: '='
         },
         controllerAs: name,
         controller: EditTodos
