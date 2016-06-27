@@ -8,11 +8,12 @@
                     </label>
                     <input type="text" ng-model="editTodos.task.name" aria-label="title" placeholder="{{ editTodos.task.name}}" required/>
                 </md-input-container>
+                <p>test: {{ editTodos.task.name}}</p>
                 <md-input-container>
                     <label>
                         Password
                     </label>
-                    <input type="password" ng-model="editTodos.credentials.password" aria-label="password" required/>
+                    <input  ng-model="editTodos.task.assignee" aria-label="password" required/>
                 </md-input-container>
                <!-- <div layout="row" layout-align="space-between center">
                     <a class="md-button" href="/password">Forgot password? - not working yet</a>-->

@@ -7,6 +7,8 @@ import { Meteor } from 'meteor/meteor';
 import template from './editTodos.html';
 
 
+import { Todos } from '../../../api/todos';
+
 class EditTodos {
     constructor($scope, $reactive, $state) {
         'ngInject';
@@ -20,6 +22,7 @@ class EditTodos {
 
         this.error = '';
     }
+
 
 }
 

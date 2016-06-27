@@ -127,18 +127,24 @@ class PartyTodos {
       });
     }
   }
+
   deleteTodo(todo){
     Todos.remove(todo._id);
   }
+
   editTodo(event){
     this.$mdDialog.show({
       controller($scope, $mdDialog, task) {
         'ngInject';
         $scope.task = task;
 
+        console.log($scope.task);
+
         this.close = () => {
           $mdDialog.hide();
         }
+
+
       },
       controllerAs: 'editTodosModal',
       template: modalEditTemplate,
