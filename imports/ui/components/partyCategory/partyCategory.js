@@ -49,6 +49,7 @@ export default angular.module(name, [
   PartyComment,
   PartyNotes, 
     EventGuestList,
+  
 ]).component(name, {
   template,
   controllerAs: name,
