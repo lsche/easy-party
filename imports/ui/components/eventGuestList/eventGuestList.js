@@ -42,6 +42,8 @@ class EventGuestList {
         this.subscribe('events');
         this.subscribe('guests');
         this.subscribe('users');
+        this.editGuest={id:"",name:"", number:"",status:""};
+        
 
 
         //this.eventId = $stateParams.eventId;
@@ -108,32 +110,65 @@ class EventGuestList {
         this.guest = {};
         this.showAddForm = false;
     }
-    
-    submitEdit() {
-        Guests.currentItem = this.guest
-        this.guest = {};
-        this.showEditForm = false;
-    }
+
     
     deleteGuest(guest){
         Guests.remove(guest._id);
     }
-    editGuest(guest) {
-        this.showEditForm = true;
-        /*Guests.newGuest = angular.copy(guest);
-         Guests.currentItemIndex = Guests.guests.indexOf(guest);*/
-        EventGuestList.update({
-                _id: this.guest._id
-            },
-            {
-                $set: {
-                    name: this.guest.name,
-        status: this.guest.status,
-        number: this.guest.number
-    }
-    })
+
+    editGuestName(guest) {
+        console.log("editGuestName called");
+        this.editGuest.id= guest._id;
+        this.editGuest.name= guest.name;
+        this.editGuest.number = "";
+        this.editGuest.status = "";
     }
 
+    editGuestNumber(guest) {
+        console.log("editGuestNumber called");
+        this.editGuest.id= guest._id;
+        this.editGuest.number = guest.number;
+        this.editGuest.name = "";
+        this.editGuest.status = "";
+    }
+
+    editGuestStatus(guest) {
+        console.log("editGuestStatus called");
+        this.editGuest.id= guest._id;
+        this.editGuest.status = guest.status;
+        this.editGuest.name = "";
+        this.editGuest.number = "";
+    }
+
+    saveGuestName() {
+        console.log("save called");
+        console.log(this.editGuest);
+        Guests.update({_id : this.editGuest.id},
+            {$set: {
+            name: this.editGuest.name}
+            });
+        this.editGuest={id:"",name:"", number:"",status:""};
+    }
+
+    saveGuestNumber() {
+        console.log("save called");
+        console.log(this.editGuest);
+        Guests.update({_id : this.editGuest.id},
+            {$set: {
+                number: this.editGuest.number}
+            });
+        this.editGuest={id:"",name:"", number:"",status:""};
+    }
+
+    saveGuestStatus() {
+        console.log("save called");
+        console.log(this.editGuest);
+        Guests.update({_id : this.editGuest.id},
+            {$set: {
+                status: this.editGuest.status}
+            });
+        this.editGuest={id:"",name:"", number:"",status:""};
+    }
         //$rootScope.item =guest;
 }
 

@@ -6,8 +6,8 @@ import { Mongo } from 'meteor/mongo';
 export const Guests = new Mongo.Collection('guests');
 
 Guests.allow({
-    insert(userId, guest) {
-        return userId && guest.creater === userId;
+    insert() {
+        return true;
     },
     update() {
         return true;
