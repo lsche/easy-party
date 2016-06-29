@@ -117,7 +117,6 @@ class EventGuestList {
     }
 
     editGuestName(guest) {
-        console.log("editGuestName called");
         this.editGuest.id= guest._id;
         this.editGuest.name= guest.name;
         this.editGuest.number = "";
@@ -125,7 +124,6 @@ class EventGuestList {
     }
 
     editGuestNumber(guest) {
-        console.log("editGuestNumber called");
         this.editGuest.id= guest._id;
         this.editGuest.number = guest.number;
         this.editGuest.name = "";
@@ -133,7 +131,6 @@ class EventGuestList {
     }
 
     editGuestStatus(guest) {
-        console.log("editGuestStatus called");
         this.editGuest.id= guest._id;
         this.editGuest.status = guest.status;
         this.editGuest.name = "";
@@ -141,7 +138,6 @@ class EventGuestList {
     }
 
     saveGuestName() {
-        console.log("save called");
         console.log(this.editGuest);
         Guests.update({_id : this.editGuest.id},
             {$set: {
@@ -151,7 +147,6 @@ class EventGuestList {
     }
 
     saveGuestNumber() {
-        console.log("save called");
         console.log(this.editGuest);
         Guests.update({_id : this.editGuest.id},
             {$set: {
@@ -161,7 +156,6 @@ class EventGuestList {
     }
 
     saveGuestStatus() {
-        console.log("save called");
         console.log(this.editGuest);
         Guests.update({_id : this.editGuest.id},
             {$set: {
