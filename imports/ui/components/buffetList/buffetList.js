@@ -33,7 +33,9 @@ class BuffetList {
 
             },
             dishList(){
-               console.log(Buffet.findOne({event: this.myEvent}));
+                console.log(Buffet.findOne({event: this.myEvent}));
+                this.buffetListId = Buffet.findOne({event: this.myEvent})._id;
+                console.log("function buffet "+ this.buffetListId);
 
                 //var buffetID = buffetObject._id;
 
