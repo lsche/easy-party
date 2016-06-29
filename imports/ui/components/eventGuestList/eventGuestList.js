@@ -181,7 +181,6 @@ class EventGuestList {
             });
         this.editGuest={id:"",name:"", number:"",status:"",description:""};
     }
-        //$rootScope.item =guest;
 }
 
 const name = 'eventGuestList';
