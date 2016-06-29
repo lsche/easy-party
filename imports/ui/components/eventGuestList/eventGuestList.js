@@ -35,7 +35,6 @@ class EventGuestList {
 
         this.category = $stateParams.categoryName.charAt(0).toUpperCase() + $stateParams.categoryName.slice(1);
         this.showAddForm = false;
-        this.showEditForm = false;
         this.selectedGuestId = null;
         this.guest = {};
         this.sort = '';
