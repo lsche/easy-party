@@ -45,9 +45,8 @@ class BuffetList {
 
     }
     save(){
-       
-        console.log(buffet);
-        console.log(buffetID);
+        this.buffetListId = Buffet.findOne({event: this.myEvent})._id;
+        console.log("save function buffet "+ this.buffetListId);
     }
 
 
