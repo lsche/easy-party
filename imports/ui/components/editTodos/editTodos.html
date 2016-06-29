@@ -4,32 +4,17 @@
             <form name="editForm" layout="column" layout-fill layout-padding layout-margin>
                 <md-input-container>
                     <label>
-                        Title
+                        Todo Title
                     </label>
-                    <input type="text" ng-model="editTodos.myTask.name" aria-label="title" placeholder="{{ editTodos.myTask.name}}" required/>
-                </md-input-container>
-                <p>test: {{ editTodos.myTask.name}}</p>
-                <md-input-container>
+                    <input type="text" ng-model="editTodos.myTask.name" placeholder="{{ editTodos.myTask.name}}"/>
                     <label>
-                        Password
+                        Todo Description
                     </label>
-                    <input  ng-model="editTodos.myTask.assignee" aria-label="password" required/>
+                    <input type="text" ng-model="editTodos.myTask.description" placeholder="{{ editTodos.myTask.description}}"/>
+
                 </md-input-container>
-               <!-- <div layout="row" layout-align="space-between center">
-                    <a class="md-button" href="/password">Forgot password? - not working yet</a>-->
-                    <div layout="row" layout-align="end center">  <!--remove when Forgot Password Button is implemented!-->
-                        <md-button class="md-raised md-primary" ng-click="userLogin.login()" aria-label="login" ng-disabled="userLogin.loginForm.$invalid()" >Save changes
-                        </md-button>
-                    </div>
-                <!--</div>-->
+
             </form>
-            <!-- <md-toolbar ng-show="userLogin.error" class="md-warn" layout="row" layout-fill layout-padding layout-margin>
-                <p class="md-body-1">{{ userLogin.error }}</p>
-            </md-toolbar>
-            <md-divider></md-divider>
-            <div layout="row" layout-align="center">
-                <a class="md-button" href="/register">Need an account? - not working yet</a>
-            </div>-->
 
         </div>
 

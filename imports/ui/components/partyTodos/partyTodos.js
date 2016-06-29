@@ -138,7 +138,6 @@ class PartyTodos {
       controller($scope, $mdDialog) {
         'ngInject';
         $scope.task = todo;
-        console.log(todo);
 
         this.close = () => {
           $mdDialog.hide();
@@ -151,9 +150,6 @@ class PartyTodos {
       targetEvent: event,
       parent: angular.element(document.body),
       clickOutsideToClose: true,
-      locals: {
-        task: todo
-      },
       fullscreen: this.$mdMedia('sm') || this.$mdMedia('xs')
     });
   }
