@@ -41,7 +41,7 @@ class EventGuestList {
         this.subscribe('events');
         this.subscribe('guests');
         this.subscribe('users');
-        this.editGuest={id:"",name:"", number:"",status:""};
+        this.editGuest={id:"",name:"", number:"",status:"", description:""};
         
 
 
@@ -120,6 +120,7 @@ class EventGuestList {
         this.editGuest.name= guest.name;
         this.editGuest.number = "";
         this.editGuest.status = "";
+        this.editGuest.description = "";
     }
 
     editGuestNumber(guest) {
@@ -127,6 +128,7 @@ class EventGuestList {
         this.editGuest.number = guest.number;
         this.editGuest.name = "";
         this.editGuest.status = "";
+        this.editGuest.description = "";
     }
 
     editGuestStatus(guest) {
@@ -134,6 +136,15 @@ class EventGuestList {
         this.editGuest.status = guest.status;
         this.editGuest.name = "";
         this.editGuest.number = "";
+        this.editGuest.description = "";
+    }
+
+    editGuestDescription(guest) {
+        this.editGuest.id= guest._id;
+        this.editGuest.status = "";
+        this.editGuest.name = "";
+        this.editGuest.number = "";
+        this.editGuest.description = guest.description;
     }
 
     saveGuestName() {
@@ -142,7 +153,7 @@ class EventGuestList {
             {$set: {
             name: this.editGuest.name}
             });
-        this.editGuest={id:"",name:"", number:"",status:""};
+        this.editGuest={id:"",name:"", number:"",status:"",description:""};
     }
 
     saveGuestNumber() {
@@ -151,7 +162,7 @@ class EventGuestList {
             {$set: {
                 number: this.editGuest.number}
             });
-        this.editGuest={id:"",name:"", number:"",status:""};
+        this.editGuest={id:"",name:"", number:"",status:"",description:""};
     }
 
     saveGuestStatus() {
@@ -160,7 +171,15 @@ class EventGuestList {
             {$set: {
                 status: this.editGuest.status}
             });
-        this.editGuest={id:"",name:"", number:"",status:""};
+        this.editGuest={id:"",name:"", number:"",status:"",description:""};
+    }
+
+    saveGuestDescription() {
+        Guests.update({_id : this.editGuest.id},
+            {$set: {
+                description: this.editGuest.description}
+            });
+        this.editGuest={id:"",name:"", number:"",status:"",description:""};
     }
         //$rootScope.item =guest;
 }
