@@ -4,18 +4,24 @@ import moment from 'moment';
 
 import { Meteor } from 'meteor/meteor';
 import template from './partyNotes.html';
+import modalBuffetTemplate from './buffetListModal.html';
 import { Notes } from '../../../api/notes';
+import { name as BuffetList } from '../buffetList/buffetList';
 
 class PartyNotes {
-  constructor($scope, $reactive, $stateParams) {
+  constructor($scope, $reactive, $stateParams, $mdDialog, $mdMedia) {
     'ngInject';
     
     $reactive(this).attach($scope);
+
+    this.$mdDialog = $mdDialog;
+    this.$mdMedia = $mdMedia;
 
     this.showAddForm = false;
     this.note = {};
     this.subscribe('notes');
     this.subscribe('users');
+    this.eventId = $stateParams.eventId;
 
     this.helpers({
       noteslist() {
@@ -49,13 +55,37 @@ class PartyNotes {
     this.note = {};
     this.showAddForm = false;
   }
+
+  openBuffetList(eventID) {
+    console.log(eventID);
+      this.$mdDialog.show({
+      controller($mdDialog, $scope) {
+        'ngInject';
+
+        $scope.event = eventID;
+
+        this.close = () => {
+          $mdDialog.hide();
+        }
+      },
+      controllerAs: 'buffetListModal',
+      template: modalBuffetTemplate,
+      targetEvent: event,
+      parent: angular.element(document.body),
+      clickOutsideToClose: true,
+      fullscreen: this.$mdMedia('sm') || this.$mdMedia('xs')
+    });
+  }
+
 }
+
 
 const name = 'partyNotes';
 
 // create a module
 export default angular.module(name, [
-  angularMeteor
+    angularMeteor,
+    BuffetList
 ]).component(name, {
   template,
   bindings: {
