@@ -1,0 +1,134 @@
+<md-content class="guests" md-whiteframe="3">
+    <md-list>
+        <md-subheader class="md-sticky">
+            <div layout="column">
+                <div layout="row">
+                    <span flex="5"></span>
+                    <span flex="75"><h5>My Guests</h5></span>
+                    <md-select ng-model="eventGuestList.sort" placeholder="Sort by" flex="13">
+                        <md-option ng-value="opt" ng-repeat="opt in ['Name', 'Status', 'Number']">{{ opt }}</md-option>
+                    </md-select>
+                    <md-button ng-hide="eventGuestList.showAddForm" class="material-icons md-fab md-mini addGuest" ng-click="eventGuestList.openForm()"> add</md-button>
+                    <md-button ng-show="eventGuestList.showAddForm" class="material-icons md-fab md-mini addGuest" ng-click="eventGuestList.openForm()"> close</md-button>
+                </div>
+                <div layout="row">
+                    <span flex="10"></span>
+                        <span flex="30">
+                        <p>Name</p>
+                        </span>
+                        <span flex="20" align="center">
+                        <p>Number</p>
+                        </span>
+                        <span flex="15" align="center">
+                            <p>Status</p>
+                        </span>
+                </div>
+            </div>
+        </md-subheader>
+        <form ng-if="eventGuestList.showAddForm" md-whiteframe>
+
+            <div layout="row">
+                <md-input-container class="md-block" flex="30">
+                    <label>
+                        Name:
+                    </label>
+                    <textarea type="text" ng-model="eventGuestList.guest.name"></textarea>
+                </md-input-container>
+                <div class="md-block" flex="5"></div>
+                <md-input-container class="md-block" flex="30">
+                    <label>
+                        Number:
+                    </label>
+                    <textarea type="number" ng-model="eventGuestList.guest.number"></textarea>
+                </md-input-container>
+                <div class="md-block" flex="5"></div>
+                <md-input-container class="md-block" flex="30">
+                    <label>Status</label>
+                    <md-select ng-model="eventGuestList.guest.status">
+                        <md-option ng-value="opt" ng-repeat="opt in ['Invited', 'Not Invited yet', 'Attending', 'Not Attending']">{{ opt }}</md-option>
+                    </md-select>
+                </md-input-container>
+            </div>
+            <div layout="row">
+                <md-input-container class="md-block" flex="65">
+                    <label>
+                        Additional Text:
+                    </label>
+                    <textarea type="text" ng-model="eventGuestList.guest.description"></textarea>
+                </md-input-container>
+            </div>
+
+            <div layout="row" flex >
+                <md-button flex="100" align="center" ng-click="eventGuestList.submit()" class="md-raised add">Add Guest</md-button>
+            </div>
+
+        </form>
+        <div class="listItems">
+            <md-list-item class="md-2-line" ng-repeat="guest in eventGuestList.guestList">
+
+                <div class="md-list-item-text selected" ng-if="eventGuestList.selectedGuestId == guest._id" ng-mouseleave="eventGuestList.selectGuest(guest)">
+                    <div layout="row" class="rows">
+                        <span flex="10"></span>
+                        <div flex="30">
+                            <h3 class="textItems" ng-hide="(guest._id == eventGuestList.editGuest.id) && !(eventGuestList.editGuest.name == '') " ng-click="eventGuestList.editGuestName(guest)" > {{guest.name}}</h3>
+                            <form class="textItems" ng-show="(guest._id == eventGuestList.editGuest.id) && !(eventGuestList.editGuest.name == '')" ng-submit="eventGuestList.saveGuestName()" >
+                                <input type="text" placeholder={{eventGuestList.editGuest.name}} ng-model="eventGuestList.editGuest.name"/>
+                            </form>
+                        </div>
+                        <span flex="20" align="center">
+                        <p class="textItems" ng-hide="(guest._id == eventGuestList.editGuest.id) && !(eventGuestList.editGuest.number == '')" ng-click="eventGuestList.editGuestNumber(guest)">{{guest.number}}  </p>
+                             <form class="textItems" ng-show="(guest._id == eventGuestList.editGuest.id) && !(eventGuestList.editGuest.number == '')" ng-submit="eventGuestList.saveGuestNumber()" >
+                                <input type="number" placeholder={{eventGuestList.editGuest.number}} ng-model="eventGuestList.editGuest.number"/>
+                            </form>
+                        </span>
+                        <span flex="5"></span>
+                        <span flex="15">
+                            <p class="textItems" ng-hide="(guest._id == eventGuestList.editGuest.id) && !(eventGuestList.editGuest.status == '')" ng-click="eventGuestList.editGuestStatus(guest)" >{{guest.status}}  </p>
+
+                             <md-select ng-show="(guest._id == eventGuestList.editGuest.id) && !(eventGuestList.editGuest.status == '')" ng-model="eventGuestList.editGuest.status" placeholder={{guest.status}} md-on-close="eventGuestList.saveGuestStatus()" >
+                                    <md-option ng-repeat="opt in ['Invited', 'Not Invited yet', 'Attending', 'Not Attending']" >{{ opt }}</md-option>
+                                  </md-select>
+
+                        </span>
+
+                        <span flex="20" align="end">
+                            <md-button class="material-icons md-icon-button guest-delete" ng-click="eventGuestList.deleteGuest(guest)"> delete</md-button>
+                        </span>
+                    </div>
+                    <div>
+                        <p class="description" ng-hide="(guest._id == eventGuestList.editGuest.id) && !(eventGuestList.editGuest.description == '')" ng-click="eventGuestList.editGuestDescription(guest)"> {{guest.description}}</p>
+                        <form class="description" ng-show="(guest._id == eventGuestList.editGuest.id) && !(eventGuestList.editGuest.description == '')" ng-submit="eventGuestList.saveGuestDescription()" >
+                            <input class="description" type="text" placeholder={{eventGuestList.editGuest.description}} ng-model="eventGuestList.editGuest.description"/>
+                        </form>
+                    </div>
+                </div>
+                <div class="md-list-item-text" ng-if=" eventGuestList.selectedGuestId != guest._id" ng-mouseover="eventGuestList.selectGuest(guest)">
+                    <div layout="row" class="rows">
+                        <span flex="10"></span>
+                        <div flex="30">
+                            <h3 class="textItems" ng-hide="(guest._id == eventGuestList.editGuest.id) && !(eventGuestList.editGuest.name == '') " ng-click="eventGuestList.editGuestName(guest)" > {{guest.name}}</h3>
+                            <form class="textItems" ng-show="(guest._id == eventGuestList.editGuest.id) && !(eventGuestList.editGuest.name == '')" ng-submit="eventGuestList.saveGuestName()" >
+                                <input type="text" placeholder={{eventGuestList.editGuest.name}} ng-model="eventGuestList.editGuest.name"/>
+                            </form>
+                        </div>
+                        <span flex="20" align="center">
+                        <p class="textItems" ng-hide="(guest._id == eventGuestList.editGuest.id) && !(eventGuestList.editGuest.number == '')" ng-click="eventGuestList.editGuestNumber(guest)">{{guest.number}}  </p>
+                             <form class="textItems" ng-show="(guest._id == eventGuestList.editGuest.id) && !(eventGuestList.editGuest.number == '')" ng-submit="eventGuestList.saveGuestNumber()" >
+                                <input type="number" placeholder={{eventGuestList.editGuest.number}} ng-model="eventGuestList.editGuest.number"/>
+                            </form>
+                        </span>
+                        <span flex="5"></span>
+                        <span flex="15">
+                            <p class="textItems" ng-hide="(guest._id == eventGuestList.editGuest.id) && !(eventGuestList.editGuest.status == '')" ng-click="eventGuestList.editGuestStatus(guest)" >{{guest.status}}  </p>
+
+                             <md-select ng-show="(guest._id == eventGuestList.editGuest.id) && !(eventGuestList.editGuest.status == '')" ng-model="eventGuestList.editGuest.status" placeholder={{guest.status}} md-on-close="eventGuestList.saveGuestStatus()" >
+                                    <md-option ng-repeat="opt in ['Invited', 'Not Invited yet', 'Attending', 'Not Attending']" >{{ opt }}</md-option>
+                                  </md-select>
+                        </span>
+                    </div>
+                </div>
+                <md-divider ng-if="!$last"></md-divider>
+            </md-list-item>
+        </div>
+    </md-list>
+</md-content>

@@ -80,17 +80,29 @@
 </div>
     <div flex="25">
         <div class="sidebar" md-whiteframe="3">
-            <h3>{{partyDashboard.currentEvent.name}}</h3>
-            <!--<div layout="column">
+            <h4>{{partyDashboard.currentEvent.name}}</h4>
+            <div layout="column">
                 <div class="todo" md-whiteframe="2">
                     <md-list>
-                        <h4>Upcoming To-Dos</h4>
-                        <md-list-item>Send Invitations</md-list-item>
-                        <md-list-item>Confirm Location</md-list-item>
-                        <md-list-item>Order Decoration</md-list-item>
+                        <h5>Upcoming To-Dos</h5>
+                        <md-list-item ng-repeat="todo in partyDashboard.upcomingTodos|limitTo:5">
+                        <div flex="30">
+                            <h7>{{todo.name}} </h7>
+                        </div>
+                             <span flex="30" align="center">
+                                <h7 >({{getName(todo.assignee)}})</h7>
+                                </span>
+                            <span flex="5"></span>
+                            <span flex="30">
+                                    <h7>{{parseDate(todo.duedate)}}</h7>
+                                </span>
+                          </md-list-item>
                     </md-list>
                 </div>
-            </div>-->
+                <div>
+
+                </div>
+            </div>
         </div>
     </div>
 </div>

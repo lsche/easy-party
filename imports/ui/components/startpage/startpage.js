@@ -11,7 +11,7 @@ import { name as EventList} from '../eventList/eventList';
 import { name as PartyCategory } from '../partyCategory/partyCategory';
 import { name as Navigation } from '../navigation/navigation';
 import { name as UserAuth} from '../userAuth/userAuth';
-import { name as PartyDashboard} from '../partyDashboard/partyDashboard'
+import { name as PartyDashboard} from '../partyDashboard/partyDashboard';
 
 class Startpage {}
 
