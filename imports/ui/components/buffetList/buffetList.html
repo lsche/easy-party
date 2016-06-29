@@ -1,11 +1,18 @@
 <div layout="column" layout-fill layout-margin layout-padding>
 
-    <div layout="row" layout-fill layout-margin>
-        <p class="md-body-2">
-            Sign in with your email</p>
-    </div>
+    <form name="buffetForm" layout="column" layout-fill layout-padding layout-margin>
+        <div flex aria-label="description">
+            <p> {{buffetList.buffetObject.description}}</p>
+        </div>
 
+        <div flex class="listItems" aria-label="dishes">
+         <!--   <md-list-item class="md-2-line" ng-repeat="dish in buffetList.dishList">
 
+            </md-list-item>-->
+        </div>
+
+        <md-button ng-click="buffetList.save()">Save</md-button>
+    </form>
 
 
 </div>

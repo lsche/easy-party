@@ -9,8 +9,8 @@ import { Meteor } from 'meteor/meteor';
 
 import template from './buffetList.html';
 
-
-import { Todos } from '../../../api/todos';
+import { Dishes } from '../../../api/dishes';
+import { Buffet } from '../../../api/buffet';
 
 class BuffetList {
     constructor($scope, $reactive, $state) {
@@ -20,9 +20,34 @@ class BuffetList {
 
         $reactive(this).attach($scope);
 
+        this.subscribe('buffet');
+        this.subscribe('dishes');
+
         console.log(this.myEvent);
 
-        this.error = '';
+      //  this.error = '';
+
+        this.helpers({
+            buffetObject() {
+                return Buffet.findOne({event: this.myEvent});
+
+            },
+            dishList(){
+               console.log(Buffet.findOne({event: this.myEvent}));
+
+                //var buffetID = buffetObject._id;
+
+                //console.log(buffetID);
+                //return buffetID;
+              //  return Dishes.find({buffet_id: buffetID});
+            }
+        });
+
+    }
+    save(){
+       
+        console.log(buffet);
+        console.log(buffetID);
     }
 
 

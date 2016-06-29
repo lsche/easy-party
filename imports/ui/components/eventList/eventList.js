@@ -1,5 +1,3 @@
-// Karin - backend for content of start page
-
 import angular from 'angular';
 import angularMeteor from 'angular-meteor';
 import uiRouter from 'angular-ui-router';
@@ -10,6 +8,7 @@ import moment from 'moment';
 import template from './eventList.html';
 
 import { Events } from '../../../api/events';
+import { Buffet } from '../../../api/buffet';
 import { Meteor } from 'meteor/meteor';
 
 
@@ -118,7 +117,16 @@ class EventList {
         this.event.creator = Meteor.user()._id;
         this.event.createdAt = new Date();
 
-        Events.insert(this.event);
+        Events.insert(this.event, function (error, result) {
+            if (result){
+                Buffet.insert({description: "Type in your description here", event: result});
+                console.log(result);
+                var test = Buffet.findOne({event: result});
+                console.log(test);
+            }
+        });
+
+
 
         this.showAddForm = false;
         this.event = {};
