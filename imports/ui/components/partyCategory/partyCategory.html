@@ -19,8 +19,8 @@
 
     <div flex="60" ng-if="partyCategory.category == 'Guests'">
         <!--<h1> {{partyCategory.category}} </h1>-->
-        <event-guest-list my-attr="partyCategory.eventId" my-category="partyCategory.categoryName"></event-guest-list>
-        <party-todos my-attr="partyCategory.eventId" my-category="partyCategory.categoryName"></party-todos>
+        <event-guest-list class = "guest-category" my-attr="partyCategory.eventId" my-category="partyCategory.categoryName"></event-guest-list>
+        <party-todos class = "guest-category" my-attr="partyCategory.eventId" my-category="partyCategory.categoryName"></party-todos>
     </div>
     <div flex="60" ng-if="partyCategory.category != 'Guests'">
         <party-todos my-attr="partyCategory.eventId" my-category="partyCategory.categoryName"></party-todos>

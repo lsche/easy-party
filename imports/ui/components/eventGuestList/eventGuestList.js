@@ -93,7 +93,7 @@ class EventGuestList {
     
 
     selectGuest(guest){
-        if(this.selectedGuestIdId == guest._id){
+        if(this.selectedGuestId == guest._id){
             this.selectedGuestId = null;
         } else {
             this.selectedGuestId = guest._id;
@@ -103,8 +103,11 @@ class EventGuestList {
     submit() {
         this.guest.creater = Meteor.user()._id;
         this.guest.event_Id = this.myAttr;
-
+        if (!(this.guest.number == "")){
         Guests.insert(this.guest);
+        } else {
+
+        }
 
         this.guest = {};
         this.showAddForm = false;

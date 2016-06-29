@@ -98,7 +98,7 @@
                     <div>
                         <p class="description" ng-hide="(guest._id == eventGuestList.editGuest.id) && !(eventGuestList.editGuest.description == '')" ng-click="eventGuestList.editGuestDescription(guest)"> {{guest.description}}</p>
                         <form class="description" ng-show="(guest._id == eventGuestList.editGuest.id) && !(eventGuestList.editGuest.description == '')" ng-submit="eventGuestList.saveGuestDescription()" >
-                            <input type="text" placeholder={{eventGuestList.editGuest.description}} ng-model="eventGuestList.editGuest.description"/>
+                            <input class="description" type="text" placeholder={{eventGuestList.editGuest.description}} ng-model="eventGuestList.editGuest.description"/>
                         </form>
                     </div>
                 </div>
