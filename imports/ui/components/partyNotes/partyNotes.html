@@ -12,15 +12,14 @@
     <label>
       Name:
     </label>
-      <textarea type="text" ng-model="partyNotes.note.name"></textarea>
+      <input type="text" ng-model="partyNotes.note.name"/>
+      <md-input-container>
+          <label>
+              Text:
+          </label>
+          <input type="text" ng-model="partyTodos.todo.description"/>
+      </md-input-container>
   </md-input-container>  
-  
-  <md-input-container>
-    <label>
-      Text:
-    </label>
-      <textarea type="text" ng-model="partyTodos.todo.description"></textarea>
-  </md-input-container>
 
 
     <div layout="row" layout-align="center">
@@ -29,7 +28,6 @@
    <div></div>
   
 </div>
-
 
 <div layout="column" layout-gt-sm="row">
     <div flex="50">
@@ -53,3 +51,4 @@
 </div>
 
 </div>
+
