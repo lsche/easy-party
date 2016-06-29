@@ -4,7 +4,7 @@
                 <div layout="column">
                     <div layout="row">
                         <span flex="5"></span>
-                        <span flex="75"><h5>Todos for {{partyTodos.category}}</h5></span>
+                        <span flex="75"><h5>ToDos</h5></span>
                         <md-select ng-model="partyTodos.sort" placeholder="Sort by" flex="13">
                             <md-option ng-value="opt" ng-repeat="opt in ['Date', 'Status', 'Assignee']">{{ opt }}</md-option>
                         </md-select>
@@ -14,7 +14,7 @@
                     <div layout="row">
                         <span flex="10"></span>
                         <span flex="30">
-                        <p>Todo</p>
+                        <p>ToDo</p>
                         </span>
                         <span flex="20" align="center">
                         <p>Assignee</p>
@@ -77,17 +77,17 @@
                                     <!--<h4>{{todo.description}}</h4>-->
                                 </div>
                                 <span flex="30" align="center">
-                                <p class="textItems" >{{getName(todo.assignee)}}</p>
+                                <p class="textItems done-{{todo.done}}" >{{getName(todo.assignee)}}</p>
                                 </span>
                                 <span flex="20">
-                                    <p class="textItems" >{{parseDate(todo.duedate)}}</p>
+                                    <p class="textItems done-{{todo.done}}" >{{parseDate(todo.duedate)}}</p>
                                 </span>
                                 <span flex></span>
                                 <md-button class="material-icons md-icon-button" ng-click="partyTodos.editTodo(todo)"> edit</md-button>
                                 <md-button class="material-icons md-icon-button" ng-click="partyTodos.deleteTodo(todo)"> delete</md-button>
                             </div>
                             <div>
-                                <p class="description"> {{todo.description}}</p>
+                                <p class="description done-{{todo.done}}"> {{todo.description}}</p>
                             </div>
                         </div>
                         <div class="md-list-item-text" ng-if=" partyTodos.selectedTodoId != todo._id" ng-mouseover="partyTodos.selectTodo(todo)">
@@ -101,10 +101,10 @@
                                     <!--<h4>{{todo.description}}</h4>-->
                                 </div>
                         <span flex="30" align="center">
-                        <p  class="textItems2">{{getName(todo.assignee)}}</p>
+                        <p  class="textItems2 done-{{todo.done}}">{{getName(todo.assignee)}}</p>
                         </span>
                         <span flex="20">
-                            <p class="textItems2">{{parseDate(todo.duedate)}}</p>
+                            <p class="textItems2 done-{{todo.done}}">{{parseDate(todo.duedate)}}</p>
                         </span>
                             </div>
                         </div>

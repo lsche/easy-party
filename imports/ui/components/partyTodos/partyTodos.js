@@ -147,7 +147,6 @@ class PartyTodos {
       },
       controllerAs: 'editTodosModal',
       template: modalEditTemplate,
-      targetEvent: event,
       parent: angular.element(document.body),
       clickOutsideToClose: true,
       fullscreen: this.$mdMedia('sm') || this.$mdMedia('xs')
