@@ -1,0 +1,37 @@
+
+        <div layout="column" layout-fill layout-margin layout-padding>
+
+            <form name="editForm" layout="column" layout-fill layout-padding layout-margin>
+                <md-input-container>
+                    <label>
+                        ToDo Title
+                    </label>
+                    <input type="text" ng-model="editTodos.myTask.name" placeholder="{{ editTodos.myTask.name}}"/>
+                </md-input-container>
+                <md-input-container >
+                    <label>
+                        ToDo Description
+                    </label>
+                    <textarea type="text" ng-model="editTodos.myTask.description" placeholder="{{ editTodos.myTask.description}}"></textarea>
+                </md-input-container>
+                <div layout="row">
+                    <md-input-container flex="40">
+                        <label>Assignee</label>
+                        <md-select ng-model="editTodos.myTask.assignee" placeholder="{{editTodos.myTask.assignee}}">
+                            <md-option ng-repeat="person in editTodos.getEventPlanner" value="{{person.id}}">{{person.name}}</md-option>
+                        </md-select>
+                    </md-input-container>
+                    <span flex="20"></span>
+                    <md-content flex="40">
+                        <label><strong></strong></label>
+                        <md-datepicker ng-model="editTodos.myTask.duedate" md-placeholder="{{editTodos.myTask.duedate}}" flex style="width: 20px"></md-datepicker>
+                    </md-content>
+                </div>
+
+                <div layout="row" layout-align="end center">
+                    <md-button class="md-raised md-primary" ng-click="editTodos.save()" >Save</md-button>
+                </div>
+            </form>
+
+        </div>
+

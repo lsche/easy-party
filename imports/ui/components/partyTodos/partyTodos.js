@@ -5,17 +5,21 @@ import moment from 'moment';
 import { Meteor } from 'meteor/meteor';
 
 import template from './partyTodos.html';
+import modalEditTemplate from './editTodosModal.html';
 
 import { Todos } from '../../../api/todos';
 import { Events } from '../../../api/events';
+import {name as EditTodos} from '../editTodos/editTodos';
+
 
 class PartyTodos {
-  constructor($stateParams, $scope, $reactive) {
+  constructor($stateParams, $scope, $mdDialog, $mdMedia, $reactive) {
     'ngInject';
     'mdDateTime';
     
     $reactive(this).attach($scope);
-
+    this.$mdDialog = $mdDialog;
+    this.$mdMedia = $mdMedia;
 
     $scope.parseDate = function(jsonDate) {
       //date parsing functionality
@@ -124,11 +128,29 @@ class PartyTodos {
       });
     }
   }
+
   deleteTodo(todo){
     Todos.remove(todo._id);
   }
+
   editTodo(todo){
-    //this.showEditForm = true;
+    this.$mdDialog.show({
+      controller($scope, $mdDialog) {
+        'ngInject';
+        $scope.task = todo;
+
+        this.close = () => {
+          $mdDialog.hide();
+        }
+
+
+      },
+      controllerAs: 'editTodosModal',
+      template: modalEditTemplate,
+      parent: angular.element(document.body),
+      clickOutsideToClose: true,
+      fullscreen: this.$mdMedia('sm') || this.$mdMedia('xs')
+    });
   }
 }
 
@@ -136,7 +158,8 @@ const name = 'partyTodos';
 
 // create a module
 export default angular.module(name, [
-  angularMeteor
+  angularMeteor,
+  EditTodos
 ]).component(name, {
   template,
   bindings: {
