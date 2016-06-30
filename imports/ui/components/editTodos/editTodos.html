@@ -4,32 +4,34 @@
             <form name="editForm" layout="column" layout-fill layout-padding layout-margin>
                 <md-input-container>
                     <label>
-                        Title
+                        ToDo Title
                     </label>
-                    <input type="text" ng-model="editTodos.task.name" aria-label="title" placeholder="{{ editTodos.task.name}}" required/>
+                    <input type="text" ng-model="editTodos.myTask.name" placeholder="{{ editTodos.myTask.name}}"/>
                 </md-input-container>
-                <p>test: {{ editTodos.task.name}}</p>
-                <md-input-container>
+                <md-input-container >
                     <label>
-                        Password
+                        ToDo Description
                     </label>
-                    <input  ng-model="editTodos.task.assignee" aria-label="password" required/>
+                    <textarea type="text" ng-model="editTodos.myTask.description" placeholder="{{ editTodos.myTask.description}}"></textarea>
                 </md-input-container>
-               <!-- <div layout="row" layout-align="space-between center">
-                    <a class="md-button" href="/password">Forgot password? - not working yet</a>-->
-                    <div layout="row" layout-align="end center">  <!--remove when Forgot Password Button is implemented!-->
-                        <md-button class="md-raised md-primary" ng-click="userLogin.login()" aria-label="login" ng-disabled="userLogin.loginForm.$invalid()" >Save changes
-                        </md-button>
-                    </div>
-                <!--</div>-->
+                <div layout="row">
+                    <md-input-container flex="40">
+                        <label>Assignee</label>
+                        <md-select ng-model="editTodos.myTask.assignee" placeholder="{{editTodos.myTask.assignee}}">
+                            <md-option ng-repeat="person in editTodos.getEventPlanner" value="{{person.id}}">{{person.name}}</md-option>
+                        </md-select>
+                    </md-input-container>
+                    <span flex="20"></span>
+                    <md-content flex="40">
+                        <label><strong></strong></label>
+                        <md-datepicker ng-model="editTodos.myTask.duedate" md-placeholder="{{editTodos.myTask.duedate}}" flex style="width: 20px"></md-datepicker>
+                    </md-content>
+                </div>
+
+                <div layout="row" layout-align="end center">
+                    <md-button class="md-raised md-primary" ng-click="editTodos.save()" >Save</md-button>
+                </div>
             </form>
-            <!-- <md-toolbar ng-show="userLogin.error" class="md-warn" layout="row" layout-fill layout-padding layout-margin>
-                <p class="md-body-1">{{ userLogin.error }}</p>
-            </md-toolbar>
-            <md-divider></md-divider>
-            <div layout="row" layout-align="center">
-                <a class="md-button" href="/register">Need an account? - not working yet</a>
-            </div>-->
 
         </div>
 

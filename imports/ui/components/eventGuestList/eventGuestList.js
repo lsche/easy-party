@@ -36,7 +36,10 @@ class EventGuestList {
         this.category = $stateParams.categoryName.charAt(0).toUpperCase() + $stateParams.categoryName.slice(1);
         this.showAddForm = false;
         this.selectedGuestId = null;
-        this.guest = {};
+        this.guest = {
+                description: "",
+                status: "Not Invited yet",
+        };
         this.sort = '';
         this.subscribe('events');
         this.subscribe('guests');
@@ -93,16 +96,19 @@ class EventGuestList {
     
 
     selectGuest(guest){
-        if(this.selectedGuestId == guest._id){
-            this.selectedGuestId = null;
-        } else {
-            this.selectedGuestId = guest._id;
-        }
+        this.selectedGuestId = guest._id;
+    }
+
+    deselectGuest(){
+        this.selectedGuestId = null;
     }
 
     submit() {
         this.guest.creater = Meteor.user()._id;
         this.guest.event_Id = this.myAttr;
+        if(this.guest.description == ""){
+            this.guest.description = "Add some information here..."
+        }
         if (!(this.guest.number == "")){
         Guests.insert(this.guest);
         } else {
@@ -115,6 +121,7 @@ class EventGuestList {
 
     
     deleteGuest(guest){
+        console.log("deleteGuest called");
         Guests.remove(guest._id);
     }
 

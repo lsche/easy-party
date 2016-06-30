@@ -11,6 +11,7 @@ import { Todos } from '../../../api/todos';
 import { Events } from '../../../api/events';
 import {name as EditTodos} from '../editTodos/editTodos';
 
+
 class PartyTodos {
   constructor($stateParams, $scope, $mdDialog, $mdMedia, $reactive) {
     'ngInject';
@@ -132,13 +133,11 @@ class PartyTodos {
     Todos.remove(todo._id);
   }
 
-  editTodo(event){
+  editTodo(todo){
     this.$mdDialog.show({
-      controller($scope, $mdDialog, task) {
+      controller($scope, $mdDialog) {
         'ngInject';
-        $scope.task = task;
-
-        console.log($scope.task);
+        $scope.task = todo;
 
         this.close = () => {
           $mdDialog.hide();
@@ -148,12 +147,8 @@ class PartyTodos {
       },
       controllerAs: 'editTodosModal',
       template: modalEditTemplate,
-      targetEvent: event,
       parent: angular.element(document.body),
       clickOutsideToClose: true,
-      locals: {
-        task: event
-      },
       fullscreen: this.$mdMedia('sm') || this.$mdMedia('xs')
     });
   }
