@@ -64,7 +64,7 @@
 
         </form>
         <div class="listItems">
-            <md-list-item class="md-2-line" ng-repeat="guest in eventGuestList.guestList" ng-mouseleave="eventGuestList.selectGuest(guest)" ng-mouseover="eventGuestList.selectGuest(guest)">
+            <md-list-item class="md-2-line" ng-repeat="guest in eventGuestList.guestList" ng-mouseover="eventGuestList.selectGuest(guest)" ng-mouseleave="eventGuestList.deselectGuest()">
 
                 <div class="md-list-item-text">
                     <div layout="row" class="rows">
@@ -90,7 +90,7 @@
                                   </md-select>
                         </span>
                         <span flex="20" align="end">
-                            <md-button class="material-icons md-icon-button guest-delete" ng-if="eventGuestList.selectedGuestId == guest._id" ng-click="eventGuestList.deleteGuest(guest)"> delete</md-button>
+                            <md-button class="material-icons md-icon-button guest-delete" ng-show="eventGuestList.selectedGuestId == guest._id" ng-click="eventGuestList.deleteGuest(guest)"> delete</md-button>
                         </span>
                     </div>
                     <div>
