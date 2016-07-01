@@ -7,7 +7,9 @@ import uiRouter from 'angular-ui-router';
 
 import template from './startpage.html';
 import { name as StartpageContent } from '../startpageContent/startpageContent';
+
 import { name as EventList} from '../eventList/eventList';
+import { name as ProvidersList} from '../providersList/providersList';
 import { name as PartyCategory } from '../partyCategory/partyCategory';
 import { name as Navigation } from '../navigation/navigation';
 import { name as UserAuth} from '../userAuth/userAuth';
@@ -28,6 +30,7 @@ export default angular.module(name, [
   UserAuth,
   PartyCategory,
   PartyDashboard,
+  ProvidersList,
   'accounts.ui'   // Karin: user accounts - delete if not necessary!!
 ]).component(name, {
   template,
