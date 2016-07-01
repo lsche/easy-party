@@ -37,8 +37,9 @@ class EventGuestList {
         this.showAddForm = false;
         this.selectedGuestId = null;
         this.guest = {
+                number: "",
                 description: "",
-                status: "Not Invited yet",
+                status: "Not Invited yet"
         };
         this.sort = '';
         this.subscribe('events');
@@ -109,13 +110,18 @@ class EventGuestList {
         if(this.guest.description == ""){
             this.guest.description = "Add some information here..."
         }
-        if (!(this.guest.number == "")){
+        if (this.guest.number == "") {
+            this.guest.number = 1;
+        }
+        if (!(this.guest.name == "")){
         Guests.insert(this.guest);
-        } else {
 
+        } else {
         }
 
-        this.guest = {};
+        this.guest = { number: "",
+            description: "",
+            status: "Not Invited yet"};
         this.showAddForm = false;
     }
 
