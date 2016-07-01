@@ -7,14 +7,11 @@ import { Accounts } from 'meteor/accounts-base';
 import template from './userAuth.html';
 import modalRegistrationTemplate from './userRegisterModal.html';
 import modalLoginTemplate from './userLoginModal.html';
-import modalProviderTemplate from './providerRegisterModal.html';
+
 
 import { name as DisplayNameFilter } from '../../filters/displayNameFilter';
 import { name as UserRegistration } from '../userRegistration/userRegistration';
 import { name as UserLogin } from '../userLogin/userLogin';
-import { name as ServiceRegistration } from '../serviceRegistration/serviceRegistration';
-
-
 
 const name = 'userAuth';
 
@@ -77,23 +74,6 @@ class UserAuth {
             fullscreen: this.$mdMedia('sm') || this.$mdMedia('xs')
         });
     }
-    openProvider(event){
-        this.$mdDialog.show({
-            controller($mdDialog) {
-                'ngInject';
-
-                this.close = () => {
-                    $mdDialog.hide();
-                }
-            },
-            controllerAs: 'providerRegisterModal',
-            template: modalProviderTemplate,
-            targetEvent: event,
-            parent: angular.element(document.body),
-            clickOutsideToClose: true,
-            fullscreen: this.$mdMedia('sm') || this.$mdMedia('xs')
-        });
-    }
 }
 
 // create a module
@@ -101,8 +81,7 @@ export default angular.module(name, [
     angularMeteor,
     DisplayNameFilter,
     UserRegistration,
-    UserLogin,
-    ServiceRegistration
+    UserLogin
 ]).component(name, {
     template,
     controllerAs: name,
