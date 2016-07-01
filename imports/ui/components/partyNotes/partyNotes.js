@@ -20,7 +20,7 @@ class PartyNotes {
 
     this.helpers({
       noteslist() {
-        return Notes.find({ event_Id: $stateParams.eventId, category: $stateParams.categoryName });
+        return Notes.find({ event_Id: $stateParams.eventId, category: $stateParams.categoryName },{sort: {createdAt: -1}});
       },
       eventId() {
         return $stateParams.eventId;

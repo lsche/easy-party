@@ -108,6 +108,17 @@
                         <div flex="50" class="Lukasflex50Top">
                             <h5>{{provider.name}}</h5>
                             <p>{{provider.about}}</p>
+
+                            <md-menu ng-show="providersSearch.isLoggedIn" flex md-position-mode="target-right bottom">
+                                <p><a ng-click="$mdOpenMenu($event)">Add to my event!</a></p>
+                                <md-menu-content>
+                                    <md-menu-item ng-repeat="event in providersSearch.eventList">
+                                        <md-button ng-click="providersSearch.saveAsNote(event, provider)">
+                                            {{event.name}}
+                                        </md-button>
+                                    </md-menu-item>
+                                </md-menu-content>
+                            </md-menu>
                         </div>
 
                         <div flex="5">

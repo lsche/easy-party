@@ -7,6 +7,8 @@ import moment from 'moment';
 import { Meteor } from 'meteor/meteor';
 import template from './providersSearch.html';
 import { Providers } from '../../../api/providers';
+import { Events } from '../../../api/events';
+import { Notes } from '../../../api/notes';
 import { name as PartyImage } from '../partyImage/partyImage';
 
 
@@ -19,6 +21,7 @@ class ProvidersSearch {
 
         this.sort = '';
         this.searchText = '';
+        this.note = {};
         
         this.typeFilter = ["Drink & Dance (Party)","Birthday(-Dinner)","Wedding Venue","Conference/Seminar"];
         this.typeSelected = [];
@@ -47,7 +50,10 @@ class ProvidersSearch {
             return list.indexOf(item) > -1;
         };
 
+        this.subscribe('notes');
+        this.subscribe('events');
         this.subscribe('providers', () => [Session.get('FilterType'), Session.get('FilterPrice'), Session.get('FilterGuests'), Session.get('FilterSearch') ]);
+
 
         $scope.getCap = function(cap){
             if (cap == 10) { return "< 10" }
@@ -83,6 +89,22 @@ class ProvidersSearch {
                     return Providers.find({ category: this.myAttr });
                 }
             },
+        isLoggedIn() {
+            return !!Meteor.userId();
+        },
+        currentUser() {
+            return Meteor.user();
+        },
+        eventList(){
+            var currentUserMail = Meteor.user();
+            var currentId = Meteor.userId();
+            if(currentUserMail){
+                var mail = currentUserMail.emails[0].address;
+                return Events.find( { $or: [ {creator: currentId}, {planner: {$elemMatch: {mail: mail}}} ] } );
+            } else {
+                return null;
+            }
+        }
     });
   }
 
@@ -96,6 +118,27 @@ class ProvidersSearch {
         Session.set('FilterGuests',this.getReactively('guestsSelected'));
         Session.set('FilterSearch',this.getReactively('searchText'));
         
+  }
+
+    saveAsNote(event,provider){
+        this.note.creater = Meteor.user()._id;
+        this.note.createdAt = new Date();
+        this.note.event_Id = event._id;
+        this.note.category = this.myAttr;
+        this.note.name = provider.name;
+
+        if(provider.about.length > 150){
+            var shortAbout = provider.about.substring(0, 149) + " (...)";
+            var customAbout = shortAbout +
+                    " - Contact Details: " + provider.street +", " + provider.zip + " " + provider.city +
+                ", Tel: " + provider.phone + ", Email: " + provider.email;
+        } else {
+            var customAbout = provider.about +
+                " - Contact Details: " + provider.street +", " + provider.zip + " " + provider.city +
+                ", Tel: " + provider.phone + ", Email: " + provider.email;
+        }
+        this.note.description = customAbout;
+        Notes.insert(this.note);
     }
 
 
