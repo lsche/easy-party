@@ -38,17 +38,10 @@ class BuffetList {
                 if(buffetList){
                     console.log(buffetList);
                     console.log(buffetList._id)
-                    return Dishes.find({buffet_id: buffetList._id});
+                    return Dishes.find({buffetID: buffetList._id});
                 }
 
-              //  console.log(Buffet.findOne({event: this.myEvent}));
-              //  this.buffetListId = Buffet.findOne({event: this.myEvent})._id;
-
-
-                //var buffetID = buffetObject._id;
-
-                //console.log(buffetID);
-                //return buffetID;
+ 
 
             }
         });
