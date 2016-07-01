@@ -25,7 +25,10 @@
         <party-todos my-attr="partyCategory.eventId" my-category="partyCategory.categoryName"></party-todos>
         <party-comment my-attr="partyCategory.eventId" my-category="partyCategory.categoryName"></party-comment>
     </div>
-    <party-notes flex="30" my-attr="partyCategory.eventId" my-category="partyCategory.categoryName"></party-notes>
+    <party-notes ng-if="partyCategory.category != 'Guests'" flex="30" my-attr="partyCategory.eventId" my-category="partyCategory.categoryName"></party-notes>
+    <div flex="30" ng-if="partyCategory.category == 'Guests'">
+        <pie-chart my-attr="partyCategory.eventId"></pie-chart>
+    </div>
 
 </div>
 
