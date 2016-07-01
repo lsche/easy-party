@@ -28,6 +28,14 @@ class PartyDashboard{
               return "unassigned";
           }
       };
+      $scope.setColor = function(todo) {
+          var now = new Date();
+          if(todo.duedate < now) {
+              return { color: "#B71C1C" };
+          } else {
+              return {color: "#00bcd4"};
+          }
+      }
 
     this.eventId = $stateParams.eventId;
 
@@ -57,9 +65,10 @@ class PartyDashboard{
       upcomingTodos() {
         //return Todos.find({ event_Id: $stateParams.eventId, category: $stateParams.categoryName },{sort: {done: 1, duedate: 1}});
 
-        var upcomingTodos = Todos.find({event_Id: this.eventId} , {sort: {duedate: 1}});
+        var upcomingTodos = Todos.find({event_Id: this.eventId, done:false} , {sort: {duedate: 1}});
         return upcomingTodos;
       },
+       
       users() {
         return Meteor.users.find({});
       },

@@ -42,7 +42,10 @@
                     <label>
                         Number:
                     </label>
-                    <textarea type="number" ng-model="eventGuestList.guest.number"></textarea>
+                    <textarea type="number" name="addNumber" ng-model="eventGuestList.guest.number"></textarea>
+                    <div ng-messages="addForm.addNumber.$error">
+                        <div ng-message="required">Please enter a valid number!</div>
+                    </div>
                 </md-input-container>
                 <div class="md-block" flex="5"></div>
                 <md-input-container class="md-block" flex="30">
