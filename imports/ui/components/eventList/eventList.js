@@ -8,21 +8,26 @@ import moment from 'moment';
 import 'meteor/mrgalaxy:stripe';
 
 import template from './eventList.html';
+import modalPaymentTemplate from './paymentModal.html';
 
 import { Events } from '../../../api/events';
 import { Meteor } from 'meteor/meteor';
+
+import {name as EventPayment} from '../eventPayment/eventPayment';
 
 
 
 
 class EventList {
-    constructor($scope, $reactive, $timeout, $q, $log, $state) {
+    constructor($scope, $reactive, $state, $mdDialog, $mdMedia) {
         'ngInject';
 
         this.showAddForm = false;
         var self = this;
 
         $reactive(this).attach($scope);
+        this.$mdDialog = $mdDialog;
+        this.$mdMedia = $mdMedia;
 
         $scope.parseDate = function(jsonDate) {
             //date parsing functionality
@@ -183,6 +188,26 @@ class EventList {
           })
 
     }
+
+    openPayment(event){
+        this.$mdDialog.show({
+            controller($scope, $mdDialog) {
+                'ngInject';
+                $scope.event = event;
+
+                this.close = () => {
+                    $mdDialog.hide();
+                }
+
+
+            },
+            controllerAs: 'paymentModal',
+            template: modalPaymentTemplate,
+            parent: angular.element(document.body),
+            clickOutsideToClose: true,
+            fullscreen: this.$mdMedia('sm') || this.$mdMedia('xs')
+        });
+    }
 }
 
 const name = 'eventList';
@@ -191,7 +216,8 @@ const name = 'eventList';
 export default angular.module(name, [
     angularMeteor,
     ngMaterial,
-    uiRouter
+    uiRouter,
+    EventPayment
 ]).component(name, {
     template,
     bindings: {
