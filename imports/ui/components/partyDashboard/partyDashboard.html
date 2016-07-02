@@ -85,19 +85,19 @@
                 <div class="todo" md-whiteframe="2">
                     <md-list>
                         <h5 class="textItems">Upcoming To-Dos</h5>
-                        <md-list-item ng-repeat="todo in partyDashboard.upcomingTodos|limitTo:5" ng-mouseover="partyDashboard.selectTodo(todo)" ng-mouseleave="partyDashboard.deselectTodo()">
+                        <md-list-item ng-repeat="todo in partyDashboard.upcomingTodos|limitTo:5" ng-mouseover="partyDashboard.selectTodo(todo)" ng-mouseleave="partyDashboard.deselectTodo()" >
                         <div flex>
                             <div layout="row" flex>
                         <span flex="50" >
-                            <p class="textItems" ng-style="setColor(todo)">{{todo.name}} </p>
+                            <p class="textItems" ng-style="setColor(todo)" ui-sref="category({ eventId: partyDashboard.eventId, categoryName: getCategory(todo)})">{{todo.name}} </p>
                         </span>
                             <span flex="5"></span>
                             <span flex="50">
-                                    <p class="textItems" ng-style="setColor(todo)">{{parseDate(todo.duedate)}}</p>
+                                    <p class="textItems" ng-style="setColor(todo)" ui-sref="category({ eventId: partyDashboard.eventId, categoryName: getCategory(todo)})">{{parseDate(todo.duedate)}}</p>
                                 </span>
                         </div>
                             <div>
-                                <p class="textItems" ng-style="setColor(todo)" layout-align="center" ng-if="partyDashboard.selectedTodoId == todo._id">({{getName(todo.assignee)}})</p>
+                                <p class="textItems" ng-style="setColor(todo)" layout-align="center" ng-if="partyDashboard.selectedTodoId == todo._id" ui-sref="category({ eventId: partyDashboard.eventId, categoryName: getCategory(todo)})">({{getName(todo.assignee)}})</p>
                             </div>
                         </div>
                             <md-divider ng-if="!$last"></md-divider>

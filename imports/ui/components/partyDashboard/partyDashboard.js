@@ -35,10 +35,14 @@ class PartyDashboard{
           } else {
               return {color: "#00bcd4"};
           }
+      };
+      
+      $scope.getCategory = function(todo) {
+          return todo.category;
       }
 
     this.eventId = $stateParams.eventId;
-
+    
 
     this.subscribe('events');
     this.subscribe('todos');
@@ -85,6 +89,7 @@ class PartyDashboard{
     deselectTodo(){
         this.selectedTodoId = null;
     }
+   
   logEvent(){
     console.log(this.eventId);
   }
