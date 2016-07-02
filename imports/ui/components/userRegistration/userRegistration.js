@@ -23,7 +23,7 @@ class UserRegistration {
                 firstName: '',
                 lastName: '',
                 color: randCol,
-                paid: false,
+                //paid: false,
                 created: Date.now()
             },      
         };

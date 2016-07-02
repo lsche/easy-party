@@ -51,12 +51,46 @@ class EventList {
         this.helpers({
             creatorEvents() {
                 var currentId = Meteor.userId();
+                Events.find({creator: currentId},{ sort: {createdAt: -1}}).forEach(function(event){
+                    if(event.paid){
+                        Events.update({_id : event._id},
+                            {$set: {
+                                blocked: false}
+                            });
+                    } else{
+                        var nowIs = Date.now();
+                        var createdIs = event.createdAt + 5 * (1000*60*60*24);
+                        if(createdIs < nowIs) {
+                            Events.update({_id : event._id},
+                                {$set: {
+                                    blocked: true}
+                                });
+                        }
+                    }
+                });
                 return Events.find({creator: currentId},{ sort: {createdAt: -1}});
             },
             plannerEvents(){
                 var currentUserMail = Meteor.user();
                 if(currentUserMail){
                     var mail = currentUserMail.emails[0].address;
+                    Events.find({planner: {$elemMatch: {mail: mail}}}, { sort: {createdAt: -1}}).forEach(function(event){
+                        if(event.paid){
+                            Events.update({_id : event._id},
+                                {$set: {
+                                    blocked: false}
+                                });
+                        } else{
+                            var nowIs = Date.now();
+                            var createdIs = event.createdAt + 5 * (1000*60*60*24);
+                            if(createdIs < nowIs) {
+                                Events.update({_id : event._id},
+                                    {$set: {
+                                        blocked: true}
+                                    });
+                            }
+                        }
+                    });
                     return Events.find({planner: {$elemMatch: {mail: mail}}}, { sort: {createdAt: -1}});
                 }
                 return null;
@@ -150,11 +184,17 @@ class EventList {
     submit() {
         this.event.creator = Meteor.user()._id;
         this.event.createdAt = new Date();
+        this.event.paid = false;
+        this.event.blocked = false;
 
         Events.insert(this.event);
 
         this.showAddForm = false;
         this.event = {};
+    }
+
+    showPaymentAlert(){
+        alert('Sorry, your trial version for this event already ended.');
     }
 
     payForAccount() {

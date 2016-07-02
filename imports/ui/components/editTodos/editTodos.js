@@ -42,7 +42,6 @@ class EditTodos {
     }
 
     save(){
-        console.log("save pressed3");
         Todos.update({_id: this.myTask._id},
             {$set:
                     {name: this.myTask.name,

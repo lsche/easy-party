@@ -24,12 +24,12 @@ class EventPayment {
         this.payment = {};
 
         this.helpers({
+            //
             timeLeft() {
-                var currentUserMail = Meteor.user();
-                if(currentUserMail) {
-                    return moment(currentUserMail.profile.created).add(5, 'days').calendar();
-                }
+                return moment(this.myEvent.createdAt).add(5, 'days').calendar();
             },
+            
+            //TODO:  ifdelete not used?!
             ifdelete() {
                 var currentUserMail = Meteor.user();
                 if (currentUserMail) {
@@ -43,11 +43,11 @@ class EventPayment {
                     }
                 }
             },
+
+            //TODO: ifpaid() not used anymore?!
             ifpaid() {
-                var currentUserMail = Meteor.user();
-                if (currentUserMail) {
-                    return currentUserMail.profile.paid;
-                }
+                console.log(this.myEvent.paid);
+                return this.myEvent.paid;
             }
         });
     }
@@ -59,9 +59,7 @@ class EventPayment {
             "cvc": this.payment.cardCVC,
             "exp_month": this.payment.cardExpiryMM,
             "exp_year": this.payment.cardExpiryYY
-        }
-
-
+        };
 
         Stripe.createToken(cardDetails, function(status, result) {
             if (result.error) {
@@ -71,11 +69,8 @@ class EventPayment {
                     if (err) {
                         alert(err.message);
                     } else {
-                        var currentUserMail = Meteor.user();
-                        if (currentUserMail) {
-                            Meteor.users.update({_id: Meteor.userId()}, {$set: {"profile.paid": true}});
-                        }
-                        alert('Thank you! You just got an unlimited access of EasyParty!');
+                        Events.update({_id: this.myEvent._id}, {$set: {"paid": true}});
+                        alert('Thank you! You just got an unlimited access to your event!');
                     }
                 })
             }

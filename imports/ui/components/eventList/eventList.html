@@ -87,7 +87,9 @@
                 <md-list-item class="md-2-line">
                     <div class="md-list-item-text">
                         <div layout="row">
-                            <span flex="70" ui-sref="partyDashboard({ eventId: event._id })"><h3>{{event.name}}</h3>
+                            <span flex="70" ng-hide="event.blocked" ui-sref="partyDashboard({ eventId: event._id })"><h3>{{event.name}}</h3>
+                        <p>{{event.description}}</p></span>
+                            <span flex="70" ng-show="event.blocked" ng-click="eventList.showPaymentAlert()"><h3>{{event.name}}</h3>
                         <p>{{event.description}}</p></span>
                             <span flex="30"><p>{{parseDate(event.event_date)}}</p></span>
                             <span flex="5">
@@ -102,7 +104,9 @@
                 <md-list-item class="md-2-line">
                     <div class="md-list-item-text">
                         <div layout="row">
-                            <span flex="70" ui-sref="partyDashboard({ eventId: event._id })"><h3>{{event.name}}</h3>
+                           <span flex="70" ng-hide="event.blocked" ui-sref="partyDashboard({ eventId: event._id })"><h3>{{event.name}}</h3>
+                        <p>{{event.description}}</p></span>
+                            <span flex="70" ng-show="event.blocked" ng-click="eventList.showPaymentAlert()"><h3>{{event.name}}</h3>
                         <p>{{event.description}}</p></span>
                             <span flex="30"><p>{{parseDate(event.event_date)}}</p></span>
                             <span flex="5">
