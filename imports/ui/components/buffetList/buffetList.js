@@ -20,12 +20,21 @@ class BuffetList {
 
         $reactive(this).attach($scope);
 
+        this.showAddForm = false;
+        this.selectedDishId = null;
+        this.dish = {
+            description: "",
+            cook: "not yet assigned"
+        };
+        this.editDish = {id:"", name:"", cook:"", description:""};
+
         this.subscribe('buffet');
         this.subscribe('dishes');
 
         console.log(this.myEvent);
+     //   this.buffetListId = Buffet.findOne({event: this.myEvent})._id;
 
-      //  this.error = '';
+
 
         this.helpers({
             buffetObject() {
@@ -40,20 +49,83 @@ class BuffetList {
                     console.log(buffetList._id)
                     return Dishes.find({buffetID: buffetList._id});
                 }
-
- 
-
+            console.log(Dishes);
             }
         });
-
-    }
-    save(){
-        this.buffetListId = Buffet.findOne({event: this.myEvent})._id;
-        console.log("save function buffet "+ this.buffetListId);
     }
 
+    openForm(){
+        this.selectedDishId = null;
+        if (this.showAddForm){
+            this.dish = {};
+            this.showAddForm = false;
+        } else {
+            this.showAddForm = true;
+        }
+    }
 
+    selectDish(dish){
+        this.selectedDishId = dish._id;
+    }
+    deselectDish(){
+        this.selectedDishId = null;
+    }
 
+    submit(){
+        this.dish.buffetID = this.buffetListId;
+        if (this.dish.description == ""){
+            this.dish.description = "Add some text here..."
+        }
+        if (!(this.dish.name == "")){
+            Dishes.insert(this.dish);
+            console.log("dish inserted");
+        } else {}
+        this.dish = {};
+        this.showAddForm = false;
+
+    }
+    deleteDish(dish){
+        Dishes.remove(dish._id);
+    }
+    editDishName(dish){
+        this.editDish.id = dish._id;
+        this.editDish.name = dish.name;
+        this.editDish.cook = "";
+        this.editDish.description = "";
+    }
+    editDishCook(dish){
+        this.editDish.id = dish._id;
+        this.editDish.name = "";
+        this.editDish.cook = dish.cook;
+        this.editDish.description = "";
+    }
+    editDishDescription(dish){
+        this.editDish.id = dish._id;
+        this.editDish.name = "";
+        this.editDish.cook = "";
+        this.editDish.description = dish.description;
+    }
+    saveDishName(){
+        Dishes.update({_id: this.editDish.id},
+            {$set: {
+                name: this.editDish.name}
+            });
+        this.editDish = {id:"", name:"", cook:"", description:""};
+    }
+    saveDishCook(){
+        Dishes.update({_id: this.editDish.id},
+            {$set: {
+                cook: this.editDish.cook}
+            });
+        this.editDish = {id:"", name:"", cook:"", description:""};
+    }
+    saveDishDescription(){
+        Dishes.update({_id: this.editDish.id},
+            {$set: {
+                description: this.editDish.description}
+            });
+        this.editDish = {id:"", name:"", cook:"", description:""};
+    }
 }
 
 const name = 'buffetList';

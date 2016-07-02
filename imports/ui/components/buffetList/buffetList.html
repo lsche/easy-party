@@ -1,13 +1,11 @@
-<md-content class="buffet" md-whiteframe="3">
+<md-content class="buffet">
     <form name="buffetDescriptionForm" layout="column" layout-fill layout-padding layout-margin>
         <div flex aria-label="description">
             <p> {{buffetList.buffetObject.description}}</p>
         </div>
-
-        <md-button ng-click="buffetList.save()">Save</md-button>
     </form>
 
-    <md-list>
+    <md-list md-whiteframe="3">
         <md-subheader class="md-sticky">
             <div layout="column">
                 <div layout="row">
@@ -93,8 +91,6 @@
                 <md-divider ng-if="!$last"></md-divider>
             </md-list-item>
         </div>
-
     </md-list>
-
 </md-content>
 
