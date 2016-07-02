@@ -38,6 +38,11 @@ class EventList {
         this.payment = {};
         this.event.planner = [];
         this.$state = $state;
+        this.selectedItem = {mail:""};
+        this.selectedItem2 = {mail: ""};
+        this.selectedItem3 = {mail: ""};
+        this.selectedItem4 = {mail: ""};
+
         
         this.subscribe('events');
         this.subscribe('users');
@@ -98,7 +103,6 @@ class EventList {
         });
 
         self.simulateQuery = false;
-        self.isDisabled    = false;
         //self.repos         = loadAll();
         self.querySearch   = querySearch;
         self.selectedItemChange = selectedItemChange;
@@ -157,6 +161,10 @@ class EventList {
         }
     }
     submit() {
+        this.event.planner[0] = this.selectedItem;
+        this.event.planner[1] = this.selectedItem2;
+        this.event.planner[2] = this.selectedItem3;
+        this.event.planner[3] = this.selectedItem4;
         this.event.creator = Meteor.user()._id;
         this.event.createdAt = new Date();
         this.event.paid = false;
@@ -166,6 +174,10 @@ class EventList {
 
         this.showAddForm = false;
         this.event = {};
+        this.selectedItem = {mail:""};
+        this.selectedItem2 = {mail: ""};
+        this.selectedItem3 = {mail: ""};
+        this.selectedItem4 = {mail: ""};
     }
 
     showPaymentAlert(){

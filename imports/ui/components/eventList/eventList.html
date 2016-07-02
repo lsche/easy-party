@@ -25,22 +25,6 @@
                         <input type="text" ng-model="eventList.event.description"/>
                     </md-input-container>
 
-                    <!--<md-autocomplete
-                            ng-disabled="eventList.isDisabled"
-                            md-no-cache="eventList.noCache"
-                            md-selected-item="eventList.selectedItem"
-                            md-search-text-change="eventList.searchTextChange(eventList.searchText)"
-                            md-search-text="eventList.searchText"
-                            md-selected-item-change="eventList.selectedItemChange(item)" md-items="item in eventList.querySearch(eventList.searchText)"
-                            md-item-text="item.value"
-                            md-min-length="3"
-                            md-floating-label="Type in a mail address"
-                            md-menu-class="autocomplete-custom-template">
-                        <md-item-template>
-                            <span md-highlight-text="eventList.searchText" class="item-title">{{item.name}}</span>
-                            <span class="item-metadata">{{item.value}}</span>
-                        </md-item-template>
-                    </md-autocomplete>-->
                 </div>
 
                 <div layout="row" layout-padding>
@@ -54,28 +38,69 @@
                         </md-select>
                     </md-input-container>
                     <div layout="column" layout-padding>
-                        <md-input-container ng-if="$scope.plannerNumber > 0">
-                            <label>
-                                Helper 1:
-                            </label>
-                            <input type="email" ng-model="eventList.event.planner[0].mail"/>
-                        </md-input-container>
-                        <md-input-container ng-if="$scope.plannerNumber > 1">
-                            <label>
-                                Helper 2:
-                            </label>
-                            <input type="email" ng-model="eventList.event.planner[1].mail"/>
-                        </md-input-container><md-input-container ng-if="$scope.plannerNumber > 2">
-                        <label>
-                            Helper 3:
-                        </label>
-                        <input type="email" ng-model="eventList.event.planner[2].mail"/>
-                    </md-input-container><md-input-container ng-if="$scope.plannerNumber > 3">
-                        <label>
-                            Helper 4:
-                        </label>
-                        <input type="email" ng-model="eventList.event.planner[3].mail"/>
-                    </md-input-container>
+                        <md-autocomplete ng-if="$scope.plannerNumber > 0"
+                                md-selected-item="eventList.selectedItem"
+                                md-search-text-change="eventList.searchTextChange(eventList.searchText)"
+                                md-search-text="eventList.searchText"
+                                md-selected-item-change="eventList.selectedItemChange(item)" md-items="item in eventList.querySearch(eventList.searchText)"
+                                md-item-text="item.value"
+                                md-min-length="3"
+                                md-floating-label="Type in a mail address"
+                                md-menu-class="autocomplete-custom-template">
+                            <md-item-template>
+                                <span md-highlight-text="eventList.searchText" class="item-title">{{item.name}}</span>
+                                <span class="item-metadata">{{item.value}}</span>
+                            </md-item-template>
+                        </md-autocomplete>
+                        <md-autocomplete ng-if="$scope.plannerNumber > 1"
+                                md-selected-item="eventList.selectedItem2"
+                                md-search-text-change="eventList.searchTextChange(eventList.searchText2)"
+                                md-search-text="eventList.searchText2"
+                                md-selected-item-change="eventList.selectedItemChange(item)"
+                                md-items="item in eventList.querySearch(eventList.searchText2)"
+                                md-item-text="item.value"
+                                md-min-length="3"
+                                md-floating-label="Type in a mail address"
+                                md-menu-class="autocomplete-custom-template">
+                            <md-item-template>
+                                <span md-highlight-text="eventList.searchText2" class="item-title">{{item.name}}</span>
+                                <span class="item-metadata">{{item.value}}</span>
+                            </md-item-template>
+                        </md-autocomplete>
+                        <md-autocomplete ng-if="$scope.plannerNumber > 2"
+                                         md-selected-item="eventList.selectedItem3"
+                                         md-search-text-change="eventList.searchTextChange(eventList.searchText3)"
+                                         md-search-text="eventList.searchText3"
+                                         md-selected-item-change="eventList.selectedItemChange(item)"
+                                         md-items="item in eventList.querySearch(eventList.searchText3)"
+                                         md-item-text="item.value"
+                                         md-min-length="3"
+                                         md-floating-label="Type in a mail address"
+                                         md-menu-class="autocomplete-custom-template">
+                            <md-item-template>
+                                <span md-highlight-text="eventList.searchText2" class="item-title">{{item.name}}</span>
+                                <span class="item-metadata">{{item.value}}</span>
+                            </md-item-template>
+                        </md-autocomplete>
+                        <md-autocomplete ng-if="$scope.plannerNumber > 3"
+                                         md-selected-item="eventList.selectedItem4"
+                                         md-search-text-change="eventList.searchTextChange(eventList.searchText4)"
+                                         md-search-text="eventList.searchText4"
+                                         md-selected-item-change="eventList.selectedItemChange(item)"
+                                         md-items="item in eventList.querySearch(eventList.searchText4)"
+                                         md-item-text="item.value"
+                                         md-min-length="3"
+                                         md-floating-label="Type in a mail address"
+                                         md-menu-class="autocomplete-custom-template">
+                            <md-item-template>
+                                <span md-highlight-text="eventList.searchText2" class="item-title">{{item.name}}</span>
+                                <span class="item-metadata">{{item.value}}</span>
+                            </md-item-template>
+                        </md-autocomplete>
+
+
+
+
                     </div>
                 </div>
                 <div layout="row" flex >
