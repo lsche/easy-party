@@ -68,7 +68,7 @@ class PartyDashboard{
         var upcomingTodos = Todos.find({event_Id: this.eventId, done:false} , {sort: {duedate: 1}});
         return upcomingTodos;
       },
-       
+        
       users() {
         return Meteor.users.find({});
       },
@@ -78,6 +78,13 @@ class PartyDashboard{
     });
   }
 
+    selectTodo(todo){
+        this.selectedTodoId = todo._id;
+    }
+
+    deselectTodo(){
+        this.selectedTodoId = null;
+    }
   logEvent(){
     console.log(this.eventId);
   }

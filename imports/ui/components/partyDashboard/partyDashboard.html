@@ -85,21 +85,21 @@
                 <div class="todo" md-whiteframe="2">
                     <md-list>
                         <h5 class="textItems">Upcoming To-Dos</h5>
-                        <md-list-item ng-repeat="todo in partyDashboard.upcomingTodos|limitTo:5">
-                            <div layout="row">
-                        <span flex="30" >
+                        <md-list-item ng-repeat="todo in partyDashboard.upcomingTodos|limitTo:5" ng-mouseover="partyDashboard.selectTodo(todo)" ng-mouseleave="partyDashboard.deselectTodo()">
+                        <div flex>
+                            <div layout="row" flex>
+                        <span flex="50" >
                             <p class="textItems" ng-style="setColor(todo)">{{todo.name}} </p>
                         </span>
-                                </div>
-                            <div layout="row">
-                             <span flex="30"  layout-align="start center">
-                                <p class="textItems" ng-style="setColor(todo)">({{getName(todo.assignee)}})</p>
-                                </span>
                             <span flex="5"></span>
-                            <span flex="30">
+                            <span flex="50">
                                     <p class="textItems" ng-style="setColor(todo)">{{parseDate(todo.duedate)}}</p>
                                 </span>
+                        </div>
+                            <div>
+                                <p class="textItems" ng-style="setColor(todo)" layout-align="center" ng-if="partyDashboard.selectedTodoId == todo._id">({{getName(todo.assignee)}})</p>
                             </div>
+                        </div>
                             <md-divider></md-divider>
                           </md-list-item>
 
