@@ -22,32 +22,12 @@ class EventPayment {
 
         this.error = '';
         this.payment = {};
+        Session.set('EventID', this.myEvent._id);
 
         this.helpers({
             //
             timeLeft() {
                 return moment(this.myEvent.createdAt).add(5, 'days').calendar();
-            },
-            
-            //TODO:  ifdelete not used?!
-            ifdelete() {
-                var currentUserMail = Meteor.user();
-                if (currentUserMail) {
-                    var nowIs = Date.now();
-                    var createdIs = currentUserMail.profile.created + 5 * (1000*60*60*24);
-
-                    if ((createdIs < nowIs) && (currentUserMail.profile.paid == false)) {
-                        alert('Your trial version already ended and we did not receive any payment from you. Your account will be deleted!');
-                        Meteor.users.remove({_id:Meteor.userId()});
-                        this.$state.go('start');
-                    }
-                }
-            },
-
-            //TODO: ifpaid() not used anymore?!
-            ifpaid() {
-                console.log(this.myEvent.paid);
-                return this.myEvent.paid;
             }
         });
     }
@@ -69,12 +49,17 @@ class EventPayment {
                     if (err) {
                         alert(err.message);
                     } else {
-                        Events.update({_id: this.myEvent._id}, {$set: {"paid": true}});
+                        console.log("EventID" + Session.get('EventID'));
+                        Events.update({_id: Session.get('EventID')}, {$set: {"paid": true}});
                         alert('Thank you! You just got an unlimited access to your event!');
                     }
                 })
             }
         })
+
+        if(this.done) {
+            this.done();
+        }
 
     }
 
