@@ -21,6 +21,8 @@ class UserAuth {
 
         this.$state = $state;
 
+        console.log(this.$state);
+
         $reactive(this).attach($scope);
 
         this.$mdDialog = $mdDialog;
