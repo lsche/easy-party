@@ -44,7 +44,7 @@
                     </label>
                     <textarea type="number" name="addNumber" placeholder="1" ng-model="eventGuestList.guest.number" ></textarea>
                     <div ng-messages="addForm.addNumber.$error">
-                        <div ng-message="required">Please enter a valid number!</div>
+                        <div ng-message="required, number">Please enter a valid number!</div>
                     </div>
                 </md-input-container>
                 <div class="md-block" flex="5"></div>
@@ -89,7 +89,7 @@
                              <form class="textItems" name="editNumForm" ng-show="(guest._id == eventGuestList.editGuest.id) && !(eventGuestList.editGuest.number == '')" ng-submit="eventGuestList.saveGuestNumber()" >
                                 <input type="number" placeholder={{eventGuestList.editGuest.number}} ng-model="eventGuestList.editGuest.number" name="editNumber" required/>
                                  <div ng-messages="editNumForm.editNumber.$error" class="validation-messages">
-                                     <div ng-message="required">Please enter a valid number!</div>
+                                     <div ng-message="required, number">Please enter a valid number!</div>
                                 </div>
                             </form>
                         </span>

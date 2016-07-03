@@ -5,35 +5,45 @@
             <label>
                 First Name
             </label>
-            <input type="text" ng-model="userRegistration.credentials.profile.firstName" placeholder="First Name" aria-label="firstName" required/>
+            <input type="text" ng-model="userRegistration.credentials.profile.firstName" placeholder="First Name" aria-label="firstName" name="addFirstName" required/>
+            <div ng-messages="registerForm.addFirstName.$error">
+                <div ng-message="required">Please enter your first name!</div>
+            </div>
         </md-input-container>
         <md-input-container >
             <label>
                 Last Name
             </label>
-            <input type="text" ng-model="userRegistration.credentials.profile.lastName" placeholder="Last Name" aria-label="lastName" required/>
+            <input type="text" ng-model="userRegistration.credentials.profile.lastName" placeholder="Last Name" aria-label="lastName" name="addLastName" required/>
+            <div ng-messages="registerForm.addLastName.$error">
+                <div ng-message="required">Please enter your last name!</div>
+            </div>
         </md-input-container>
         
         <md-input-container >
             <label>
                 Email
             </label>
-            <input type="email" ng-model="userRegistration.credentials.email" placeholder="E-Mail" aria-label="email" required/>
+            <input type="email" ng-model="userRegistration.credentials.email" placeholder="E-Mail" aria-label="email" name="mail" required/>
+            <div ng-messages="registerForm.mail.$error">
+                <div ng-message="required, email">Please enter a valid e-mail address!</div>
+            </div>
         </md-input-container>
         <md-input-container >
             <label>
                 Password
             </label>
-            <input type="password" ng-model="userRegistration.credentials.password" placeholder="Password" aria-label="password" required/>
+            <input type="password" ng-model="userRegistration.credentials.password" placeholder="Password" aria-label="password" name="valPW" ng-minlength="6" required/>
+            <div ng-messages="registerForm.addLastName.$error">
+                <div ng-message="required, minlength">Please enter a password that has at least six characters!</div>
+            </div>
         </md-input-container>
         <div layout="row" layout-align="end center">
-            <md-button class="md-raised md-primary" ng-click="userRegistration.register()" aria-label="login" ng-disabled="userRegistration.registerForm.$invalid()">Register</md-button>
+            <md-button class="md-raised md-primary" ng-click="userRegistration.register()" aria-label="login" ng-disabled="registerForm.$invalid">Register</md-button>
         </div>
     </form>
 
-    <md-toolbar ng-show="userRegistration.error" class="md-warn" layout="row" layout-fill layout-padding layout-margin>
-        <p class="md-body-1">{{ userRegistration.error }}</p>
-    </md-toolbar>
+
 
    <!-- <md-divider></md-divider>
     Already a user? - button (missing)
