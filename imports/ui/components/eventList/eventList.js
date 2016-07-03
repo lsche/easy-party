@@ -39,6 +39,7 @@ class EventList {
         this.payment = {};
         this.event.planner = [];
         this.$state = $state;
+        this.selectedEventID = "";
 
 
         
@@ -150,6 +151,15 @@ class EventList {
         }
     }
     minDate = new Date();
+
+    selectEvent(event){
+        this.selectedEventID = event._id;
+    }
+
+    deselectEvent(){
+        this.selectedEventID = "";
+    }
+
     openForm() {
         if(this.showAddForm) {
             this.event= {};
