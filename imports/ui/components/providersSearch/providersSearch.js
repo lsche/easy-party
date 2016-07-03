@@ -13,10 +13,12 @@ import { name as PartyImage } from '../partyImage/partyImage';
 
 
 class ProvidersSearch {
-  constructor($stateParams, $scope, $reactive) {
+  constructor($stateParams, $scope, $reactive, $mdToast) {
     'ngInject';
     'mdDateTime';
-    
+
+      this.$mdToast = $mdToast;
+
     $reactive(this).attach($scope);
 
         this.sort = '';
@@ -139,6 +141,13 @@ class ProvidersSearch {
         }
         this.note.description = customAbout;
         Notes.insert(this.note);
+
+        this.$mdToast.show(
+            this.$mdToast.simple()
+                .textContent('Successfully saved in your event!')
+                .position('right bottom')
+                .hideDelay(3000)
+        );
     }
 
 
