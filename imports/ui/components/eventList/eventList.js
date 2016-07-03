@@ -39,10 +39,7 @@ class EventList {
         this.payment = {};
         this.event.planner = [];
         this.$state = $state;
-        this.selectedItem = {};
-        this.selectedItem2 = {};
-        this.selectedItem3 = {};
-        this.selectedItem4 = {};
+
 
         
         this.subscribe('events');
@@ -184,10 +181,10 @@ class EventList {
 
         this.showAddForm = false;
         this.event = {};
-        this.selectedItem = {};
-        this.selectedItem2 = {};
-        this.selectedItem3 = {};
-        this.selectedItem4 = {};
+        this.selectedItem = null;
+        this.selectedItem2 = null;
+        this.selectedItem3 = null;
+        this.selectedItem4 = null;
     }
 
     showDeleteConfirm(triggerEvent, event){
@@ -243,7 +240,7 @@ class EventList {
             controllerAs: 'editEventModal',
             template: modalEditTemplate,
             parent: angular.element(document.body),
-            clickOutsideToClose: true,
+            clickOutsideToClose: false,
             fullscreen: this.$mdMedia('sm') || this.$mdMedia('xs')
         });
     }
