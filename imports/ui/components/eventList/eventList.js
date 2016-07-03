@@ -1,5 +1,3 @@
-// Karin - backend for content of start page
-
 import angular from 'angular';
 import angularMeteor from 'angular-meteor';
 import uiRouter from 'angular-ui-router';
@@ -11,6 +9,7 @@ import template from './eventList.html';
 import modalPaymentTemplate from './paymentModal.html';
 
 import { Events } from '../../../api/events';
+import { Buffet } from '../../../api/buffet';
 import { Meteor } from 'meteor/meteor';
 
 import {name as EventPayment} from '../eventPayment/eventPayment';
@@ -170,7 +169,16 @@ class EventList {
         this.event.paid = false;
         this.event.blocked = false;
 
-        Events.insert(this.event);
+        Events.insert(this.event, function (error, result) {
+            if (result){
+                Buffet.insert({description: "Type in your description here", event: result});
+                console.log(result);
+                var test = Buffet.findOne({event: result});
+                console.log(test);
+            }
+        });
+
+
 
         this.showAddForm = false;
         this.event = {};

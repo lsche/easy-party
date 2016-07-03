@@ -1,0 +1,90 @@
+<md-content class="buffetGuest">
+    <md-list>
+        <md-subheader>
+            <div layout="column">
+                <div layout="row">
+                    <span flex="5"></span>
+                    <span flex="75" align="center"><h2>Dish List</h2></span>
+                    <p class="textItems3">{{buffetListGuest.buffetObject.description}}</p>
+                </div>
+                <div layout="row">
+                    <span flex="10"></span>
+                    <span flex="30">
+                        <p>Dish</p>
+                    </span>
+                    <span flex="20" align="center">
+                        <p>Cook</p>
+                    </span>
+                    <span flex></span>
+                    <span  flex-initial="11">
+                        <md-button ng-hide="buffetListGuest.showAddForm" class="material-icons md-fab md-mini addDish"
+                                   ng-click="buffetListGuest.openForm()"> add</md-button>
+                        <md-button ng-show="buffetListGuest.showAddForm" class="material-icons md-fab md-mini addDish"
+                                   ng-click="buffetListGuest.openForm()"> close</md-button>
+                    </span>
+                </div>
+            </div>
+        </md-subheader>
+
+        <form ng-if="buffetListGuest.showAddForm" md-whiteframe>
+            <div layout="row">
+                <md-input-container class="md-block" flex="40">
+                    <label>Dish:</label>
+                    <input type="text" ng-model="buffetListGuest.dish.name"/>
+                </md-input-container>
+                <div class="md-block" flex="10"></div>
+                <md-input-container class="md-block" flex="40">
+                    <label>Cook:</label>
+                    <input type="text" placeholder="Not yet assigned" ng-model="buffetListGuest.dish.cook"/>
+                </md-input-container>
+            </div>
+            <div layout="row">
+                <md-input-container class="md-block" flex="65">
+                    <label>Additional Text:</label>
+                    <textarea type="text" placeholder="Add some additional text here" ng-model="buffetListGuest.dish.description"></textarea>
+                </md-input-container>
+            </div>
+            <div layout="row">
+                <md-button flex="100" align="center" ng-click="buffetListGuest.submit()" class="md-raised add">Add Dish</md-button>
+            </div>
+        </form>
+
+        <div flex class="listItems" aria-label="dishes">
+            <md-list-item class="md-2-line" ng-repeat="dish in buffetListGuest.dishList"
+                          ng-mouseover="buffetListGuest.selectDish(dish)" ng-mouseleave="buffetListGuest.deselectDish()">
+                <div class="md-list-item-text">
+                    <div layout="row" class="rows">
+                        <span flex="10"></span>
+                        <div flex="30">
+                            <h3 class="textItems" ng-hide="(dish._id == buffetListGuest.editDish.id) &&
+                            !(buffetListGuest.editDish.name == '') " ng-click="buffetListGuest.editDishName(dish)" > {{dish.name}}</h3>
+                            <form class="textItems" ng-show="(dish._id == buffetListGuest.editDish.id) &&
+                            !(buffetListGuest.editDish.name == '')" ng-submit="buffetListGuest.saveDishName()" >
+                                <input type="text" placeholder={{buffetListGuest.editDish.name}} ng-model="buffetListGuest.editDish.name" required/>
+                            </form>
+                        </div>
+                        <span flex="5"></span>
+                        <span flex="30">
+                            <p class="textItems" ng-hide="(dish._id == buffetListGuest.editDish.id) &&
+                            !(buffetListGuest.editDish.cook == '') " ng-click="buffetListGuest.editDishCook(dish)" > {{dish.cook}}</p>
+                            <form class="textItems" ng-show="(dish._id == buffetListGuest.editDish.id) &&
+                            !(buffetList.editDish.cook == '')" ng-submit="buffetListGuest.saveDishCook()" >
+                                <input type="text" placeholder={{buffetListGuest.editDish.cook}} ng-model="buffetListGuest.editDish.cook"/>
+                            </form>
+                        </span>
+                    </div>
+                    <div>
+                        <p class="description" ng-if="buffetListGuest.selectedDishId == dish._id" ng-hide="(dish._id == buffetListGuest.editDish.id)
+                        && !(buffetListGuest.editDish.description == '')" ng-click="buffetListGuest.editDishDescription(dish)"> {{dish.description}}</p>
+                        <form class="description" ng-if="buffetListGuest.selectedDishId == dish._id" ng-show="(dish._id == buffetListGuest.editDish.id)
+                        && !(buffetListGuest.editDish.description == '')" ng-submit="buffetListGuest.saveDishDescription()" >
+                            <input class="description" type="text" placeholder={{buffetListGuest.editDish.description}} ng-model="buffetListGuest.editDish.description"/>
+                        </form>
+                    </div>
+                </div>
+                <md-divider ng-if="!$last"></md-divider>
+            </md-list-item>
+        </div>
+
+    </md-list>
+</md-content>
