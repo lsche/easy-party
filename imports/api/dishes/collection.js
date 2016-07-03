@@ -2,6 +2,8 @@ import { Mongo } from 'meteor/mongo';
 
 export const Dishes = new Mongo.Collection('dishes');
 
+// Attributes for dishes: ID, name, cook, description
+
 Dishes.allow({
   insert() {
     return true;
@@ -9,7 +11,7 @@ Dishes.allow({
   update() {
     return true;
   },
-  remove(){
-    return true;
+  remove(userId){
+    return userId;
   }
 });

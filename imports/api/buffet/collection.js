@@ -2,14 +2,16 @@ import { Mongo } from 'meteor/mongo';
 
 export const Buffet = new Mongo.Collection('buffet');
 
+//Attributes for buffet: ID, description, url
+
 Buffet.allow({
-  insert() {
-    return true;
+  insert(userId) {
+    return userId;
   },
-  update() {
-    return true;
+  update(userId) {
+    return userId;
   },
-  remove(){
-    return true;
+  remove(userId){
+    return userId;
   }
 });

@@ -21,14 +21,19 @@
         <!--<h1> {{partyCategory.category}} </h1>-->
         <event-guest-list class = "guest-category" my-attr="partyCategory.eventId" my-category="partyCategory.categoryName"></event-guest-list>
     </div>
-    <div flex="60" ng-if="partyCategory.category != 'Guests'">
+    <div flex="60" ng-if="(partyCategory.category != 'Guests') && (partyCategory.category != 'Finance')">
         <party-todos my-attr="partyCategory.eventId" my-category="partyCategory.categoryName"></party-todos>
         <party-comment my-attr="partyCategory.eventId" my-category="partyCategory.categoryName"></party-comment>
     </div>
-    <party-notes ng-if="partyCategory.category != 'Guests'" flex="30" my-attr="partyCategory.eventId" my-category="partyCategory.categoryName"></party-notes>
+    <party-notes ng-if="(partyCategory.category != 'Guests') && (partyCategory.category != 'Finance')" flex="30" my-attr="partyCategory.eventId" my-category="partyCategory.categoryName"></party-notes>
     <div flex="30" ng-if="partyCategory.category == 'Guests'">
         <pie-chart my-attr="partyCategory.eventId"></pie-chart>
     </div>
+    <div ng-if="(partyCategory.category == 'Finance')" class="financelayout">
+        <h2>Keep track of your Finances!</h2>
+        <h3> Coming soon!</h3>
+    </div>
+
 
 </div>
 
