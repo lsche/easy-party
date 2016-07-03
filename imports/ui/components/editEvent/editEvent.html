@@ -6,14 +6,16 @@
                 <label>
                     Event Title
                 </label>
-                <input type="text" ng-model="editEvent.editEvent.name"/>
-
+                <input type="text" ng-model="editEvent.editEvent.name" name="addName" required/>
+                <div ng-messages="editForm.addName.$error">
+                    <div ng-message="required">Please enter a Name!</div>
+                </div>
             </md-input-container>
 
             <span flex="20"></span>
             <md-content flex="40">
                 <label><strong></strong></label>
-                <md-datepicker ng-model="editEvent.editEvent.event_date" flex style="width: 20px"></md-datepicker>
+                <md-datepicker ng-model="editEvent.editEvent.event_date" flex style="width: 20px" md-min-date="editEvent.minDate"></md-datepicker>
             </md-content>
         </div>
         <md-input-container >
@@ -49,7 +51,7 @@
         <a ng-if="!(editEvent.showHelperAddForm) && (editEvent.editEvent.planner[3] == null)" ng-click="editEvent.addHelper()" >Add a helper</a>
 
         <div layout="row" layout-align="end center">
-            <md-button class="md-raised md-primary" ng-click="editEvent.save()" >Save</md-button>
+            <md-button class="md-raised md-primary" ng-click="editEvent.save()" ng-disabled="editForm.$invalid">Save</md-button>
         </div>
     </form>
 

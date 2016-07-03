@@ -90,7 +90,7 @@ class EditEvent {
     addHelper(){
         this.showHelperAddForm = true;
     }
-
+    minDate = new Date();
     save() {
         // add selectedItem to editEvent.planner
         if(this.selectedItem != null){

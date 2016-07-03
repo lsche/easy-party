@@ -11,9 +11,9 @@
                     <label>
                         Email
                     </label>
-                    <input type="text" ng-model="userLogin.credentials.email" aria-label="email" name="addMail" required/>
+                    <input type="email" ng-model="userLogin.credentials.email" aria-label="email" name="addMail" required/>
                     <div ng-messages="loginForm.addMail.$error">
-                        <div ng-message="required">Please enter your e-mail address!</div>
+                        <div ng-message="required, email">Please enter your e-mail address!</div>
                     </div>
                 </md-input-container>
                 <md-input-container>

@@ -58,7 +58,7 @@ class PartyDashboard{
       procent() {
         var allTodos = Todos.find({event_Id: this.eventId}).count();
         if (allTodos == 0) {
-          return 0;
+          return 100;
         } else {
           var allDoneTodos = Todos.find({event_Id: this.eventId, done: false}).count();
           var f = Math.ceil( allDoneTodos / allTodos * 100);
