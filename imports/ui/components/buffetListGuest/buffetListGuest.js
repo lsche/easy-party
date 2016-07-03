@@ -15,7 +15,7 @@ class BuffetListGuest{
 
 
         this.eventId = $stateParams.eventId;
-        this.buffetID = $stateParams.buffetID;
+        this.buffetId = $stateParams.buffetId;
 
         $reactive(this).attach($scope);
         this.$state = $state;
@@ -35,11 +35,11 @@ class BuffetListGuest{
 
         this.helpers({
             buffetObject() {
-                return Buffet.findOne({event: this.myEvent});
+                return Buffet.findOne({event: this.eventId});
 
             },
             dishList(){
-                var buffetList = Buffet.findOne({event: this.myEvent});
+                var buffetList = Buffet.findOne({event: this.eventId});
                 if(buffetList){
                     return Dishes.find({buffetID: buffetList._id});
                 }
@@ -65,7 +65,7 @@ class BuffetListGuest{
     }
 
     submit(){
-        var buffetList = Buffet.findOne({event: this.myEvent});
+        var buffetList = Buffet.findOne({event: this.eventId});
         if(buffetList)
         {
             this.dish.buffetID = buffetList._id;
@@ -82,9 +82,6 @@ class BuffetListGuest{
         this.dish = {cook: "", description: ""};
         this.showAddForm = false;
 
-    }
-    deleteDish(dish){
-        Dishes.remove(dish._id);
     }
     editDishName(dish){
         this.editDish.id = dish._id;
@@ -133,13 +130,11 @@ const name = 'buffetListGuest';
 
 export default angular.module(name, [
         angularMeteor,
-        uiRouter
+        uiRouter,
+        'ngMessages'
     ])
     .component(name, {
         template,
-        bindings: {
-            myEvent: '='
-        },
         controllerAs: name,
         controller: BuffetListGuest
     })
@@ -151,7 +146,7 @@ function config($stateProvider) {
 
     $stateProvider
         .state('buffetListGuest', {
-        url: '/:eventId/:buffetID',
+        url: '/:eventId/:buffetId',
             template: '<buffet-list-guest></buffet-list-guest>'
         })
 }
