@@ -36,10 +36,6 @@ class BuffetList {
         this.subscribe('buffet');
         this.subscribe('dishes');
 
-        console.log(this.myEvent);
-
-
-
         this.helpers({
             buffetObject() {
                 return Buffet.findOne({event: this.myEvent});
@@ -48,8 +44,6 @@ class BuffetList {
             dishList(){
                 var buffetList = Buffet.findOne({event: this.myEvent});
                 if(buffetList){
-                    console.log(buffetList);
-                    console.log(buffetList._id);
                     return Dishes.find({buffetID: buffetList._id});
                 }
             }
@@ -81,16 +75,12 @@ class BuffetList {
         }
         if (!(this.dish.name == "")){
             if (this.dish.cook == ""){
-                console.log("set cook");
                 this.dish.cook = "Not yet assigned";
             }
             if (this.dish.description == ""){
-                console.log("set description");
                 this.dish.description = "Add some additional text here";
             }
             Dishes.insert(this.dish);
-            console.log("dish inserted");
-            console.log(this.dish);
         } else {}
         this.dish = {cook: "", description: ""};
         this.showAddForm = false;
@@ -169,7 +159,6 @@ class BuffetList {
 
 const name = 'buffetList';
 
-// create a module
 export default angular.module(name, [
         angularMeteor,
         uiRouter

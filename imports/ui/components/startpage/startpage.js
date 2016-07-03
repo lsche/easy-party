@@ -12,6 +12,7 @@ import { name as PartyCategory } from '../partyCategory/partyCategory';
 import { name as Navigation } from '../navigation/navigation';
 import { name as UserAuth} from '../userAuth/userAuth';
 import { name as PartyDashboard} from '../partyDashboard/partyDashboard';
+import { name as BuffetListGuest} from '../buffetListGuest/buffetListGuest';
 
 class Startpage {}
 
@@ -28,6 +29,7 @@ export default angular.module(name, [
   UserAuth,
   PartyCategory,
   PartyDashboard,
+  BuffetListGuest,
   'accounts.ui'   // Karin: user accounts - delete if not necessary!!
 ]).component(name, {
   template,

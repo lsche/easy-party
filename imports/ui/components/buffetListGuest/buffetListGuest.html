@@ -68,7 +68,7 @@
                             <p class="textItems" ng-hide="(dish._id == buffetListGuest.editDish.id) &&
                             !(buffetListGuest.editDish.cook == '') " ng-click="buffetListGuest.editDishCook(dish)" > {{dish.cook}}</p>
                             <form class="textItems" ng-show="(dish._id == buffetListGuest.editDish.id) &&
-                            !(buffetList.editDishGuest.cook == '')" ng-submit="buffetListGuest.saveDishCook()" >
+                            !(buffetList.editDish.cook == '')" ng-submit="buffetListGuest.saveDishCook()" >
                                 <input type="text" placeholder={{buffetListGuest.editDish.cook}} ng-model="buffetListGuest.editDish.cook"/>
                             </form>
                         </span>

@@ -10,7 +10,7 @@ import { Dishes } from '../../../api/dishes';
 import { Buffet } from '../../../api/buffet';
 
 class BuffetListGuest{
-    constructor($scope, $reactive, $stateParams) {
+    constructor($scope, $reactive, $stateParams, $state) {
         'ngInject';
 
 
@@ -18,6 +18,7 @@ class BuffetListGuest{
         this.buffetID = $stateParams.buffetID;
 
         $reactive(this).attach($scope);
+        this.$state = $state;
         
 
         this.showAddForm = false;
@@ -32,8 +33,6 @@ class BuffetListGuest{
         this.subscribe('buffet');
         this.subscribe('dishes');
 
-        console.log(this.myEvent);
-
         this.helpers({
             buffetObject() {
                 return Buffet.findOne({event: this.myEvent});
@@ -42,8 +41,6 @@ class BuffetListGuest{
             dishList(){
                 var buffetList = Buffet.findOne({event: this.myEvent});
                 if(buffetList){
-                    console.log(buffetList);
-                    console.log(buffetList._id);
                     return Dishes.find({buffetID: buffetList._id});
                 }
             }
@@ -75,16 +72,12 @@ class BuffetListGuest{
         }
         if (!(this.dish.name == "")){
             if (this.dish.cook == ""){
-                console.log("set cook");
                 this.dish.cook = "Not yet assigned";
             }
             if (this.dish.description == ""){
-                console.log("set description");
                 this.dish.description = "Add some additional text here";
             }
             Dishes.insert(this.dish);
-            console.log("dish inserted");
-            console.log(this.dish);
         } else {}
         this.dish = {cook: "", description: ""};
         this.showAddForm = false;
@@ -138,7 +131,6 @@ class BuffetListGuest{
 
 const name = 'buffetListGuest';
 
-
 export default angular.module(name, [
         angularMeteor,
         uiRouter
@@ -157,21 +149,10 @@ export default angular.module(name, [
 function config($stateProvider) {
     'ngInject';
 
-    $stateProvider.state('buffetListGuest', {
-     //   url: '/:eventId/:buffetID',
-        url: 'http://localhost:3000/3Qgse3ywuBfuQQTfj/eRN8TmremLKcZyh4Y',
-        template: '<buffetListGuest></buffetListGuest>'
- /*       resolve: {
-            currentUser($q) {
-                if (Meteor.userId() === null) {
-                    return $q.reject('AUTH_REQUIRED');
-                } else {
-                    return $q.resolve();
-                }
-            }
-        }*/
-    });
-
-
+    $stateProvider
+        .state('buffetListGuest', {
+        url: '/:eventId/:buffetID',
+            template: '<buffet-list-guest></buffet-list-guest>'
+        })
 }
 
