@@ -28,16 +28,22 @@
             </div>
         </md-subheader>
 
-        <form ng-if="buffetListGuest.showAddForm" md-whiteframe>
+        <form ng-if="buffetListGuest.showAddForm" md-whiteframe name="addForm">
             <div layout="row">
                 <md-input-container class="md-block" flex="40">
                     <label>Dish:</label>
-                    <input type="text" ng-model="buffetListGuest.dish.name"/>
+                    <input type="text" ng-model="buffetListGuest.dish.name" name="addName" ng-maxlength="30" required/>
+                    <div ng-messages="addForm.addName.$error">
+                        <div ng-message="required, maxlength">Please enter a dish name that has between 1 and 30 characters!</div>
+                    </div>
                 </md-input-container>
                 <div class="md-block" flex="10"></div>
                 <md-input-container class="md-block" flex="40">
                     <label>Cook:</label>
-                    <input type="text" placeholder="Not yet assigned" ng-model="buffetListGuest.dish.cook"/>
+                    <input type="text" placeholder="Not yet assigned" ng-model="buffetListGuest.dish.cook" name="addName2" ng-maxlength="30" required/>
+                    <div ng-messages="addForm.addName2.$error">
+                        <div ng-message="required, maxlength">Please enter a name that has between 1 and 30 characters!</div>
+                    </div>
                 </md-input-container>
             </div>
             <div layout="row">
@@ -47,7 +53,8 @@
                 </md-input-container>
             </div>
             <div layout="row">
-                <md-button flex="100" align="center" ng-click="buffetListGuest.submit()" class="md-raised buttonLink">Add Dish</md-button>
+                <md-button flex="100" align="center" ng-click="buffetListGuest.submit()" class="md-raised buttonLink"
+                           ng-disabled="addForm.$invalid">Add Dish</md-button>
             </div>
         </form>
 
@@ -61,8 +68,12 @@
                             <h3 class="textItems" ng-hide="(dish._id == buffetListGuest.editDish.id) &&
                             !(buffetListGuest.editDish.name == '') " ng-click="buffetListGuest.editDishName(dish)" > {{dish.name}}</h3>
                             <form class="textItems" ng-show="(dish._id == buffetListGuest.editDish.id) &&
-                            !(buffetListGuest.editDish.name == '')" ng-submit="buffetListGuest.saveDishName()" >
-                                <input type="text" placeholder={{buffetListGuest.editDish.name}} ng-model="buffetListGuest.editDish.name" required/>
+                            !(buffetListGuest.editDish.name == '')" ng-submit="buffetListGuest.saveDishName()" name="editForm">
+                                <input type="text" placeholder={{buffetListGuest.editDish.name}} ng-model="buffetListGuest.editDish.name"
+                                       name="editName" ng-maxlength="30" required/>
+                                <div ng-messages="editForm.editName.$error" class="validation-messages">
+                                    <div ng-message="required, maxlength">Please enter a dish name that has between 1 and 30 characters!</div>
+                                </div>
                             </form>
                         </div>
                         <span flex="10"></span>
@@ -70,8 +81,12 @@
                             <p class="textItems" ng-hide="(dish._id == buffetListGuest.editDish.id) &&
                             !(buffetListGuest.editDish.cook == '') " ng-click="buffetListGuest.editDishCook(dish)" > {{dish.cook}}</p>
                             <form class="textItems" ng-show="(dish._id == buffetListGuest.editDish.id) &&
-                            !(buffetList.editDish.cook == '')" ng-submit="buffetListGuest.saveDishCook()" >
-                                <input type="text" placeholder={{buffetListGuest.editDish.cook}} ng-model="buffetListGuest.editDish.cook"/>
+                            !(buffetListGuest.editDish.cook == '')" ng-submit="buffetListGuest.saveDishCook()" name="editForm2">
+                                <input type="text" placeholder={{buffetListGuest.editDish.cook}} ng-model="buffetListGuest.editDish.cook"
+                                       name="editName2" ng-maxlength="30" required/>
+                                <div ng-messages="editForm2.editName2.$error" class="validation-messages">
+                                    <div ng-message="required, maxlength">Please enter a name that has between 1 and 30 characters!</div>
+                                </div>
                             </form>
                         </span>
                     </div>

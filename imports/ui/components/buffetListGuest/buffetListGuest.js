@@ -130,7 +130,8 @@ const name = 'buffetListGuest';
 
 export default angular.module(name, [
         angularMeteor,
-        uiRouter
+        uiRouter,
+        'ngMessages'
     ])
     .component(name, {
         template,
