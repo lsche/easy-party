@@ -78,8 +78,10 @@ class PartyTodos {
         }
         if(event){
           event.planner.forEach(function(person) {
-            if(person.mail!= ""){
-              planner.push(person);
+            if(person != null){
+              if(person.mail!= ""){
+                planner.push(person);
+              }
             }
           });
         }

@@ -122,6 +122,9 @@
                         <p>{{event.description}}</p></span>
                             <span flex="30"><p>{{parseDate(event.event_date)}}</p></span>
                             <span flex="5">
+                                <md-button class="material-icons md-icon-button" ng-click="eventList.showDeleteConfirm($event, event)" > delete</md-button>
+
+                                <md-button class="material-icons md-icon-button" ng-click="eventList.openEdit(event)"> edit</md-button>
                                 <md-button class="material-icons md-icon-button" ng-click="eventList.openPayment(event)"> info</md-button>
                             </span>
                         </div>
