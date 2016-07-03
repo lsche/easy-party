@@ -24,20 +24,23 @@
                 </div>
                 
                 <div layout="column" layout-padding ng-if="partyComment.showAddForm">
-  
+                <form name="addForm">
                     <md-input-container class="commentCont">
                         <label>
                         Text:
                         </label>
-                        <input type="text" ng-model="partyComment.comment.text"/>
+                        <input type="text" ng-model="partyComment.comment.text" name="addComment" required/>
+                        <div ng-messages="addForm.addComment.$error">
+                            <div ng-message="required">Please enter your comment!</div>
+                        </div>
                     </md-input-container>
                     
                     
                     <div flex>
-                        <md-button ng-click="partyComment.submit()" class="md-raised commentBut">Add Comment</md-button>
+                        <md-button ng-click="partyComment.submit()" class="md-raised commentBut" ng-disabled="addForm.$invalid">Add Comment</md-button>
                     </div>
-                
-                
+
+                    </form>
                 </div>
     
     </md-subheader>

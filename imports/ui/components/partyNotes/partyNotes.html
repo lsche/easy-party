@@ -7,26 +7,30 @@
 </div>
 
 <div layout="column" layout-padding class="lukas7" ng-if="partyNotes.showAddForm">
-    
+<form name="addForm">
   <md-input-container>
     <label>
       Name:
     </label>
-      <input type="text" ng-model="partyNotes.note.name"/>
+      <input type="text" ng-model="partyNotes.note.name" name="addName" ng-maxlength="30" required/>
+      <div ng-messages="addForm.addName.$error">
+          <div ng-message="required, maxlength">Please enter a title that has between 1 and 30 characters!</div>
+      </div>
+
   </md-input-container>
+
     <md-input-container>
-          <label>
-              Text:
-          </label>
-          <textarea type="text" ng-model="partyNotes.note.description"></textarea>
-      </md-input-container>
+        <label>
+            Text:
+        </label>
+        <textarea type="text" ng-model="partyNotes.note.description"></textarea>
 
-
+    </md-input-container>
     <div layout="row" layout-align="center">
-    <md-button ng-click="partyNotes.submit()" class="md-raised lukas8">Add Note</md-button>
+    <md-button ng-click="partyNotes.submit()" class="md-raised lukas8" ng-disabled="addForm.$invalid" >Add Note</md-button>
   </div>
    <div></div>
-  
+</form>
 </div>
 
 <div layout="column" layout-gt-sm="row">

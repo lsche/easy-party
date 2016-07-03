@@ -32,9 +32,9 @@
                     <label>
                         Name:
                     </label>
-                    <textarea type="text" ng-model="eventGuestList.guest.name" name="addName" required></textarea>
+                    <textarea type="text" ng-model="eventGuestList.guest.name" name="addName" ng-maxlength="30" required></textarea>
                     <div ng-messages="addForm.addName.$error">
-                        <div ng-message="required">Please enter a name!</div>
+                        <div ng-message="required, maxlength">Please enter a name that has between 1 and 30 characters!</div>
                     </div>
                 </md-input-container>
                 <div class="md-block" flex="5"></div>
@@ -42,9 +42,9 @@
                     <label>
                         Number:
                     </label>
-                    <textarea type="number" name="addNumber" ng-model="eventGuestList.guest.number"></textarea>
+                    <textarea type="number" name="addNumber" placeholder="1" ng-model="eventGuestList.guest.number" ></textarea>
                     <div ng-messages="addForm.addNumber.$error">
-                        <div ng-message="required">Please enter a valid number!</div>
+                        <div ng-message="required, number">Please enter a valid number!</div>
                     </div>
                 </md-input-container>
                 <div class="md-block" flex="5"></div>
@@ -77,14 +77,20 @@
                         <span flex="10"></span>
                         <div flex="30">
                             <h3 class="textItems" ng-hide="(guest._id == eventGuestList.editGuest.id) && !(eventGuestList.editGuest.name == '') " ng-click="eventGuestList.editGuestName(guest)" > {{guest.name}}</h3>
-                            <form class="textItems" ng-show="(guest._id == eventGuestList.editGuest.id) && !(eventGuestList.editGuest.name == '')" ng-submit="eventGuestList.saveGuestName()" >
-                                <input type="text" placeholder={{eventGuestList.editGuest.name}} ng-model="eventGuestList.editGuest.name"/>
+                            <form class="textItems" name="editForm" ng-show="(guest._id == eventGuestList.editGuest.id) && !(eventGuestList.editGuest.name == '')" ng-submit="eventGuestList.saveGuestName()" >
+                                <input type="text" placeholder={{eventGuestList.editGuest.name}} ng-model="eventGuestList.editGuest.name" name="editName" ng-maxlength="30" required/>
+                                <div ng-messages="editForm.editName.$error" class="validation-messages">
+                                    <div ng-message="required, maxlength">Please enter a name that has between 1 and 30 characters!</div>
+                                </div>
                             </form>
                         </div>
                         <span flex="20" align="center">
                         <p class="textItems" ng-hide="(guest._id == eventGuestList.editGuest.id) && !(eventGuestList.editGuest.number == '')" ng-click="eventGuestList.editGuestNumber(guest)">{{guest.number}}  </p>
-                             <form class="textItems" ng-show="(guest._id == eventGuestList.editGuest.id) && !(eventGuestList.editGuest.number == '')" ng-submit="eventGuestList.saveGuestNumber()" >
-                                <input type="number" placeholder={{eventGuestList.editGuest.number}} ng-model="eventGuestList.editGuest.number"/>
+                             <form class="textItems" name="editNumForm" ng-show="(guest._id == eventGuestList.editGuest.id) && !(eventGuestList.editGuest.number == '')" ng-submit="eventGuestList.saveGuestNumber()" >
+                                <input type="number" placeholder={{eventGuestList.editGuest.number}} ng-model="eventGuestList.editGuest.number" name="editNumber" required/>
+                                 <div ng-messages="editNumForm.editNumber.$error" class="validation-messages">
+                                     <div ng-message="required, number">Please enter a valid number!</div>
+                                </div>
                             </form>
                         </span>
                         <span flex="5"></span>

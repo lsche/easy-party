@@ -38,7 +38,12 @@ class PartyTodos {
     this.showAddForm = false;
     this.showEditForm = true;
     this.selectedTodoId = null;
-    this.todo = {};
+    this.todo = {
+      name: "",
+      assignee: Meteor.userId(),
+        duedate: new Date(),
+        description:""
+    };
     this.sort = '';
     this.subscribe('events');
     this.subscribe('todos');
@@ -84,19 +89,24 @@ class PartyTodos {
       },
       categoryName() {
         return $stateParams.categoryName;
-      }
+      },
+        
     });
   }
   openForm() {
     this.selectedTodoId = null;
     if(this.showAddForm) {
-      this.todo = {};
+      this.todo = {name: "",
+          assignee: Meteor.userId(),
+          duedate: new Date(),
+          description:""};
       this.showAddForm = false;
     } else {
       this.showAddForm = true;
     }
   }
-
+   minDate = new Date();
+    
   selectTodo(todo){
     if(this.selectedTodoId == todo._id){
       this.selectedTodoId = null;
@@ -114,7 +124,12 @@ class PartyTodos {
     Todos.insert(this.todo);
 
 
-    this.todo = {};
+      this.todo = {
+          name: "",
+          assignee: Meteor.userId(),
+          duedate: new Date(),
+          description:""
+      };
     this.showAddForm = false;
   }
   
@@ -160,7 +175,7 @@ const name = 'partyTodos';
 // create a module
 export default angular.module(name, [
   angularMeteor,
-  EditTodos
+  EditTodos,'ngMessages'
 ]).component(name, {
   template,
   bindings: {

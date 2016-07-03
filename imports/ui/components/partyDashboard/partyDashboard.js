@@ -67,9 +67,7 @@ class PartyDashboard{
          
     },
       upcomingTodos() {
-        //return Todos.find({ event_Id: $stateParams.eventId, category: $stateParams.categoryName },{sort: {done: 1, duedate: 1}});
-
-        var upcomingTodos = Todos.find({event_Id: this.eventId, done:false} , {sort: {duedate: 1}});
+        var upcomingTodos = Todos.find({event_Id: this.eventId, assignee: Meteor.userId() ,done:false} , {sort: {duedate: 1}});
         return upcomingTodos;
       },
         

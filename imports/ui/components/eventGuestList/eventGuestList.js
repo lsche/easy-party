@@ -88,7 +88,9 @@ class EventGuestList {
     openForm() {
         this.selectedGuestId = null;
         if(this.showAddForm) {
-            this.guest = {};
+            this.guest = {number: "",
+                description: "",
+                status: "Not Invited yet"};
             this.showAddForm = false;
         } else {
             this.showAddForm = true;
@@ -203,7 +205,7 @@ const name = 'eventGuestList';
 
 // create a module
 export default angular.module(name, [
-    angularMeteor
+    angularMeteor, 'ngMessages'
 ]).component(name, {
     template,
     bindings: {

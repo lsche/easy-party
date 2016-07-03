@@ -82,10 +82,10 @@
         <div class="sidebar" md-whiteframe="3">
             <h4 class="textItems">{{partyDashboard.currentEvent.name}}</h4>
             <div layout="column">
-                <div class="todo" md-whiteframe="2">
+                <div class="todo" md-whiteframe="2" ng-if="!(partyDashboard.upcomingTodos.length == 0)">
                     <md-list>
-                        <h5 class="textItems">Upcoming To-Dos</h5>
-                        <md-list-item ng-repeat="todo in partyDashboard.upcomingTodos|limitTo:5" ng-mouseover="partyDashboard.selectTodo(todo)" ng-mouseleave="partyDashboard.deselectTodo()" >
+                        <h5 class="textItems" ng-if="!(partyDashboard.upcomingTodos.length == 0)">Upcoming To-Dos</h5>
+                        <md-list-item ng-if="!(partyDashboard.upcomingTodos.length == 0)" ng-repeat="todo in partyDashboard.upcomingTodos|limitTo:5" ng-mouseover="partyDashboard.selectTodo(todo)" ng-mouseleave="partyDashboard.deselectTodo()" >
                         <div flex>
                             <div layout="row" flex>
                         <span flex="50" >
@@ -96,9 +96,6 @@
                                     <p class="textItems" ng-style="setColor(todo)" ui-sref="category({ eventId: partyDashboard.eventId, categoryName: getCategory(todo)})">{{parseDate(todo.duedate)}}</p>
                                 </span>
                         </div>
-                            <div>
-                                <p class="textItems" ng-style="setColor(todo)" layout-align="center" ng-if="partyDashboard.selectedTodoId == todo._id" ui-sref="category({ eventId: partyDashboard.eventId, categoryName: getCategory(todo)})">({{getName(todo.assignee)}})</p>
-                            </div>
                         </div>
                             <md-divider ng-if="!$last"></md-divider>
                           </md-list-item>
