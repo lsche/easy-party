@@ -32,7 +32,7 @@
                 </div>
 
                 <div layout="row" layout-padding>
-                    <md-datepicker flex="30" align="center" ng-model="eventList.event.event_date" md-placeholder="Enter date"></md-datepicker>
+                    <md-datepicker flex="30" align="center" ng-model="eventList.event.event_date" md-placeholder="Enter date" md-min-date="eventList.minDate"></md-datepicker>
                     <span flex="5px"></span>
                     <md-input-container>
                         <label>How many people should help you?</label>
@@ -116,17 +116,17 @@
                 <md-list-item class="md-2-line">
                     <div class="md-list-item-text">
                         <div layout="row">
-                            <span flex="70" ng-hide="event.blocked" ui-sref="partyDashboard({ eventId: event._id })"><h3>{{event.name}}</h3>
+                            <span flex="50" ng-hide="event.blocked" ui-sref="partyDashboard({ eventId: event._id })"><h3>{{event.name}}</h3>
                         <p>{{event.description}}</p></span>
-                            <span flex="70" ng-show="event.blocked" ng-click="eventList.showPaymentAlert()"><h3>{{event.name}}</h3>
+                            <span flex="50" ng-show="event.blocked" ng-click="eventList.showPaymentAlert()"><h3>{{event.name}}</h3>
                         <p>{{event.description}}</p></span>
                             <span flex="30"><p>{{parseDate(event.event_date)}}</p></span>
-                            <span flex="5">
+                            <div flex="20" layout="row" layout-align="right">
                                 <md-button class="material-icons md-icon-button" ng-click="eventList.showDeleteConfirm($event, event)" > delete</md-button>
 
                                 <md-button class="material-icons md-icon-button" ng-click="eventList.openEdit(event)"> edit</md-button>
                                 <md-button class="material-icons md-icon-button" ng-click="eventList.openPayment(event)"> info</md-button>
-                            </span>
+                            </div>
                         </div>
                     </div>
                 </md-list-item>
@@ -136,9 +136,9 @@
                 <md-list-item class="md-2-line">
                     <div class="md-list-item-text">
                         <div layout="row">
-                           <span flex="70" ng-hide="event.blocked" ui-sref="partyDashboard({ eventId: event._id })"><h3>{{event.name}}</h3>
+                           <span flex="50" ng-hide="event.blocked" ui-sref="partyDashboard({ eventId: event._id })"><h3>{{event.name}}</h3>
                         <p>{{event.description}}</p></span>
-                            <span flex="70" ng-show="event.blocked" ng-click="eventList.showPaymentAlert()"><h3>{{event.name}}</h3>
+                            <span flex="50" ng-show="event.blocked" ng-click="eventList.showPaymentAlert()"><h3>{{event.name}}</h3>
                         <p>{{event.description}}</p></span>
                             <span flex="30"><p>{{parseDate(event.event_date)}}</p></span>
                             <span flex="5">
