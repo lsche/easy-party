@@ -1,0 +1,148 @@
+<md-content class="md-padding LukasSearchPad">
+
+        <div layout-gt-xs="row">
+          <md-input-container class="md-block LukasSearchCont" flex-gt-md>
+            <label>Search</label>
+            <md-icon md-svg-src="search.svg" class="search"></md-icon>
+            <input type="search" ng-model="providersSearch.searchText">
+          </md-input-container>
+          <md-button class="md-raised md-primary SearchLukas" ng-click="providersSearch.submit()">Search</md-button>
+        </div>
+
+          
+          <!--<p>Integer turpis erat, porttitor vitae mi faucibus, laoreet interdum tellus. Curabitur posuere molestie dictum. Morbi eget congue risus, quis rhoncus quam. Suspendisse vitae hendrerit erat, at posuere mi. Cras eu fermentum nunc. Sed id ante eu orci commodo volutpat non ac est. Praesent ligula diam, congue eu enim scelerisque, finibus commodo lectus.</p>-->
+  
+        </md-content>
+    <div layout="row" class="" layout-wrap>
+        <div flex="20" class="LukasFilterPad">
+
+            <h3 class="centForm">Filter</h3>
+            <br>
+
+            <div>
+                <h5 class="LukasfilterName">Type</h5>
+                <fieldset class="standard">
+                    <div ng-repeat="item in providersSearch.typeFilter">
+                    <md-checkbox ng-checked="providersSearch.exists(item, providersSearch.typeSelected)" ng-click="providersSearch.toggle(item, providersSearch.typeSelected)">
+                        {{ item }}                 
+                    </md-checkbox>
+                    </div>
+                </fieldset>
+            </div>
+
+            <br>
+
+            <div>
+                <h5 class="LukasfilterName">Price</h5>
+                <fieldset class="standard">
+                    <div ng-repeat="itemPrice in providersSearch.priceFilter">
+                    <md-checkbox ng-checked="providersSearch.exists(itemPrice, providersSearch.priceSelected)" ng-click="providersSearch.toggle(itemPrice, providersSearch.priceSelected)">
+                        <div ng-if="itemPrice == '1'"><b>€</b></div>
+                        <div ng-if="itemPrice == '2'"><b>€€</b></div> 
+                        <div ng-if="itemPrice == '3'"><b>€€€</b></div> 
+                        <div ng-if="itemPrice == '4'"><b>€€€€</b></div> 
+                        <div ng-if="itemPrice == '5'"><b>€€€€€</b></div>                 
+                    </md-checkbox>
+                    </div>
+                </fieldset>
+            </div>
+
+            <br>
+
+            <div>
+                <h5 class="LukasfilterName">Number of guests</h5>
+                <fieldset class="standard">
+                    <div ng-repeat="itemGuest in providersSearch.guestsFilter">
+                    <md-checkbox ng-checked="providersSearch.exists(itemGuest, providersSearch.guestsSelected)" ng-click="providersSearch.toggle(itemGuest, providersSearch.guestsSelected)">
+                        <div ng-if="itemGuest == '10'"><b>&lt; 10</b></div>
+                        <div ng-if="itemGuest == '20'"><b>10 - 30</b></div>
+                        <div ng-if="itemGuest == '30'"><b>&gt; 30</b></div>      
+                    </md-checkbox>
+                    </div>
+                </fieldset>
+            </div>
+
+            <md-button class="md-raised md-primary LukasFilterButton" ng-click="providersSearch.submit()">Filter</md-button>
+            
+
+        </div>
+
+        <div flex="5">
+        </div>
+
+        <div flex="75" class="heightForm padForm">
+
+            <div layout="column">
+                <div layout="row">
+                    <div flex="80"></div>
+                        <md-select ng-model="providersSearch.sort" placeholder="Sort by" flex="15">
+                            <md-option ng-value="opt" ng-repeat="opt in ['Price', 'Guests', 'Name']">{{ opt }}</md-option>
+                        </md-select>
+                    <div flex="5"></div>
+                </div>
+            </div>
+
+        <md-content class="comment" md-whiteframe="3">
+          <md-list class="serviceProviderList">
+                    
+            <div class="listItems">
+                <md-list-item class="md-2-line" ng-repeat="provider in providersSearch.providerslist">
+                    <div >
+                        <div layout="row" class="rows">
+                        
+                        <div flex="20" class="flexikona LukasPadLogo">
+                            <md-card-title-media ng-if="provider.images">
+                                <div class="md-media-lg card-media">
+                                    <party-image images="provider.images"></party-image>
+                                </div>
+                            </md-card-title-media>
+                            <img src="https://raw.githubusercontent.com/narkhedegs/CakeTryout/develop/cake.png" ng-if="!provider.images" alt="">
+                            <p>Capacity: <b>{{getCap(provider.capacity)}}</b></p>
+                            <p>Price category: <b>{{getPrice(provider.price)}}</b></p>
+                        </div>
+                        
+                        <div flex="5">
+
+                        </div>
+
+                        <div flex="50" class="Lukasflex50Top">
+                            <h5>{{provider.name}}</h5>
+                            <p>{{provider.about}}</p>
+
+                            <md-menu ng-show="providersSearch.isLoggedIn" flex md-position-mode="target-right bottom">
+                                <p><a ng-click="$mdOpenMenu($event)">Add to my event!</a></p>
+                                <md-menu-content>
+                                    <md-menu-item ng-repeat="event in providersSearch.eventList">
+                                        <md-button ng-click="providersSearch.saveAsNote(event, provider)">
+                                            {{event.name}}
+                                        </md-button>
+                                    </md-menu-item>
+                                </md-menu-content>
+                            </md-menu>
+                        </div>
+
+                        <div flex="5">
+
+                        </div>
+
+                        <div flex="20" class="addressForm">
+                            <i class="material-icons">location_on</i> 
+                            <p class="lukasCloseForm">{{provider.street}} <br>
+                               {{provider.zip}} {{provider.city}}</p>
+                            <i class="material-icons">phone</i>
+                            <p class="lukasCloseForm">{{provider.phone}}</p>
+                            <i class="material-icons">email</i> 
+                            <p class="lukasCloseForm">{{provider.email}}</p>
+                        </div>
+
+                        </div>
+                    </div>
+                    <md-divider ng-if="!$last"></md-divider>
+                </md-list-item>
+            </div>
+        </md-list>
+    </md-content>
+
+
+        </div>
+    </div>

@@ -7,11 +7,11 @@ import { Accounts } from 'meteor/accounts-base';
 import template from './userAuth.html';
 import modalRegistrationTemplate from './userRegisterModal.html';
 import modalLoginTemplate from './userLoginModal.html';
+
+
 import { name as DisplayNameFilter } from '../../filters/displayNameFilter';
 import { name as UserRegistration } from '../userRegistration/userRegistration';
 import { name as UserLogin } from '../userLogin/userLogin';
-
-
 
 const name = 'userAuth';
 

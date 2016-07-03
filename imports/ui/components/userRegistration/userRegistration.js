@@ -22,7 +22,9 @@ class UserRegistration {
             profile:{
                 firstName: '',
                 lastName: '',
-                color: randCol
+                color: randCol,
+                //paid: false,
+                created: Date.now()
             },      
         };
         

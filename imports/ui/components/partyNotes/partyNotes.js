@@ -19,13 +19,14 @@ class PartyNotes {
 
     this.showAddForm = false;
     this.note = {};
+    this.currentNote = null;
     this.subscribe('notes');
     this.subscribe('users');
     this.eventId = $stateParams.eventId;
 
     this.helpers({
       noteslist() {
-        return Notes.find({ event_Id: $stateParams.eventId, category: $stateParams.categoryName });
+        return Notes.find({ event_Id: $stateParams.eventId, category: $stateParams.categoryName },{sort: {createdAt: -1}});
       },
       eventId() {
         return $stateParams.eventId;
@@ -56,6 +57,7 @@ class PartyNotes {
     this.showAddForm = false;
   }
 
+
   openBuffetList(eventID) {
     console.log(eventID);
       this.$mdDialog.show({
@@ -75,6 +77,18 @@ class PartyNotes {
       clickOutsideToClose: true,
       fullscreen: this.$mdMedia('sm') || this.$mdMedia('xs')
     });
+  }
+
+  enterNote(note){
+    this.currentNote = note._id;
+  }
+
+  leaveNote(){
+    this.currentNote = null;
+  }
+
+  deleteNote(note){
+    Notes.remove(note._id);
   }
 
 }

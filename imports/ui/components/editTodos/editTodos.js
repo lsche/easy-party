@@ -25,15 +25,12 @@ class EditTodos {
             getEventPlanner(){
                 var event = Events.findOne($stateParams.eventId);
                 if(Meteor.user()){
-                    var planner = [{name: Meteor.user().profile.firstName, id: Meteor.userId(), mail: Meteor.user().emails[0].address}];
+                    var name = Meteor.user().profile.firstName + " " + Meteor.user().profile.lastName;
+                    var planner = [{name: name, id: Meteor.userId(), mail: Meteor.user().emails[0].address}];
                 }
                 if(event){
                     event.planner.forEach(function(person) {
-                        var user = Meteor.users.findOne({emails: {$elemMatch: {address: person.mail }}});
-                        if(user){
-                            //safe object with name and id in planner
-                            planner.push({name: user.profile.firstName, id: user._id, mail: person.mail});
-                        }
+                        planner.push(person);
                     });
                 }
                 return planner;
@@ -42,7 +39,6 @@ class EditTodos {
     }
 
     save(){
-        console.log("save pressed3");
         Todos.update({_id: this.myTask._id},
             {$set:
                     {name: this.myTask.name,
