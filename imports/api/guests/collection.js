@@ -3,16 +3,18 @@
  */
 import { Mongo } from 'meteor/mongo';
 
+//Attributes for guests: name, number, status, description
+
 export const Guests = new Mongo.Collection('guests');
 
 Guests.allow({
-    insert() {
-        return true;
+    insert(userId) {
+        return userId;
     },
-    update() {
-        return true;
+    update(userId) {
+        return userId;
     },
-    remove(){
-        return true;
+    remove(userId){
+        return userId;
     }
 });
