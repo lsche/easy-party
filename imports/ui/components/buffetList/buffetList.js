@@ -21,18 +21,22 @@ class BuffetList {
         $reactive(this).attach($scope);
 
         this.showAddForm = false;
+        this.buffetBool = false;
+        this.showLink = false;
         this.selectedDishId = null;
         this.dish = {
-            description: "",
-            cook: "not yet assigned"
+            cook: "",
+            description: ""
         };
+
         this.editDish = {id:"", name:"", cook:"", description:""};
+        this.editBuffet = {id:"", description: "", url:""};
+
 
         this.subscribe('buffet');
         this.subscribe('dishes');
 
         console.log(this.myEvent);
-     //   this.buffetListId = Buffet.findOne({event: this.myEvent})._id;
 
 
 
@@ -42,14 +46,12 @@ class BuffetList {
 
             },
             dishList(){
-                console.log("this is dishList");
                 var buffetList = Buffet.findOne({event: this.myEvent});
                 if(buffetList){
                     console.log(buffetList);
-                    console.log(buffetList._id)
+                    console.log(buffetList._id);
                     return Dishes.find({buffetID: buffetList._id});
                 }
-            console.log(Dishes);
             }
         });
     }
@@ -72,15 +74,25 @@ class BuffetList {
     }
 
     submit(){
-        this.dish.buffetID = this.buffetListId;
-        if (this.dish.description == ""){
-            this.dish.description = "Add some text here..."
+        var buffetList = Buffet.findOne({event: this.myEvent});
+        if(buffetList)
+        {
+            this.dish.buffetID = buffetList._id;
         }
         if (!(this.dish.name == "")){
+            if (this.dish.cook == ""){
+                console.log("set cook");
+                this.dish.cook = "Not yet assigned";
+            }
+            if (this.dish.description == ""){
+                console.log("set description");
+                this.dish.description = "Add some additional text here";
+            }
             Dishes.insert(this.dish);
             console.log("dish inserted");
+            console.log(this.dish);
         } else {}
-        this.dish = {};
+        this.dish = {cook: "", description: ""};
         this.showAddForm = false;
 
     }
@@ -105,6 +117,20 @@ class BuffetList {
         this.editDish.cook = "";
         this.editDish.description = dish.description;
     }
+    editBuffetDescription (){
+        this.editBuffet.description = Buffet.findOne({event: this.myEvent}).description;
+        this.editBuffet.url = "";
+        this.buffetBool = true;
+    }
+    saveBuffetDescription (){
+        var buffetid = Buffet.findOne({event: this.myEvent})._id;
+        Buffet.update({_id: buffetid},
+            {$set: {
+                description: this.editBuffet.description}
+            });
+        this.editBuffet = {id:"", description:"", url:""};
+        this.buffetBool = false;
+    }
     saveDishName(){
         Dishes.update({_id: this.editDish.id},
             {$set: {
@@ -125,6 +151,19 @@ class BuffetList {
                 description: this.editDish.description}
             });
         this.editDish = {id:"", name:"", cook:"", description:""};
+    }
+
+    displayLink(){
+        var buffetListID = Buffet.findOne({event: this.myEvent})._id;
+        var urlStart = "http://localhost:3000/";
+        Buffet.update({_id: buffetListID},
+            {$set: {
+                url: urlStart + this.myEvent + "/" + buffetListID
+            }});
+        this.showLink = true;
+    }
+    closeLink(){
+        this.showLink = false;
     }
 }
 

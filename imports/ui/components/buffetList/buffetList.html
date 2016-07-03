@@ -1,20 +1,15 @@
 <md-content class="buffet">
-    <form name="buffetDescriptionForm" layout="column" layout-fill layout-padding layout-margin>
-        <div flex aria-label="description">
-            <p> {{buffetList.buffetObject.description}}</p>
-        </div>
-    </form>
-
-    <md-list md-whiteframe="3">
+    <md-list>
         <md-subheader class="md-sticky">
             <div layout="column">
-                <div layout="row">
-                    <span flex="5"></span>
-                    <span flex="75"><h5 align="center">Dish List</h5></span>
-                    <md-button ng-hide="buffetList.showAddForm" class="material-icons md-fab md-mini addDish"
-                               ng-click="buffetList.openForm()"> add</md-button>
-                    <md-button ng-show="buffetList.showAddForm" class="material-icons md-fab md-mini addDish"
-                               ng-click="buffetList.openForm()"> close</md-button>
+                <div>
+                    <p class="textItems3" ng-if="!(buffetList.buffetBool)" ng-click="buffetList.editBuffetDescription()">
+                        {{buffetList.buffetObject.description}}
+                    </p>
+                    <form class="textItems3" ng-if="buffetList.buffetBool" ng-submit="buffetList.saveBuffetDescription()" >
+                        <input type="text" ng-model="buffetList.editBuffet.description"/>
+                    </form>
+                    <span flex></span>
                 </div>
                 <div layout="row">
                     <span flex="10"></span>
@@ -24,6 +19,13 @@
                     <span flex="20" align="center">
                         <p>Cook</p>
                     </span>
+                    <span flex></span>
+                    <span  flex-initial="11">
+                        <md-button ng-hide="buffetList.showAddForm" class="material-icons md-fab md-mini addDish"
+                                                       ng-click="buffetList.openForm()"> add</md-button>
+                        <md-button ng-show="buffetList.showAddForm" class="material-icons md-fab md-mini addDish"
+                               ng-click="buffetList.openForm()"> close</md-button>
+                    </span>
                 </div>
             </div>
         </md-subheader>
@@ -32,18 +34,18 @@
             <div layout="row">
                 <md-input-container class="md-block" flex="40">
                     <label>Dish:</label>
-                    <textarea type="text" ng-model="buffetList.dish.name"></textarea>
+                    <input type="text" ng-model="buffetList.dish.name"/>
                 </md-input-container>
                 <div class="md-block" flex="10"></div>
                 <md-input-container class="md-block" flex="40">
                     <label>Cook:</label>
-                    <textarea type="text" ng-model="buffetList.dish.cook"></textarea>
+                    <input type="text" placeholder="Not yet assigned" ng-model="buffetList.dish.cook"/>
                 </md-input-container>
             </div>
             <div layout="row">
                 <md-input-container class="md-block" flex="65">
                     <label>Additional Text:</label>
-                    <textarea type="text" ng-model="buffetList.dish.description"></textarea>
+                    <textarea type="text" placeholder="Add some additional text here" ng-model="buffetList.dish.description"></textarea>
                 </md-input-container>
             </div>
             <div layout="row">
@@ -61,8 +63,8 @@
                             <h3 class="textItems" ng-hide="(dish._id == buffetList.editDish.id) &&
                             !(buffetList.editDish.name == '') " ng-click="buffetList.editDishName(dish)" > {{dish.name}}</h3>
                             <form class="textItems" ng-show="(dish._id == buffetList.editDish.id) &&
-                            !(buffetList.edit.Dish.name == '')" ng-submit="buffetList.saveDishName()" >
-                                <input type="text" placeholder={{buffetList.editDish.name}} ng-model="buffetList.editDish.name"/>
+                            !(buffetList.editDish.name == '')" ng-submit="buffetList.saveDishName()" >
+                                <input type="text" placeholder={{buffetList.editDish.name}} ng-model="buffetList.editDish.name" required/>
                             </form>
                         </div>
                         <span flex="5"></span>
@@ -70,7 +72,7 @@
                             <p class="textItems" ng-hide="(dish._id == buffetList.editDish.id) &&
                             !(buffetList.editDish.cook == '') " ng-click="buffetList.editDishCook(dish)" > {{dish.cook}}</p>
                             <form class="textItems" ng-show="(dish._id == buffetList.editDish.id) &&
-                            !(buffetList.edit.Dish.cook == '')" ng-submit="buffetList.saveDishCook()" >
+                            !(buffetList.editDish.cook == '')" ng-submit="buffetList.saveDishCook()" >
                                 <input type="text" placeholder={{buffetList.editDish.cook}} ng-model="buffetList.editDish.cook"/>
                             </form>
                         </span>
@@ -92,5 +94,15 @@
             </md-list-item>
         </div>
     </md-list>
+    <span flex></span>
+    <div layout="row">
+        <md-button flex="100" align="center" ng-hide="buffetList.showLink" class="md-raised buttonLink"
+                   ng-click="buffetList.displayLink()"> Show link to Guest View </md-button>
+        <md-button flex="100" align="center" ng-show="buffetList.showLink" class="md-raised buttonLink"
+                   ng-click="buffetList.closeLink()"> Hide link to Guest View </md-button>
+    </div>
+    <div>
+        <p flex="100" ng-if="buffetList.showLink"> The link you should send to your guests for the buffet list is: {{buffetList.buffetObject.url}}</p>
+    </div>
 </md-content>
 
