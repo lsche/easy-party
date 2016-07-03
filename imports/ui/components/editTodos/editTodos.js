@@ -19,6 +19,8 @@ class EditTodos {
         $reactive(this).attach($scope);
 
         this.subscribe('events');
+        
+        this.editTask = this.myTask;
 
         this.error = '';
         this.helpers({
@@ -30,7 +32,11 @@ class EditTodos {
                 }
                 if(event){
                     event.planner.forEach(function(person) {
-                        planner.push(person);
+                        if(person != null){
+                            if(person.mail!= ""){
+                                planner.push(person);
+                            }
+                        }
                     });
                 }
                 return planner;
@@ -40,12 +46,12 @@ class EditTodos {
     minDate = new Date();
 
     save(){
-        Todos.update({_id: this.myTask._id},
+        Todos.update({_id: this.editTask._id},
             {$set:
-                    {name: this.myTask.name,
-                    description: this.myTask.description ,
-                    assignee: this.myTask.assignee, 
-                    duedate: this.myTask.duedate}
+                    {name: this.editTask.name,
+                    description: this.editTask.description ,
+                    assignee: this.editTask.assignee, 
+                    duedate: this.editTask.duedate}
             }
         );
         //to close the modal
@@ -62,7 +68,7 @@ const name = 'editTodos';
 // create a module
 export default angular.module(name, [
     angularMeteor,
-    uiRouter
+    uiRouter, 'ngMessages'
 ])
     .component(name, {
         template,

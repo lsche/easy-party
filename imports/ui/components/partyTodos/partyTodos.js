@@ -173,7 +173,7 @@ const name = 'partyTodos';
 // create a module
 export default angular.module(name, [
   angularMeteor,
-  EditTodos
+  EditTodos,'ngMessages'
 ]).component(name, {
   template,
   bindings: {

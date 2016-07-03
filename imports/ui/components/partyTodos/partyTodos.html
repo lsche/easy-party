@@ -32,9 +32,9 @@
                         <label>
                             Title:
                         </label>
-                        <textarea type="text" ng-model="partyTodos.todo.name" name="addName" required></textarea>
+                        <textarea type="text" ng-model="partyTodos.todo.name" name="addName" ng-maxlength="30" required></textarea>
                         <div ng-messages="addForm.addName.$error">
-                            <div ng-message="required">Please enter a title!</div>
+                            <div ng-message="required, maxlength">Please enter a title that has between 1 and 30 characters!</div>
                         </div>
                     </md-input-container>
                     <div class="md-block" flex="5"></div>

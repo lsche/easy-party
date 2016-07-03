@@ -205,7 +205,7 @@ const name = 'eventGuestList';
 
 // create a module
 export default angular.module(name, [
-    angularMeteor
+    angularMeteor, 'ngMessages'
 ]).component(name, {
     template,
     bindings: {
