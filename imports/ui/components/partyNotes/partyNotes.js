@@ -14,12 +14,13 @@ class PartyNotes {
 
     this.showAddForm = false;
     this.note = {};
+    this.currentNote = null;
     this.subscribe('notes');
     this.subscribe('users');
 
     this.helpers({
       noteslist() {
-        return Notes.find({ event_Id: $stateParams.eventId, category: $stateParams.categoryName });
+        return Notes.find({ event_Id: $stateParams.eventId, category: $stateParams.categoryName },{sort: {createdAt: -1}});
       },
       eventId() {
         return $stateParams.eventId;
@@ -48,6 +49,18 @@ class PartyNotes {
 
     this.note = {};
     this.showAddForm = false;
+  }
+
+  enterNote(note){
+    this.currentNote = note._id;
+  }
+
+  leaveNote(){
+    this.currentNote = null;
+  }
+
+  deleteNote(note){
+    Notes.remove(note._id);
   }
 }
 

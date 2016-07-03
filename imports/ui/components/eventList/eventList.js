@@ -5,22 +5,29 @@ import angularMeteor from 'angular-meteor';
 import uiRouter from 'angular-ui-router';
 import ngMaterial from 'angular-material';
 import moment from 'moment';
-
+import 'meteor/mrgalaxy:stripe';
 
 import template from './eventList.html';
+import modalPaymentTemplate from './paymentModal.html';
 
 import { Events } from '../../../api/events';
 import { Meteor } from 'meteor/meteor';
 
+import {name as EventPayment} from '../eventPayment/eventPayment';
+
+
+
 
 class EventList {
-    constructor($scope, $reactive, $timeout, $q, $log, $state) {
+    constructor($scope, $reactive, $state, $mdDialog, $mdMedia) {
         'ngInject';
 
         this.showAddForm = false;
         var self = this;
 
         $reactive(this).attach($scope);
+        this.$mdDialog = $mdDialog;
+        this.$mdMedia = $mdMedia;
 
         $scope.parseDate = function(jsonDate) {
             //date parsing functionality
@@ -28,8 +35,14 @@ class EventList {
         };
 
         this.event = {};
+        this.payment = {};
         this.event.planner = [];
         this.$state = $state;
+        this.selectedItem = {mail:""};
+        this.selectedItem2 = {mail: ""};
+        this.selectedItem3 = {mail: ""};
+        this.selectedItem4 = {mail: ""};
+
         
         this.subscribe('events');
         this.subscribe('users');
@@ -43,12 +56,46 @@ class EventList {
         this.helpers({
             creatorEvents() {
                 var currentId = Meteor.userId();
+                Events.find({creator: currentId},{ sort: {createdAt: -1}}).forEach(function(event){
+                    if(event.paid){
+                        Events.update({_id : event._id},
+                            {$set: {
+                                blocked: false}
+                            });
+                    } else{
+                        var nowIs = Date.now();
+                        var createdIs = event.createdAt + 5 * (1000*60*60*24);
+                        if(createdIs < nowIs) {
+                            Events.update({_id : event._id},
+                                {$set: {
+                                    blocked: true}
+                                });
+                        }
+                    }
+                });
                 return Events.find({creator: currentId},{ sort: {createdAt: -1}});
             },
             plannerEvents(){
                 var currentUserMail = Meteor.user();
                 if(currentUserMail){
                     var mail = currentUserMail.emails[0].address;
+                    Events.find({planner: {$elemMatch: {mail: mail}}}, { sort: {createdAt: -1}}).forEach(function(event){
+                        if(event.paid){
+                            Events.update({_id : event._id},
+                                {$set: {
+                                    blocked: false}
+                                });
+                        } else{
+                            var nowIs = Date.now();
+                            var createdIs = event.createdAt + 5 * (1000*60*60*24);
+                            if(createdIs < nowIs) {
+                                Events.update({_id : event._id},
+                                    {$set: {
+                                        blocked: true}
+                                    });
+                            }
+                        }
+                    });
                     return Events.find({planner: {$elemMatch: {mail: mail}}}, { sort: {createdAt: -1}});
                 }
                 return null;
@@ -56,7 +103,6 @@ class EventList {
         });
 
         self.simulateQuery = false;
-        self.isDisabled    = false;
         //self.repos         = loadAll();
         self.querySearch   = querySearch;
         self.selectedItemChange = selectedItemChange;
@@ -115,13 +161,47 @@ class EventList {
         }
     }
     submit() {
+        this.event.planner[0] = this.selectedItem;
+        this.event.planner[1] = this.selectedItem2;
+        this.event.planner[2] = this.selectedItem3;
+        this.event.planner[3] = this.selectedItem4;
         this.event.creator = Meteor.user()._id;
         this.event.createdAt = new Date();
+        this.event.paid = false;
+        this.event.blocked = false;
 
         Events.insert(this.event);
 
         this.showAddForm = false;
         this.event = {};
+        this.selectedItem = {mail:""};
+        this.selectedItem2 = {mail: ""};
+        this.selectedItem3 = {mail: ""};
+        this.selectedItem4 = {mail: ""};
+    }
+
+    showPaymentAlert(){
+        alert('Sorry, your trial version for this event already ended.');
+    }
+
+    openPayment(event){
+        this.$mdDialog.show({
+            controller($scope, $mdDialog) {
+                'ngInject';
+                $scope.event = event;
+
+                this.close = () => {
+                    $mdDialog.hide();
+                }
+
+
+            },
+            controllerAs: 'paymentModal',
+            template: modalPaymentTemplate,
+            parent: angular.element(document.body),
+            clickOutsideToClose: true,
+            fullscreen: this.$mdMedia('sm') || this.$mdMedia('xs')
+        });
     }
 }
 
@@ -131,7 +211,8 @@ const name = 'eventList';
 export default angular.module(name, [
     angularMeteor,
     ngMaterial,
-    uiRouter
+    uiRouter,
+    EventPayment
 ]).component(name, {
     template,
     bindings: {
