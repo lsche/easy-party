@@ -7,12 +7,14 @@ import 'meteor/mrgalaxy:stripe';
 
 import template from './eventList.html';
 import modalPaymentTemplate from './paymentModal.html';
+import modalEditTemplate from './editEventModal.html';
 
 import { Events } from '../../../api/events';
 import { Buffet } from '../../../api/buffet';
 import { Meteor } from 'meteor/meteor';
 
 import {name as EventPayment} from '../eventPayment/eventPayment';
+import {name as EditEvent} from '../editEvent/editEvent';
 
 
 
@@ -37,10 +39,10 @@ class EventList {
         this.payment = {};
         this.event.planner = [];
         this.$state = $state;
-        this.selectedItem = {mail:""};
-        this.selectedItem2 = {mail: ""};
-        this.selectedItem3 = {mail: ""};
-        this.selectedItem4 = {mail: ""};
+        this.selectedItem = {};
+        this.selectedItem2 = {};
+        this.selectedItem3 = {};
+        this.selectedItem4 = {};
 
         
         this.subscribe('events');
@@ -182,10 +184,24 @@ class EventList {
 
         this.showAddForm = false;
         this.event = {};
-        this.selectedItem = {mail:""};
-        this.selectedItem2 = {mail: ""};
-        this.selectedItem3 = {mail: ""};
-        this.selectedItem4 = {mail: ""};
+        this.selectedItem = {};
+        this.selectedItem2 = {};
+        this.selectedItem3 = {};
+        this.selectedItem4 = {};
+    }
+
+    showDeleteConfirm(triggerEvent, event){
+        var confirm = this.$mdDialog.confirm()
+            .title('')
+            .textContent('Are you sure you want to delete your event ' + event.name + "?")
+            .ariaLabel('Confirm Delete')
+            .targetEvent(triggerEvent)
+            .ok('Confirm')
+            .cancel('Cancel');
+        this.$mdDialog.show(confirm).then(function() {
+            Events.remove(event._id);
+        }, function() {
+        });
     }
 
     showPaymentAlert(){
@@ -211,6 +227,26 @@ class EventList {
             fullscreen: this.$mdMedia('sm') || this.$mdMedia('xs')
         });
     }
+    
+    openEdit(event){
+        this.$mdDialog.show({
+            controller($scope, $mdDialog) {
+                'ngInject';
+                $scope.event = event;
+
+                this.close = () => {
+                    $mdDialog.hide();
+                }
+
+
+            },
+            controllerAs: 'editEventModal',
+            template: modalEditTemplate,
+            parent: angular.element(document.body),
+            clickOutsideToClose: true,
+            fullscreen: this.$mdMedia('sm') || this.$mdMedia('xs')
+        });
+    }
 }
 
 const name = 'eventList';
@@ -220,7 +256,8 @@ export default angular.module(name, [
     angularMeteor,
     ngMaterial,
     uiRouter,
-    EventPayment
+    EventPayment,
+    EditEvent
 ]).component(name, {
     template,
     bindings: {

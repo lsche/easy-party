@@ -8,5 +8,8 @@ Events.allow({
   },
   update(){
     return true;
+  },
+  remove(userId, event){
+    return userId && event.creator === userId;
   }
 });
