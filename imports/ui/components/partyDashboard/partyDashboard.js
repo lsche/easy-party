@@ -60,7 +60,7 @@ class PartyDashboard{
         if (allTodos == 0) {
           return 100;
         } else {
-          var allDoneTodos = Todos.find({event_Id: this.eventId, done: false}).count();
+          var allDoneTodos = Todos.find({event_Id: this.eventId, done: true}).count();
           var f = Math.ceil( allDoneTodos / allTodos * 100);
           return f; 
         }
