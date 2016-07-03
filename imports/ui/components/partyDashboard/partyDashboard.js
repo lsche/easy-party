@@ -28,9 +28,21 @@ class PartyDashboard{
               return "unassigned";
           }
       };
+      $scope.setColor = function(todo) {
+          var now = new Date();
+          if(todo.duedate < now) {
+              return { color: "#B71C1C" };
+          } else {
+              return {color: "#00bcd4"};
+          }
+      };
+      
+      $scope.getCategory = function(todo) {
+          return todo.category;
+      }
 
     this.eventId = $stateParams.eventId;
-
+    
 
     this.subscribe('events');
     this.subscribe('todos');
@@ -57,9 +69,10 @@ class PartyDashboard{
       upcomingTodos() {
         //return Todos.find({ event_Id: $stateParams.eventId, category: $stateParams.categoryName },{sort: {done: 1, duedate: 1}});
 
-        var upcomingTodos = Todos.find({event_Id: this.eventId} , {sort: {duedate: 1}});
+        var upcomingTodos = Todos.find({event_Id: this.eventId, done:false} , {sort: {duedate: 1}});
         return upcomingTodos;
       },
+        
       users() {
         return Meteor.users.find({});
       },
@@ -69,6 +82,14 @@ class PartyDashboard{
     });
   }
 
+    selectTodo(todo){
+        this.selectedTodoId = todo._id;
+    }
+
+    deselectTodo(){
+        this.selectedTodoId = null;
+    }
+   
   logEvent(){
     console.log(this.eventId);
   }

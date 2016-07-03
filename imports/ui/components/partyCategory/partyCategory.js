@@ -10,7 +10,9 @@ import { Events } from '../../../api/events';
 import { name as PartyTodos } from '../partyTodos/partyTodos';
 import { name as PartyComment } from '../partyComment/partyComment';
 import { name as PartyNotes } from '../partyNotes/partyNotes';
-import {name as EventGuestList} from '../eventGuestList/eventGuestList';
+import { name as PieChart } from '../PieChart/pieChart';
+import { name as EventGuestList } from '../eventGuestList/eventGuestList';
+
 
 
 class PartyCategory {
@@ -49,8 +51,9 @@ export default angular.module(name, [
   uiRouter,
   PartyTodos,
   PartyComment,
-  PartyNotes, 
-    EventGuestList,
+  PartyNotes,
+    PieChart,
+    EventGuestList
   
 ]).component(name, {
   template,

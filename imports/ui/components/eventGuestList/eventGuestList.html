@@ -25,27 +25,33 @@
                 </div>
             </div>
         </md-subheader>
-        <form ng-if="eventGuestList.showAddForm" md-whiteframe>
+        <form ng-if="eventGuestList.showAddForm" md-whiteframe name="addForm" >
 
             <div layout="row">
                 <md-input-container class="md-block" flex="30">
                     <label>
                         Name:
                     </label>
-                    <textarea type="text" ng-model="eventGuestList.guest.name"></textarea>
+                    <textarea type="text" ng-model="eventGuestList.guest.name" name="addName" required></textarea>
+                    <div ng-messages="addForm.addName.$error">
+                        <div ng-message="required">Please enter a name!</div>
+                    </div>
                 </md-input-container>
                 <div class="md-block" flex="5"></div>
                 <md-input-container class="md-block" flex="30">
                     <label>
                         Number:
                     </label>
-                    <textarea type="number" ng-model="eventGuestList.guest.number"></textarea>
+                    <textarea type="number" name="addNumber" ng-model="eventGuestList.guest.number"></textarea>
+                    <div ng-messages="addForm.addNumber.$error">
+                        <div ng-message="required">Please enter a valid number!</div>
+                    </div>
                 </md-input-container>
                 <div class="md-block" flex="5"></div>
                 <md-input-container class="md-block" flex="30">
                     <label>Status</label>
                     <md-select ng-model="eventGuestList.guest.status">
-                        <md-option ng-value="opt" ng-repeat="opt in ['Invited', 'Not Invited yet', 'Attending', 'Not Attending']">{{ opt }}</md-option>
+                        <md-option ng-value="opt" ng-repeat="opt in ['Not Invited yet', 'Invited', 'Attending', 'Not Attending']">{{ opt }}</md-option>
                     </md-select>
                 </md-input-container>
             </div>
@@ -59,7 +65,7 @@
             </div>
 
             <div layout="row" flex >
-                <md-button flex="100" align="center" ng-click="eventGuestList.submit()" class="md-raised add">Add Guest</md-button>
+                <md-button flex="100" align="center" ng-click="eventGuestList.submit()" ng-disabled="addForm.$invalid"  class="md-raised add">Add Guest</md-button>
             </div>
 
         </form>
@@ -86,7 +92,7 @@
                             <p class="textItems" ng-hide="(guest._id == eventGuestList.editGuest.id) && !(eventGuestList.editGuest.status == '')" ng-click="eventGuestList.editGuestStatus(guest)" >{{guest.status}}  </p>
 
                              <md-select ng-show="(guest._id == eventGuestList.editGuest.id) && !(eventGuestList.editGuest.status == '')" ng-model="eventGuestList.editGuest.status" placeholder={{guest.status}} md-on-close="eventGuestList.saveGuestStatus()" >
-                                    <md-option ng-repeat="opt in ['Invited', 'Not Invited yet', 'Attending', 'Not Attending']" >{{ opt }}</md-option>
+                                    <md-option ng-repeat="opt in ['Not Invited yet', 'Invited', 'Attending', 'Not Attending']" >{{ opt }}</md-option>
                                   </md-select>
                         </span>
                         <span flex="20" align="end">
