@@ -6,7 +6,10 @@ Events.allow({
   insert(userId, event) {
     return userId && event.creator === userId;
   },
-  update(){
-    return true;
+  update(userId, event){
+    return userId && event.creator === userId;
+  },
+  remove(userId, event){
+    return userId && event.creator === userId;
   }
 });
