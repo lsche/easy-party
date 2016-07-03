@@ -1,6 +1,7 @@
 import angular from 'angular';
 
 import { Meteor } from 'meteor/meteor';
+import 'meteor/mrgalaxy:stripe';
 
 import { name as Startpage } from '../imports/ui/components/startpage/startpage';
 
@@ -11,6 +12,10 @@ function onReady() {
     strictDi: true
   });
 }
+
+Meteor.startup(function() {
+    Stripe.setPublishableKey(Meteor.settings.public.StripePub);
+});
 
 if (Meteor.isCordova) {
   angular.element(document).on('deviceready', onReady);

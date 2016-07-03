@@ -1,10 +1,12 @@
 <div layout="row">
-    <div ng-show="!userAuth.isLoggedIn">
+    <div ng-show="!(userAuth.isLoggedIn) && !(userAuth.$state.current.name == 'buffetListGuest')" layout="row">
+        <md-button flex style="width: 200px;" ui-sref="providers">Find Services</md-button>
         <md-button flex ng-click="userAuth.openLogin($event)"> Log in</md-button>
         <md-button flex aria-label="Registration" ng-click="userAuth.openRegistration($event)">Sign up</md-button>
     </div>
 
     <div ng-show="userAuth.isLoggedIn" layout="row">
+        <md-button flex ui-sref="providers">Find Services</md-button>
         <md-button flex ui-sref="event"> My Events </md-button>
         <md-menu flex md-position-mode="target-right bottom">
             <md-button aria-label="Open user menu" ng-click="$mdOpenMenu($event)">

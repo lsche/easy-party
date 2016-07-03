@@ -27,7 +27,7 @@ class UserLogin {
         Meteor.loginWithPassword(this.credentials.email, this.credentials.password,
             this.$bindToContext((err) => {
                 if (err) {
-                    this.error = err;
+                    this.error = "Login failed. Please check your email and password!";
                 } else {
 
                     //to close the modal
@@ -46,7 +46,7 @@ const name = 'userLogin';
 // create a module
 export default angular.module(name, [
     angularMeteor,
-    uiRouter
+    uiRouter, 'ngMessages'
 ])
     .component(name, {
         template,

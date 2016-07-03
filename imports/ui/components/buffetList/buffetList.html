@@ -1,0 +1,116 @@
+<md-content class="buffet">
+    <md-list>
+        <md-subheader class="md-sticky">
+            <div layout="column">
+                <div>
+                    <p class="textItems3" ng-if="!(buffetList.buffetBool)" ng-click="buffetList.editBuffetDescription()">
+                        {{buffetList.buffetObject.description}}
+                    </p>
+                    <form class="textItems3" ng-if="buffetList.buffetBool" ng-submit="buffetList.saveBuffetDescription()" >
+                        <input type="text" ng-model="buffetList.editBuffet.description"/>
+                    </form>
+                    <span flex></span>
+                </div>
+                <div layout="row">
+                    <span flex="10"></span>
+                    <span flex="30">
+                        <p class="columnNames">Dish</p>
+                    </span>
+                    <span flex="20" align="center">
+                        <p class="columnNames">Cook</p>
+                    </span>
+                    <span flex></span>
+                    <span  flex-initial="11">
+                        <md-button ng-hide="buffetList.showAddForm" class="material-icons md-fab md-mini addDish"
+                                                       ng-click="buffetList.openForm()"> add</md-button>
+                        <md-button ng-show="buffetList.showAddForm" class="material-icons md-fab md-mini addDish"
+                               ng-click="buffetList.openForm()"> close</md-button>
+                    </span>
+                </div>
+            </div>
+        </md-subheader>
+
+        <form ng-if="buffetList.showAddForm" md-whiteframe name="addForm">
+            <div layout="row">
+                <md-input-container class="md-block" flex="40">
+                    <label>Dish:</label>
+                    <input type="text" ng-model="buffetList.dish.name" name="addName" ng-maxlength="30" required/>
+                    <div ng-messages="addForm.addName.$error">
+                        <div ng-message="required, maxlength">Please enter a dish name that has between 1 and 30 characters!</div>
+                    </div>
+                </md-input-container>
+                <div class="md-block" flex="10"></div>
+                <md-input-container class="md-block" flex="40">
+                    <label>Cook:</label>
+                    <input type="text" placeholder="Not yet assigned" ng-model="buffetList.dish.cook"/>
+                </md-input-container>
+            </div>
+            <div layout="row">
+                <md-input-container class="md-block" flex="65">
+                    <label>Additional Text:</label>
+                    <textarea type="text" placeholder="Add some additional text here" ng-model="buffetList.dish.description"></textarea>
+                </md-input-container>
+            </div>
+            <div layout="row">
+                <md-button flex="100" align="center" ng-click="buffetList.submit()" class="md-raised buttonLink"
+                           ng-disabled="addForm.$invalid">Add Dish</md-button>
+            </div>
+        </form>
+
+        <div flex class="listItems" aria-label="dishes">
+            <md-list-item class="md-2-line" ng-repeat="dish in buffetList.dishList"
+                          ng-mouseover="buffetList.selectDish(dish)" ng-mouseleave="buffetList.deselectDish()">
+                <div class="md-list-item-text">
+                    <div layout="row" class="rows">
+                        <span flex="10"></span>
+                        <div flex="30">
+                            <h3 class="textItems" ng-hide="(dish._id == buffetList.editDish.id) &&
+                            !(buffetList.editDish.name == '') " ng-click="buffetList.editDishName(dish)" > {{dish.name}}</h3>
+                            <form class="textItems" ng-show="(dish._id == buffetList.editDish.id) &&
+                            !(buffetList.editDish.name == '')" ng-submit="buffetList.saveDishName()" name="editForm">
+                                <input type="text" placeholder={{buffetList.editDish.name}} ng-model="buffetList.editDish.name"
+                                       name="editName" ng-maxlength="30" required/>
+                                <div ng-messages="editForm.editName.$error" class="validation-messages">
+                                    <div ng-message="required, maxlength">Please enter a dish name that has between 1 and 30 characters!</div>
+                                </div>
+                            </form>
+                        </div>
+                        <span flex="5"></span>
+                        <span flex="30">
+                            <p class="textItems" ng-hide="(dish._id == buffetList.editDish.id) &&
+                            !(buffetList.editDish.cook == '') " ng-click="buffetList.editDishCook(dish)" > {{dish.cook}}</p>
+                            <form class="textItems" ng-show="(dish._id == buffetList.editDish.id) &&
+                            !(buffetList.editDish.cook == '')" ng-submit="buffetList.saveDishCook()" >
+                                <input type="text" placeholder={{buffetList.editDish.cook}} ng-model="buffetList.editDish.cook"/>
+                            </form>
+                        </span>
+                        <span flex="25" align="end">
+                            <md-button class="material-icons md-icon-button dish-delete" ng-show="buffetList.selectedDishId == dish._id"
+                                       ng-click="buffetList.deleteDish(dish)"> delete</md-button>
+                        </span>
+                    </div>
+                    <div>
+                        <p class="description" ng-if="buffetList.selectedDishId == dish._id" ng-hide="(dish._id == buffetList.editDish.id)
+                        && !(buffetList.editDish.description == '')" ng-click="buffetList.editDishDescription(dish)"> {{dish.description}}</p>
+                        <form class="description" ng-if="buffetList.selectedDishId == dish._id" ng-show="(dish._id == buffetList.editDish.id)
+                        && !(buffetList.editDish.description == '')" ng-submit="buffetList.saveDishDescription()" >
+                            <input class="description" type="text" placeholder={{buffetList.editDish.description}} ng-model="buffetList.editDish.description"/>
+                        </form>
+                    </div>
+                </div>
+                <md-divider ng-if="!$last"></md-divider>
+            </md-list-item>
+        </div>
+    </md-list>
+    <span flex></span>
+    <div layout="row">
+        <md-button flex="100" align="center" ng-hide="buffetList.showLink" class="md-raised buttonLink"
+                   ng-click="buffetList.displayLink()"> Show link to Guest View </md-button>
+        <md-button flex="100" align="center" ng-show="buffetList.showLink" class="md-raised buttonLink"
+                   ng-click="buffetList.closeLink()"> Hide link to Guest View </md-button>
+    </div>
+    <div>
+        <p flex="100" ng-if="buffetList.showLink"> The link you should send to your guests for the buffet list is: {{buffetList.buffetObject.url}}</p>
+    </div>
+</md-content>
+

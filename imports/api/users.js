@@ -23,3 +23,9 @@ if (Meteor.isServer) {
     });
   });
 }
+
+Meteor.users.allow({
+  update(userId) {
+    return userId;
+  }
+});

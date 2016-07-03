@@ -2,14 +2,17 @@ import { Mongo } from 'meteor/mongo';
 
 export const Todos = new Mongo.Collection('todos');
 
+
+//Attributes: creater, event_Id, category, done, assignee, duedate, description, name
+
 Todos.allow({
   insert(userId, todo) {
     return userId && todo.creater === userId;
   },
-  update() {
-    return true;
+  update(userId) {
+    return userId;
   },
-  remove(){
-    return true;
+  remove(userId){
+    return userId;
   }
 });

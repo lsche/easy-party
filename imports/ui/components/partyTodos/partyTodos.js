@@ -5,18 +5,22 @@ import moment from 'moment';
 import { Meteor } from 'meteor/meteor';
 
 import template from './partyTodos.html';
+import modalEditTemplate from './editTodosModal.html';
 
 import { Todos } from '../../../api/todos';
 import { Events } from '../../../api/events';
-import { Activities } from '../../../api/activities'
+import { Activities } from '../../../api/activities';
+
+import {name as EditTodos} from '../editTodos/editTodos';
 
 class PartyTodos {
-  constructor($stateParams, $scope, $reactive) {
+  constructor($stateParams, $scope, $mdDialog, $mdMedia, $reactive) {
     'ngInject';
     'mdDateTime';
     
     $reactive(this).attach($scope);
-
+    this.$mdDialog = $mdDialog;
+    this.$mdMedia = $mdMedia;
 
     $scope.parseDate = function(jsonDate) {
       //date parsing functionality
@@ -35,7 +39,12 @@ class PartyTodos {
     this.showAddForm = false;
     this.showEditForm = true;
     this.selectedTodoId = null;
-    this.todo = {};
+    this.todo = {
+      name: "",
+      assignee: Meteor.userId(),
+        duedate: new Date(),
+        description:""
+    };
     this.sort = '';
     this.subscribe('events');
     this.subscribe('todos');
@@ -66,14 +75,15 @@ class PartyTodos {
       getEventPlanner(){
         var event = Events.findOne($stateParams.eventId);
         if(Meteor.user()){
-          var planner = [{name: Meteor.user().profile.firstName, id: Meteor.userId(), mail: Meteor.user().emails[0].address}];
+          var name = Meteor.user().profile.firstName + " " + Meteor.user().profile.lastName;
+          var planner = [{name: name, id: Meteor.userId(), mail: Meteor.user().emails[0].address}];
         }
         if(event){
           event.planner.forEach(function(person) {
-            var user = Meteor.users.findOne({emails: {$elemMatch: {address: person.mail }}});
-            if(user){
-              //safe object with name and id in planner
-              planner.push({name: user.profile.firstName, id: user._id, mail: person.mail});
+            if(person != null){
+              if(person.mail!= ""){
+                planner.push(person);
+              }
             }
           });
         }
@@ -81,19 +91,24 @@ class PartyTodos {
       },
       categoryName() {
         return $stateParams.categoryName;
-      }
+      },
+        
     });
   }
   openForm() {
     this.selectedTodoId = null;
     if(this.showAddForm) {
-      this.todo = {};
+      this.todo = {name: "",
+          assignee: Meteor.userId(),
+          duedate: new Date(),
+          description:""};
       this.showAddForm = false;
     } else {
       this.showAddForm = true;
     }
   }
-
+   minDate = new Date();
+    
   selectTodo(todo){
     if(this.selectedTodoId == todo._id){
       this.selectedTodoId = null;
@@ -116,7 +131,12 @@ class PartyTodos {
     });
 
 
-    this.todo = {};
+      this.todo = {
+          name: "",
+          assignee: Meteor.userId(),
+          duedate: new Date(),
+          description:""
+      };
     this.showAddForm = false;
   }
   
@@ -131,11 +151,29 @@ class PartyTodos {
       });
     }
   }
+
   deleteTodo(todo){
     Todos.remove(todo._id);
   }
+
   editTodo(todo){
-    //this.showEditForm = true;
+    this.$mdDialog.show({
+      controller($scope, $mdDialog) {
+        'ngInject';
+        $scope.task = todo;
+
+        this.close = () => {
+          $mdDialog.hide();
+        }
+
+
+      },
+      controllerAs: 'editTodosModal',
+      template: modalEditTemplate,
+      parent: angular.element(document.body),
+      clickOutsideToClose: true,
+      fullscreen: this.$mdMedia('sm') || this.$mdMedia('xs')
+    });
   }
 }
 
@@ -143,7 +181,8 @@ const name = 'partyTodos';
 
 // create a module
 export default angular.module(name, [
-  angularMeteor
+  angularMeteor,
+  EditTodos,'ngMessages'
 ]).component(name, {
   template,
   bindings: {

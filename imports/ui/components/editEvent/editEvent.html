@@ -1,0 +1,58 @@
+<div layout="column" layout-fill layout-margin layout-padding>
+
+    <form name="editForm" layout="column" layout-fill layout-padding layout-margin>
+        <div layout="row">
+            <md-input-container flex="40">
+                <label>
+                    Event Title
+                </label>
+                <input type="text" ng-model="editEvent.editEvent.name" name="addName" required/>
+                <div ng-messages="editForm.addName.$error">
+                    <div ng-message="required">Please enter a Name!</div>
+                </div>
+            </md-input-container>
+
+            <span flex="20"></span>
+            <md-content flex="40">
+                <label><strong></strong></label>
+                <md-datepicker ng-model="editEvent.editEvent.event_date" flex style="width: 20px" md-min-date="editEvent.minDate"></md-datepicker>
+            </md-content>
+        </div>
+        <md-input-container >
+            <label>
+                Event Description
+            </label>
+            <textarea type="text" ng-model="editEvent.editEvent.description"></textarea>
+        </md-input-container>
+
+        <label> Your Helper </label>
+        <ul>
+            <li>{{editEvent.editEvent.planner[0].name}}: {{editEvent.editEvent.planner[0].mail}}</li>
+            <li>{{editEvent.editEvent.planner[1].name}}: {{editEvent.editEvent.planner[1].mail}}</li>
+            <li>{{editEvent.editEvent.planner[2].name}}: {{editEvent.editEvent.planner[2].mail}}</li>
+            <li>{{editEvent.editEvent.planner[3].name}}: {{editEvent.editEvent.planner[3].mail}}</li>
+        </ul>
+
+        <md-autocomplete ng-if="editEvent.showHelperAddForm"
+                         md-selected-item="editEvent.selectedItem"
+                         md-search-text-change="editEvent.searchTextChange(eventList.searchText)"
+                         md-search-text="editEvent.searchText"
+                         md-selected-item-change="editEvent.selectedItemChange(item)" md-items="item in editEvent.querySearch(editEvent.searchText)"
+                         md-item-text="item.value"
+                         md-min-length="3"
+                         md-floating-label="Type in a mail address"
+                         md-menu-class="autocomplete-custom-template">
+            <md-item-template>
+                <span md-highlight-text="editEvent.searchText" class="item-title">{{item.name}}</span>
+                <span class="item-metadata">{{item.value}}</span>
+            </md-item-template>
+        </md-autocomplete>
+
+        <a ng-if="!(editEvent.showHelperAddForm) && (editEvent.editEvent.planner[3] == null)" ng-click="editEvent.addHelper()" >Add a helper</a>
+
+        <div layout="row" layout-align="end center">
+            <md-button class="md-raised md-primary" ng-click="editEvent.save()" ng-disabled="editForm.$invalid">Save</md-button>
+        </div>
+    </form>
+
+</div>

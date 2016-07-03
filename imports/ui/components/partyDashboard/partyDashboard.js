@@ -1,6 +1,7 @@
 import angular from 'angular';
 import angularMeteor from 'angular-meteor';
 import uiRouter from 'angular-ui-router';
+import moment from 'moment';
 
 import { Meteor } from 'meteor/meteor';
 import { Events } from '../../../api/events';
@@ -16,13 +17,40 @@ class PartyDashboard{
 
     $reactive(this).attach($scope);
 
-    this.eventId = $stateParams.eventId;
+      $scope.parseDate = function(jsonDate) {
+          //date parsing functionality
+          return moment(jsonDate).format('DD-MM-YYYY');
+      };
+      $scope.getName = function(userId){
+          var user = Meteor.users.findOne({_id: userId});
+          if(user){
+              return user.profile.firstName;
+          } else{
+              return "unassigned";
+          }
+      };
+      $scope.setColor = function(todo) {
+          var now = new Date();
+          if(todo.duedate < now) {
+              return { color: "#B71C1C" };
+          } else {
+              return {color: "#00bcd4"};
+          }
+      };
+      
+      $scope.getCategory = function(todo) {
+          return todo.category;
+      }
 
+    this.eventId = $stateParams.eventId;
+    
 
     this.subscribe('events');
     this.subscribe('todos');
     this.subscribe('users');
     this.subscribe('activities');
+
+
 
 
     this.helpers({
@@ -35,14 +63,19 @@ class PartyDashboard{
       procent() {
         var allTodos = Todos.find({event_Id: this.eventId}).count();
         if (allTodos == 0) {
-          return 0;
+          return 100;
         } else {
-          var allDoneTodos = Todos.find({event_Id: this.eventId, done: false}).count();
+          var allDoneTodos = Todos.find({event_Id: this.eventId, done: true}).count();
           var f = Math.ceil( allDoneTodos / allTodos * 100);
           return f; 
         }
          
     },
+      upcomingTodos() {
+        var upcomingTodos = Todos.find({event_Id: this.eventId, assignee: Meteor.userId() ,done:false} , {sort: {duedate: 1}});
+        return upcomingTodos;
+      },
+        
       users() {
         return Meteor.users.find({});
       },
@@ -52,6 +85,14 @@ class PartyDashboard{
     });
   }
 
+    selectTodo(todo){
+        this.selectedTodoId = todo._id;
+    }
+
+    deselectTodo(){
+        this.selectedTodoId = null;
+    }
+   
   logEvent(){
     console.log(this.eventId);
   }

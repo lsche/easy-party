@@ -8,7 +8,7 @@
 <div class="row categories" >
     
     <div layout="row" layout-align="center center" class="disProgr">
-        <p class="textProgr">{{partyDashboard.procent}} % done</p>
+        <p class="textProgr">You have fulfilled {{partyDashboard.procent}}% of your ToDos! </p>
         <md-progress-linear md-mode="determinate" value="{{partyDashboard.procent}}" class="progBar"></md-progress-linear>
     </div>
     
@@ -80,24 +80,40 @@
 </div>
     <div flex="25">
         <div class="sidebar" md-whiteframe="3">
-            <h3>{{partyDashboard.currentEvent.name}}</h3>
-            <md-list>
-                <md-list-item class="md-2-line" ng-repeat="activity in partyDashboard.activitiesOfEvent">
-                    <div class="md-list-item-text">
-                        <p>{{activity.text}}</p>
-                    </div>
-                </md-list-item>
-            </md-list>
-            <!--<div layout="column">
-                <div class="todo" md-whiteframe="2">
+
+            <h4 class="textItems">{{partyDashboard.currentEvent.name}}</h4>
+            <div layout="column">
+                <div class="todo" md-whiteframe="2" ng-if="!(partyDashboard.upcomingTodos.length == 0)">
                     <md-list>
-                        <h4>Upcoming To-Dos</h4>
-                        <md-list-item>Send Invitations</md-list-item>
-                        <md-list-item>Confirm Location</md-list-item>
-                        <md-list-item>Order Decoration</md-list-item>
+                        <h5 class="textItems" ng-if="!(partyDashboard.upcomingTodos.length == 0)">Upcoming To-Dos</h5>
+                        <md-list-item ng-if="!(partyDashboard.upcomingTodos.length == 0)" ng-repeat="todo in partyDashboard.upcomingTodos|limitTo:5" ng-mouseover="partyDashboard.selectTodo(todo)" ng-mouseleave="partyDashboard.deselectTodo()" >
+                        <div flex>
+                            <div layout="row" flex>
+                        <span flex="50" >
+                            <p class="textItems" ng-style="setColor(todo)" ui-sref="category({ eventId: partyDashboard.eventId, categoryName: getCategory(todo)})">{{todo.name}} </p>
+                        </span>
+                            <span flex="5"></span>
+                            <span flex="50">
+                                    <p class="textItems" ng-style="setColor(todo)" ui-sref="category({ eventId: partyDashboard.eventId, categoryName: getCategory(todo)})">{{parseDate(todo.duedate)}}</p>
+                                </span>
+                        </div>
+                        </div>
+                            <md-divider ng-if="!$last"></md-divider>
+                        </md-list-item>
+
                     </md-list>
                 </div>
-            </div>-->
+                <md-list>
+                    <md-list-item class="md-2-line" ng-repeat="activity in partyDashboard.activitiesOfEvent">
+                        <div class="md-list-item-text">
+                            <p>{{activity.text}}</p>
+                        </div>
+                    </md-list-item>
+                </md-list>
+                <div>
+
+                </div>
+            </div>
         </div>
     </div>
 </div>

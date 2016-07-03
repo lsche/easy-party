@@ -10,17 +10,21 @@ import { Events } from '../../../api/events';
 import { name as PartyTodos } from '../partyTodos/partyTodos';
 import { name as PartyComment } from '../partyComment/partyComment';
 import { name as PartyNotes } from '../partyNotes/partyNotes';
+import { name as PieChart } from '../PieChart/pieChart';
+import { name as EventGuestList } from '../eventGuestList/eventGuestList';
 
 
 
 class PartyCategory {
-  constructor($stateParams, $scope, $reactive) {
+  constructor($stateParams, $scope, $mdDialog, $mdMedia, $reactive) {
     'ngInject';
 
     $reactive(this).attach($scope);
 
     $scope.selected = [];
 
+      this.$mdDialog = $mdDialog;
+      this.$mdMedia = $mdMedia;
     
     this.subscribe('events');
     this.subscribe('users');
@@ -47,7 +51,10 @@ export default angular.module(name, [
   uiRouter,
   PartyTodos,
   PartyComment,
-  PartyNotes
+  PartyNotes,
+    PieChart,
+    EventGuestList
+  
 ]).component(name, {
   template,
   controllerAs: name,

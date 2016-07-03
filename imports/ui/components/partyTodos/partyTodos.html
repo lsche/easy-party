@@ -4,7 +4,7 @@
                 <div layout="column">
                     <div layout="row">
                         <span flex="5"></span>
-                        <span flex="75"><h5>Todos for {{partyTodos.category}}</h5></span>
+                        <span flex="75"><h5>ToDos</h5></span>
                         <md-select ng-model="partyTodos.sort" placeholder="Sort by" flex="13">
                             <md-option ng-value="opt" ng-repeat="opt in ['Date', 'Status', 'Assignee']">{{ opt }}</md-option>
                         </md-select>
@@ -14,7 +14,7 @@
                     <div layout="row">
                         <span flex="10"></span>
                         <span flex="30">
-                        <p>Todo</p>
+                        <p>ToDo</p>
                         </span>
                         <span flex="20" align="center">
                         <p>Assignee</p>
@@ -25,14 +25,17 @@
                     </div>
                 </div>
             </md-subheader>
-            <form ng-if="partyTodos.showAddForm" md-whiteframe>
+            <form ng-if="partyTodos.showAddForm" md-whiteframe name="addForm">
 
                 <div layout="row">
                     <md-input-container class="md-block" flex="30">
                         <label>
                             Title:
                         </label>
-                        <textarea type="text" ng-model="partyTodos.todo.name"></textarea>
+                        <textarea type="text" ng-model="partyTodos.todo.name" name="addName" ng-maxlength="30" required></textarea>
+                        <div ng-messages="addForm.addName.$error">
+                            <div ng-message="required, maxlength">Please enter a title that has between 1 and 30 characters!</div>
+                        </div>
                     </md-input-container>
                     <div class="md-block" flex="5"></div>
                     <md-input-container class="md-block" flex="30">
@@ -44,7 +47,8 @@
                     <div class="md-block" flex="10"></div>
                         <md-content flex="15">
                             <label><strong></strong></label>
-                            <md-datepicker ng-model="partyTodos.todo.duedate" md-placeholder="Due date" flex style="width: 20px"></md-datepicker>
+                            <md-datepicker ng-model="partyTodos.todo.duedate" md-placeholder="Due date" flex style="width: 30px" name="dateField" md-min-date="partyTodos.minDate"></md-datepicker>
+
                         </md-content>
                 </div>
                 <div layout="row">
@@ -58,7 +62,7 @@
                 </div>
 
                 <div layout="row" flex >
-                    <md-button flex="100" align="center" ng-click="partyTodos.submit()" class="md-raised add">Add Todo</md-button>
+                    <md-button flex="100" align="center" ng-click="partyTodos.submit()" class="md-raised buttonLink" ng-disabled="addForm.$invalid">Add Todo</md-button>
                 </div>
 
             </form>
@@ -77,17 +81,17 @@
                                     <!--<h4>{{todo.description}}</h4>-->
                                 </div>
                                 <span flex="30" align="center">
-                                <p class="textItems" >{{getName(todo.assignee)}}</p>
+                                <p class="textItems done-{{todo.done}}" >{{getName(todo.assignee)}}</p>
                                 </span>
                                 <span flex="20">
-                                    <p class="textItems" >{{parseDate(todo.duedate)}}</p>
+                                    <p class="textItems done-{{todo.done}}" >{{parseDate(todo.duedate)}}</p>
                                 </span>
                                 <span flex></span>
                                 <md-button class="material-icons md-icon-button" ng-click="partyTodos.editTodo(todo)"> edit</md-button>
                                 <md-button class="material-icons md-icon-button" ng-click="partyTodos.deleteTodo(todo)"> delete</md-button>
                             </div>
                             <div>
-                                <p class="description"> {{todo.description}}</p>
+                                <p class="description done-{{todo.done}}"> {{todo.description}}</p>
                             </div>
                         </div>
                         <div class="md-list-item-text" ng-if=" partyTodos.selectedTodoId != todo._id" ng-mouseover="partyTodos.selectTodo(todo)">
@@ -101,10 +105,10 @@
                                     <!--<h4>{{todo.description}}</h4>-->
                                 </div>
                         <span flex="30" align="center">
-                        <p  class="textItems2">{{getName(todo.assignee)}}</p>
+                        <p  class="textItems2 done-{{todo.done}}">{{getName(todo.assignee)}}</p>
                         </span>
                         <span flex="20">
-                            <p class="textItems2">{{parseDate(todo.duedate)}}</p>
+                            <p class="textItems2 done-{{todo.done}}">{{parseDate(todo.duedate)}}</p>
                         </span>
                             </div>
                         </div>

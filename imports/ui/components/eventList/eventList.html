@@ -1,8 +1,8 @@
-<md-slider-container class="image" >
+<md-slider-container class="image" xmlns="http://www.w3.org/1999/html">
     <img src="other.jpg" alt="" id="background" >
 
-    <div layout="column" layout-padding id="content">
-        <div id="whiteBox">
+    <div layout="row" layout-padding id="content">
+        <div flex id="whiteBox">
             <div layout="row">
                     <h2 class="md-display-1">Your Events:</h2>
                     <span flex></span>
@@ -10,12 +10,16 @@
                     <md-button ng-show="eventList.showAddForm" class="md-fab material-icons" ng-click="eventList.openForm()"> close</md-button>
             </div>
             <div ng-if="eventList.showAddForm" md-whiteframe>
+                <form name="addForm" layout="column" layout-fill layout-padding layout-margin>
                 <div layout="row" layout-padding>
                     <md-input-container flex="45" align="center" class="topInputEventList">
                         <label>
                             Event Name:
                         </label>
-                        <input type="text" ng-model="eventList.event.name"/>
+                        <input type="text" ng-model="eventList.event.name" name="addName" required/>
+                        <div ng-messages="addForm.addName.$error">
+                            <div ng-message="required">Please enter a Name!</div>
+                        </div>
                     </md-input-container>
                     <span flex="10"></span>
                     <md-input-container flex="45" align="center" class="topInputEventList">
@@ -25,26 +29,10 @@
                         <input type="text" ng-model="eventList.event.description"/>
                     </md-input-container>
 
-                    <!--<md-autocomplete
-                            ng-disabled="eventList.isDisabled"
-                            md-no-cache="eventList.noCache"
-                            md-selected-item="eventList.selectedItem"
-                            md-search-text-change="eventList.searchTextChange(eventList.searchText)"
-                            md-search-text="eventList.searchText"
-                            md-selected-item-change="eventList.selectedItemChange(item)" md-items="item in eventList.querySearch(eventList.searchText)"
-                            md-item-text="item.value"
-                            md-min-length="3"
-                            md-floating-label="Type in a mail address"
-                            md-menu-class="autocomplete-custom-template">
-                        <md-item-template>
-                            <span md-highlight-text="eventList.searchText" class="item-title">{{item.name}}</span>
-                            <span class="item-metadata">{{item.value}}</span>
-                        </md-item-template>
-                    </md-autocomplete>-->
                 </div>
 
                 <div layout="row" layout-padding>
-                    <md-datepicker flex="30" align="center" ng-model="eventList.event.event_date" md-placeholder="Enter date"></md-datepicker>
+                    <md-datepicker flex="30" align="center" ng-model="eventList.event.event_date" md-placeholder="Enter date" md-min-date="eventList.minDate"></md-datepicker>
                     <span flex="5px"></span>
                     <md-input-container>
                         <label>How many people should help you?</label>
@@ -53,59 +41,114 @@
                         </md-select>
                     </md-input-container>
                     <div layout="column" layout-padding>
-                        <md-input-container ng-if="$scope.plannerNumber > 0">
-                            <label>
-                                Helper 1:
-                            </label>
-                            <input type="email" ng-model="eventList.event.planner[0].mail"/>
-                        </md-input-container>
-                        <md-input-container ng-if="$scope.plannerNumber > 1">
-                            <label>
-                                Helper 2:
-                            </label>
-                            <input type="email" ng-model="eventList.event.planner[1].mail"/>
-                        </md-input-container><md-input-container ng-if="$scope.plannerNumber > 2">
-                        <label>
-                            Helper 3:
-                        </label>
-                        <input type="email" ng-model="eventList.event.planner[2].mail"/>
-                    </md-input-container><md-input-container ng-if="$scope.plannerNumber > 3">
-                        <label>
-                            Helper 4:
-                        </label>
-                        <input type="email" ng-model="eventList.event.planner[3].mail"/>
-                    </md-input-container>
+                        <md-autocomplete ng-if="$scope.plannerNumber > 0"
+                                md-selected-item="eventList.selectedItem"
+                                md-search-text-change="eventList.searchTextChange(eventList.searchText)"
+                                md-search-text="eventList.searchText"
+                                md-selected-item-change="eventList.selectedItemChange(item)" md-items="item in eventList.querySearch(eventList.searchText)"
+                                md-item-text="item.value"
+                                md-min-length="3"
+                                md-floating-label="Type in a mail address"
+                                md-menu-class="autocomplete-custom-template">
+                            <md-item-template>
+                                <span md-highlight-text="eventList.searchText" class="item-title">{{item.name}}</span>
+                                <span class="item-metadata">{{item.value}}</span>
+                            </md-item-template>
+                        </md-autocomplete>
+                        <md-autocomplete ng-if="$scope.plannerNumber > 1"
+                                md-selected-item="eventList.selectedItem2"
+                                md-search-text-change="eventList.searchTextChange(eventList.searchText2)"
+                                md-search-text="eventList.searchText2"
+                                md-selected-item-change="eventList.selectedItemChange(item)"
+                                md-items="item in eventList.querySearch(eventList.searchText2)"
+                                md-item-text="item.value"
+                                md-min-length="3"
+                                md-floating-label="Type in a mail address"
+                                md-menu-class="autocomplete-custom-template">
+                            <md-item-template>
+                                <span md-highlight-text="eventList.searchText2" class="item-title">{{item.name}}</span>
+                                <span class="item-metadata">{{item.value}}</span>
+                            </md-item-template>
+                        </md-autocomplete>
+                        <md-autocomplete ng-if="$scope.plannerNumber > 2"
+                                         md-selected-item="eventList.selectedItem3"
+                                         md-search-text-change="eventList.searchTextChange(eventList.searchText3)"
+                                         md-search-text="eventList.searchText3"
+                                         md-selected-item-change="eventList.selectedItemChange(item)"
+                                         md-items="item in eventList.querySearch(eventList.searchText3)"
+                                         md-item-text="item.value"
+                                         md-min-length="3"
+                                         md-floating-label="Type in a mail address"
+                                         md-menu-class="autocomplete-custom-template">
+                            <md-item-template>
+                                <span md-highlight-text="eventList.searchText2" class="item-title">{{item.name}}</span>
+                                <span class="item-metadata">{{item.value}}</span>
+                            </md-item-template>
+                        </md-autocomplete>
+                        <md-autocomplete ng-if="$scope.plannerNumber > 3"
+                                         md-selected-item="eventList.selectedItem4"
+                                         md-search-text-change="eventList.searchTextChange(eventList.searchText4)"
+                                         md-search-text="eventList.searchText4"
+                                         md-selected-item-change="eventList.selectedItemChange(item)"
+                                         md-items="item in eventList.querySearch(eventList.searchText4)"
+                                         md-item-text="item.value"
+                                         md-min-length="3"
+                                         md-floating-label="Type in a mail address"
+                                         md-menu-class="autocomplete-custom-template">
+                            <md-item-template>
+                                <span md-highlight-text="eventList.searchText2" class="item-title">{{item.name}}</span>
+                                <span class="item-metadata">{{item.value}}</span>
+                            </md-item-template>
+                        </md-autocomplete>
+
+
+
+
                     </div>
                 </div>
                 <div layout="row" flex >
-                    <md-button flex="100" align="center" ng-click="eventList.submit()" class="md-raised">Add Event!</md-button>
+                    <md-button flex="100" align="center" ng-click="eventList.submit()" class="md-raised" ng-disabled="addForm.$invalid">Add Event!</md-button>
                 </div>
+                </form>
             </div>
 
             <md-list flex ng-repeat="event in eventList.creatorEvents" >
-                <md-list-item class="md-2-line"  ui-sref="partyDashboard({ eventId: event._id })">
+                <md-list-item class="md-2-line" ng-mouseleave="eventList.deselectEvent()" ng-mouseover="eventList.selectEvent(event)">
                     <div class="md-list-item-text">
                         <div layout="row">
-                            <span flex="70"><h3>{{event.name}}</h3>
+                            <span flex="50" ng-hide="event.blocked" ui-sref="partyDashboard({ eventId: event._id })"><h3>{{event.name}}</h3>
+                        <p>{{event.description}}</p></span>
+                            <span flex="50" ng-show="event.blocked" ng-click="eventList.showPaymentAlert()"><h3>{{event.name}}</h3>
                         <p>{{event.description}}</p></span>
                             <span flex="30"><p>{{parseDate(event.event_date)}}</p></span>
+                            <div flex="20" layout="row" layout-align="end">
+                                <md-button class="material-icons md-icon-button" ng-click="eventList.openEdit(event)" ng-if="eventList.selectedEventID == event._id" > edit</md-button>
+                                <md-button class="material-icons md-icon-button" ng-click="eventList.showDeleteConfirm($event, event)" ng-if="eventList.selectedEventID == event._id" > delete</md-button>
+                                <md-button class="material-icons md-icon-button" ng-click="eventList.openPayment(event)"> info</md-button>
+                            </div>
                         </div>
                     </div>
                 </md-list-item>
             </md-list>
             <md-divider></md-divider>
             <md-list flex ng-repeat="event in eventList.plannerEvents" >
-                <md-list-item class="md-2-line"  ui-sref="partyDashboard({ eventId: event._id })">
+                <md-list-item class="md-2-line">
                     <div class="md-list-item-text">
                         <div layout="row">
-                            <span flex="70"><h3>{{event.name}}</h3>
+                           <span flex="50" ng-hide="event.blocked" ui-sref="partyDashboard({ eventId: event._id })"><h3>{{event.name}}</h3>
+                        <p>{{event.description}}</p></span>
+                            <span flex="50" ng-show="event.blocked" ng-click="eventList.showPaymentAlert()"><h3>{{event.name}}</h3>
                         <p>{{event.description}}</p></span>
                             <span flex="30"><p>{{parseDate(event.event_date)}}</p></span>
+                            <span flex="5">
+                                <md-button class="material-icons md-icon-button"> </md-button>
+                            </span>
                         </div>
                     </div>
                 </md-list-item>
             </md-list>
 
         </div>
-    </div>
+
+   </div>
 </md-slider-container>

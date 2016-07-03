@@ -1,0 +1,63 @@
+<div flex id="whiteBox">
+    <p ng-hide="eventPayment.myEvent.paid">Your trial version for this event will end on <b>{{eventPayment.timeLeft}}</b>. Please put your credit card details down below and get an unlimited access for just 4,99 Euros!</p>
+    <p ng-show="eventPayment.myEvent.paid">You've already paid for this event.</p>
+    <p ng-show="eventPayment.myEvent.paid">Enjoy planning! :-) </p>
+    <md-content layout-padding ng-hide="eventPayment.myEvent.paid">
+
+        <form class="payment-form">
+
+            <md-input-container class="md-block">
+                <label for="cardNumber">Card Number</label>
+                <input
+                        ng-model="eventPayment.payment.cardNumber"
+                        type="tel"
+                        class="form-control"
+                        name="cardNumber"
+                        autocomplete="cc-number"
+                        required autofocus
+                />
+            </md-input-container>
+
+            <!--<span flex="10"></span>-->
+            <div layout-gt-sm="row">
+                <md-input-container class="md-block" flex-gt-sm>
+                    <label for="cardExpiry">Expiration Month</label>
+                    <input
+                            ng-model="eventPayment.payment.cardExpiryMM"
+                            type="tel"
+                            class="form-control"
+                            name="cardExpiryMM"
+                            autocomplete="cc-exp"
+                            required
+                    />
+                </md-input-container>
+
+                <md-input-container class="md-block" flex-gt-sm>
+                    <label for="cardExpiry">Expiration Year</label>
+                    <input
+                            ng-model="eventPayment.payment.cardExpiryYY"
+                            type="tel"
+                            class="form-control"
+                            name="cardExpiryYY"
+                            autocomplete="cc-exp"
+                            required
+                    />
+                </md-input-container>
+
+                <md-input-container class="md-block" flex-gt-sm>
+                    <label for="cardCVC">CVC Code</label>
+                    <input
+                            ng-model="eventPayment.payment.cardCVC"
+                            type="tel"
+                            class="form-control"
+                            name="cardCVC"
+                            autocomplete="cc-csc"
+                            required
+                    />
+                </md-input-container>
+            </div>
+
+            <md-button ng-click="eventPayment.payForAccount()" type="submit" class="md-raised">Pay</md-button>
+        </form>
+    </md-content>
+</div>
