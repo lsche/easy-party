@@ -1,5 +1,5 @@
 <div layout="row">
-    <div ng-show="!userAuth.isLoggedIn" layout="row">
+    <div ng-show="!(userAuth.isLoggedIn) && !(userAuth.$state.current.name == 'buffetListGuest')" layout="row">
         <md-button flex style="width: 200px;" ui-sref="providers">Find Services</md-button>
         <md-button flex ng-click="userAuth.openLogin($event)"> Log in</md-button>
         <md-button flex aria-label="Registration" ng-click="userAuth.openRegistration($event)">Sign up</md-button>
