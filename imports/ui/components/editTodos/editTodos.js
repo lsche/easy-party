@@ -37,6 +37,7 @@ class EditTodos {
             }
         });
     }
+    minDate = new Date();
 
     save(){
         Todos.update({_id: this.myTask._id},

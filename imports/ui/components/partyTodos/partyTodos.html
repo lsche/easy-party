@@ -34,7 +34,7 @@
                         </label>
                         <textarea type="text" ng-model="partyTodos.todo.name" name="addName" required></textarea>
                         <div ng-messages="addForm.addName.$error">
-                            <div ng-message="required">Please enter a Title!</div>
+                            <div ng-message="required">Please enter a title!</div>
                         </div>
                     </md-input-container>
                     <div class="md-block" flex="5"></div>
@@ -47,7 +47,8 @@
                     <div class="md-block" flex="10"></div>
                         <md-content flex="15">
                             <label><strong></strong></label>
-                            <md-datepicker ng-model="partyTodos.todo.duedate" md-placeholder="Due date" flex style="width: 20px"></md-datepicker>
+                            <md-datepicker ng-model="partyTodos.todo.duedate" md-placeholder="Due date" flex style="width: 30px" name="dateField" md-min-date="partyTodos.minDate"></md-datepicker>
+
                         </md-content>
                 </div>
                 <div layout="row">
