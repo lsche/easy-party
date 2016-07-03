@@ -149,7 +149,7 @@ class EventList {
             };
         }
     }
-    
+    minDate = new Date();
     openForm() {
         if(this.showAddForm) {
             this.event= {};
@@ -180,7 +180,7 @@ class EventList {
 
 
         this.showAddForm = false;
-        this.event = {};
+        this.event = {planner: []};
         this.selectedItem = null;
         this.selectedItem2 = null;
         this.selectedItem3 = null;
