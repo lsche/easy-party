@@ -25,10 +25,7 @@ if (Meteor.isServer) {
 }
 
 Meteor.users.allow({
-  remove(userId) {
-    return userId;
-  },
   update(userId) {
-    return true;
+    return userId;
   }
 });
