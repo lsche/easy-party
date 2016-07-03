@@ -32,3 +32,8 @@ planettraining:material-design-icons
 materialize:materialize
 angular:angular-messages
 
+jalik:ufs
+jalik:ufs-gridfs
+session
+bobbigmac:scrape-parser
+mrgalaxy:stripe

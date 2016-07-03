@@ -6,17 +6,42 @@ import uiRouter from 'angular-ui-router';
 import ngMaterial from 'angular-material';
 
 import template from './startpageContent.html';
+import modalProviderTemplate from './providerRegisterModal.html';
+
+import { name as ServiceRegistration } from '../serviceRegistration/serviceRegistration';
 
 
 
 class StartpageContent {
-  constructor($scope, $reactive) {
+  constructor($scope, $reactive, $mdDialog, $mdMedia, $state) {
     'ngInject';
 
     $reactive(this).attach($scope);
 
+
+    this.$mdDialog = $mdDialog;
+    this.$mdMedia = $mdMedia;
+
+
     this.helpers({
       
+    });
+  }
+  openProvider(event){
+    this.$mdDialog.show({
+      controller($mdDialog) {
+        'ngInject';
+
+        this.close = () => {
+          $mdDialog.hide();
+        }
+      },
+      controllerAs: 'providerRegisterModal',
+      template: modalProviderTemplate,
+      targetEvent: event,
+      parent: angular.element(document.body),
+      clickOutsideToClose: true,
+      fullscreen: this.$mdMedia('sm') || this.$mdMedia('xs')
     });
   }
 }
@@ -27,7 +52,8 @@ const name = 'startpageContent';
 export default angular.module(name, [
   angularMeteor,
     ngMaterial,
-  uiRouter
+  uiRouter,
+  ServiceRegistration
 ]).component(name, {
   template,
   controllerAs: name,

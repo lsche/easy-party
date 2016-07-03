@@ -46,29 +46,29 @@
     </md-subheader>
     
     <div class="listItems">
-                <md-list-item class="md-2-line" ng-repeat="comment in partyComment.commentslist">
-                    <div class="md-list-item-text">
-                        <div layout="row" class="rows">
-                            <span flex="85"></span>
-                            <span flex="15">{{parseDate(comment.createdAt)}}</span>
-                        </div>
-                        <div layout="row" class="rows">
-                        
-                        <div flex="15" class="flexikona">
-                        <i style="color: {{getColor(comment.creater)}}" class="material-icons ikona">person</i>   
-                        <h3 style="color: {{getColor(comment.creater)}}">{{getName(comment.creater)}}</h3>
-                        </div>
-                        
+        <md-list-item class="md-2-line" ng-repeat="comment in partyComment.commentslist">
+            <div class="md-list-item-text">
+                <div layout="row" class="rows">
+                    <span flex="85"></span>
+                    <span flex="15">{{parseDate(comment.createdAt)}}</span>
+                </div>
+                <div layout="row" class="rows">
+                
+                <div flex="15" class="flexikona">
+                <i style="color: {{getColor(comment.creater)}}" class="material-icons ikona">person</i>   
+                <h3 style="color: {{getColor(comment.creater)}}">{{getName(comment.creater)}}</h3>
+                </div>
+                
 
-                        <span flex="85">
-                        <p>{{comment.text}}</p>
-                        </span>
- 
-                        </div>
-                    </div>
-                    <md-divider ng-if="!$last"></md-divider>
-                </md-list-item>
+                <span flex="85">
+                <p>{{comment.text}}</p>
+                </span>
+
+                </div>
             </div>
+            <md-divider ng-if="!$last"></md-divider>
+        </md-list-item>
+    </div>
     
     
     <!--<div flex="50">

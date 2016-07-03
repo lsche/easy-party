@@ -1,0 +1,140 @@
+<div layout="column" layout-fill layout-margin layout-padding>
+
+    <form name="registerForm" layout="column" layout-fill layout-padding layout-margin>
+        <md-input-container >
+            <label>
+                Name
+            </label>
+            <input type="text" ng-model="serviceRegistration.provider.name" placeholder="Name" aria-label="Name" required/>
+        </md-input-container>
+
+        <md-input-container >
+            <label>
+                City
+            </label>
+            <input type="text" ng-model="serviceRegistration.provider.city" placeholder="City" aria-label="City" required/>
+        </md-input-container>
+
+        <md-input-container >
+            <label>
+                Street
+            </label>
+            <input type="text" ng-model="serviceRegistration.provider.street" placeholder="Street" aria-label="Street" required/>
+        </md-input-container>
+
+        <md-input-container >
+            <label>
+                Zip
+            </label>
+            <input type="text" ng-model="serviceRegistration.provider.zip" placeholder="Zip" aria-label="Zip" required/>
+        </md-input-container>
+
+        <md-input-container >
+            <label>
+                Phone
+            </label>
+            <input type="text" ng-model="serviceRegistration.provider.phone" placeholder="Phone" aria-label="Phone" required/>
+        </md-input-container>
+
+        <md-input-container >
+            <label>
+                E-Mail
+            </label>
+            <input type="email" ng-model="serviceRegistration.provider.email" placeholder="Email" aria-label="Email" required/>
+        </md-input-container>
+
+        <md-input-container class="md-block">
+          <label>
+              About 
+          </label>
+          <textarea ng-model="serviceRegistration.provider.about" md-maxlength="400" rows="5" placeholder="About" aria-label="About" md-select-on-focus></textarea>
+        </md-input-container>
+
+        <!--<md-input-container>
+            <label>
+              Image 
+            </label>
+            <input ng-model="serviceRegistration.provider.file" type="file">
+        
+        </md-input-container>-->
+
+       
+
+        <md-input-container>
+            <label>Price Category</label>
+            <md-select ng-model="serviceRegistration.provider.price">
+                <md-option value="1">€</md-option>
+                <md-option value="2">€€</md-option>
+                <md-option value="3">€€€</md-option>
+                <md-option value="4">€€€€</md-option>
+                <md-option value="5">€€€€€</md-option>
+            </md-select>
+        </md-input-container>
+
+        <md-input-container>
+            <label>Service Category</label>
+            <md-select onchange="showDiv(this)" ng-model="serviceRegistration.provider.category">
+                <md-option value="catering">Catering</md-option>
+                <md-option value="location">Location</md-option>
+                <md-option value="entertainment">Entertainment</md-option>
+            </md-select>
+        </md-input-container>
+
+        <div ng-if="serviceRegistration.provider.category == 'location' ">
+            <fieldset class="standard">
+                <div ng-repeat="item in serviceRegistration.items">
+                <md-checkbox ng-checked="serviceRegistration.exists(item, serviceRegistration.provider.type)" ng-click="serviceRegistration.toggle(item, serviceRegistration.provider.type)">
+                    {{ item }} 
+                </md-checkbox>           
+                </div>
+            </fieldset>
+        </div>
+
+        <div ng-if="serviceRegistration.provider.category == 'catering' ">
+            <fieldset class="standard">
+                <div ng-repeat="item in serviceRegistration.itemsCatering">
+                <md-checkbox ng-checked="serviceRegistration.exists(item, serviceRegistration.provider.type)" ng-click="serviceRegistration.toggle(item, serviceRegistration.provider.type)">
+                    {{ item }} 
+                </md-checkbox>           
+                </div>
+            </fieldset>
+        </div>
+
+        <div ng-if="serviceRegistration.provider.category == 'entertainment' ">
+            <fieldset class="standard">
+                <div ng-repeat="item in serviceRegistration.itemsEntertainment">
+                <md-checkbox ng-checked="serviceRegistration.exists(item, serviceRegistration.provider.type)" ng-click="serviceRegistration.toggle(item, serviceRegistration.provider.type)">
+                    {{ item }} 
+                </md-checkbox>           
+                </div>
+            </fieldset>
+        </div>
+
+        <md-input-container>
+            <label>Capacity (optional)</label>
+            <md-select ng-model="serviceRegistration.provider.capacity">
+                <md-option value="10">&lt; 10</md-option>
+                <md-option value="20">10 - 30</md-option>
+                <md-option value="30">&gt; 30</md-option>
+            </md-select>
+        </md-input-container>
+        
+        <div layout="row" layout-align="end center">
+            <md-button class="md-raised md-primary" ng-click="serviceRegistration.register()" aria-label="login" ng-disabled="serviceRegistration.registerForm.$invalid()">Register</md-button>
+        </div>
+
+         <party-upload files="serviceRegistration.provider.images"></party-upload>
+
+    </form>
+
+    <md-toolbar ng-show="serviceRegistration.error" class="md-warn" layout="row" layout-fill layout-padding layout-margin>
+        <p class="md-body-1">{{ serviceRegistration.error }}</p>
+    </md-toolbar>
+
+   <!-- <md-divider></md-divider>
+    Already a user? - button (missing)
+    <div layout="row" layout-align="center">
+        <a class="md-button" href="/login">Already a user?</a>
+    </div> -->
+
+</div>

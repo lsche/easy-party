@@ -20,7 +20,7 @@
           <label>
               Text:
           </label>
-          <input type="text" ng-model="partyTodos.todo.description" />
+           <textarea type="text" ng-model="partyNotes.note.description"></textarea>
 
       </md-input-container>
   </md-input-container>
@@ -35,16 +35,18 @@
 
 <div layout="column" layout-gt-sm="row">
     <div flex="50">
-        <md-card ng-repeat="note in partyNotes.noteslist">
+        <md-card ng-repeat="note in partyNotes.noteslist" ng-mouseover="partyNotes.enterNote(note)" ng-mouseleave="partyNotes.leaveNote()">
             <md-card-title>
                 <md-card-title-text>
                 <span class="md-headline">
                     {{note.name}}
                 </span>
-                    <span class="md-subhead">{{note.text}}</span>
+                    <span class="md-subhead">{{note.description}}</span>
                 </md-card-title-text>
             </md-card-title>
-
+            <md-card-actions layout="row" layout-align="end center" ng-show="note._id == partyNotes.currentNote" ng-click="partyNotes.deleteNote(note)">
+                <md-button>Delete</md-button>
+            </md-card-actions>
         </md-card>
     </div>
 </div>

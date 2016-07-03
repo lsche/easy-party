@@ -1,0 +1,17 @@
+<md-dialog aria-label="payment" ng-cloak flex="50">
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h2>Your Event Status - Payment </h2>
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="paymentModal.close()" aria-label="Close">
+                <md-icon md-svg-icon="navigation:ic_close_24px"></md-icon>
+            </md-button>
+
+        </div>
+    </md-toolbar>
+    <md-dialog-content>
+        <div class="md-dialog-content">
+            <event-payment my-event="event" done="paymentModal.close()"></event-payment>
+        </div>
+    </md-dialog-content>
+</md-dialog>
